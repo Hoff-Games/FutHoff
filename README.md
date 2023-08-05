@@ -17,9 +17,9 @@
 
 - Conquistar o Troféu Dourado: O objetivo dos personagens principais é vencer o Torneio Troféu Dourado, uma competição de futebol de prestígio em TonwSide. Para isso, eles devem progredir através das fases, enfrentar desafios e chefes, como os irmãos Stumrhond.
 - Derrotar os Irmãos Sturmhond: Os personagens principais devem enfrentar os maléficos irmãos Sturmhond, que estão determinados a vencer o torneio de forma desonesta e dominar a cidade. Os jogadores devem superar os obstáculos criados pelos vilões e confrontá-los em batalhas emocionantes para restaurar a justiça no futebol e proteger o Troféu Dourado.
-- Coletar Moedas e Itens: Ao longo das fases, os personagens devem coletar moedas para adquirir melhorias, equipamentos especiais e power-ups que os ajudarão em sua jornada, como “Barreira Imbatível”.
+- Coletar Moedas e Itens: Ao longo das fases, os personagens devem coletar moedas para adquirir melhorias e power-ups que os ajudarão em sua jornada, como a “Barreira Imbatível”.
 - Aprimorar Habilidades: Ao progredir no jogo, eles podem aprimorar suas habilidades para enfrentar os desafios mais difíceis.
-- Enfrentar os “craques sombrios”: Ao longo do jogo, os personagens principais encontrarão como inimigos também os “craques sombrios”, capangas dos irmãos Sturmhond. Os jogadores devem derrotar esses inimigos usando suas habilidades de plataforma e inspiradas no futebol.
+- Enfrentar os “craques sombrios”: Ao longo do jogo, os personagens principais encontrarão como inimigos também os “craques sombrios”, capangas dos irmãos Sturmhond. Os jogadores devem derrotar esses inimigos usando suas habilidades inspiradas no futebol.
 - Alcançar a Pontuação Máxima: O jogo incentiva os jogadores a buscar a pontuação máxima em cada fase, coletando moedas, derrotando inimigos e concluindo desafios bônus. A competição pela melhor pontuação pode levar a recompensas adicionais.
 
 ## Regras do Jogo:
