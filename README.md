@@ -49,6 +49,14 @@
 
 ## Personagens:
 
+Skyler:
+
+Steve:
+
+Craques Sombrios:
+
+Irmãos Sturmhond:
+
 ## Objetivos do Jogo:
 
 - Conquistar o Troféu Dourado: O objetivo dos personagens principais é vencer o Torneio Troféu Dourado, uma competição de futebol de prestígio em TonwSide. Para isso, eles devem progredir através das fases, enfrentar desafios e chefes, como os irmãos Stumrhond.
@@ -58,7 +66,13 @@
 - Enfrentar os “craques sombrios”: Ao longo do jogo, os personagens principais encontrarão como inimigos também os “craques sombrios”, capangas dos irmãos Sturmhond. Os jogadores devem derrotar esses inimigos usando suas habilidades inspiradas no futebol.
 - Alcançar a Pontuação Máxima: O jogo incentiva os jogadores a buscar a pontuação máxima em cada fase, coletando moedas, derrotando inimigos e concluindo desafios bônus. A competição pela melhor pontuação pode levar a recompensas adicionais.
 
-## Regras do Jogo:
+## Regras do Jogo (Plataforma):
+
+
+## Regras do Jogo (Arcade):
+
+
+
 
 
 
