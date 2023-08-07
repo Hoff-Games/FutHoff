@@ -70,9 +70,5 @@ Irmãos Sturmhond:
 
 
 ## Regras do Jogo (Arcade):
-
-
-
-
-
+.
 
