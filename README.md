@@ -49,6 +49,8 @@
 
 ## Personagens:
 
+A história dos personagens principais, Skyler e Steve, em "TonwSide", é uma jornada de amizade, superação e trabalho em equipe, à medida que eles enfrentam os desafios impostos pelos irmãos Sturmhond e buscam proteger o torneio de futebol e conquistar o cobiçado troféu.
+
 ### Skyler: 
 Skyler é uma jovem de 16 anos apaixonada pelo futebol. Ela possui cabelos claros e olhos verdes que refletem sua determinação e coragem. Sua personalidade é destemida e dedicada. Ela é conhecida por sua ética de trabalho incansável e sua habilidade em motivar os outros ao seu redor. Ela é uma líder natural, mas seu psicológico é moldado por uma pressão interna para sempre se destacar e corresponder às expectativas dos outros. Ela lida com a necessidade de equilibrar a liderança e a autoconfiança com momentos de dúvida sobre suas próprias capacidades. Entre suas habilidades temos "Chute Relâmpago", "Defesa de Aço" e "Mordida Mortal".
 
