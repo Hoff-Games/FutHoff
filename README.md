@@ -86,9 +86,8 @@ A história dos Irmãos Sturmhond é uma saga de ambição, rivalidade e determi
 - Os jogadores normalmente começam com um número limitado de vidas. Cada vez que o personagem é derrotado por inimigos ou cai em um obstáculo, ele perde uma vida. Quando todas as vidas são perdidas, o jogador deve recomeçar o nível.
 - Tomar cuidado com os ataques do inimigo para não ser eliminado; 
 - O jogo é dividido em várias fases que ocorrem em locais diversos de TonwSide, incluindo estádios de futebol, ruas da cidade e até mesmo locais inusitados. Cada fase apresenta desafios únicos, como obstáculos de plataforma e inimigos.
-- Os jogadores podem alternar entre os personagens principais durante o jogo, aproveitando suas habilidades únicas para enfrentar diferentes desafios. Cada personagem tem características específicas relacionadas ao futebol que podem ser utilizadas para derrotar os inimigos.
+- Os jogadores não podem alternar entre os personagens principais durante o jogo. Cada personagem tem características específicas relacionadas ao futebol que podem ser utilizadas para derrotar os inimigos.
 - O principal objetivo do jogo é derrotar os vilões, os irmãos Sturmhond, e seus aliados, os "Craques Sombrios", para proteger a cidade de TonwSide e ganhar o Troféu Dourado.
-
 
 ## Regras do Jogo (Arcade):
 - Os jogadores controlam seus personagens usando as teclas direcionais (setas) ou as teclas de movimento. A tecla de salto é usada para fazer o personagem pular, cabecear a bola. Para usar as habilidades, há um botão especial para ativa-las.
