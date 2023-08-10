@@ -14,6 +14,7 @@
 ## Receita do jogo:
 
 - Versão gratuita com Anúncios;
+- Versão premium sem Anúncios;
 - Parcerias e patrocínios com empresas (principalmente de jogos);
 - Compras dentro do jogo;
 
