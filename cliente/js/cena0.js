@@ -3,7 +3,6 @@ export default class abertura extends Phaser.Scene {
         super('cena0')
     }
 
-
     preload() {
         this.load.image('pixil-frame-0', '../assets/pixil-frame-0.png')
     }
@@ -15,5 +14,4 @@ export default class abertura extends Phaser.Scene {
     update() {
 
     }
-
 }

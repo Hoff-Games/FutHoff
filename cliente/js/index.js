@@ -1,8 +1,8 @@
-/*Importação de objetos*/
+/* Importação de objetos */
 import config from './config.js'
 import cena0 from './cena0.js'
 
-/*Definição do objeti Game*/
+/* Definição do objeti Game */
 class Game extends Phaser.Game {
   constructor () {
     super(config)
@@ -12,7 +12,7 @@ class Game extends Phaser.Game {
     this.scene.start('cena0')
   }
 }
-/*Criação do objeto Game*/
+/* Criação do objeto Game */
 window.onload = () => {
   window.game = new Game()
 }

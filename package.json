@@ -8,5 +8,10 @@
   },
   "scripts": {
     "start": "npm start --prefix servidor"
-  }
+  },
+  "name": "futhoff_-_a_busca_pelo_trofeu_dourado",
+  "description": "## Plataforma/Arcade:",
+  "version": "0.1.0",
+  "author": "Hoff-Games <isabela.h07@aluno.ifsc.edu.br>",
+  "license": "MIT"
 }
