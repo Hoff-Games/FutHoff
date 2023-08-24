@@ -13,5 +13,8 @@
   "description": "## Plataforma/Arcade:",
   "version": "0.1.0",
   "author": "Hoff-Games <isabela.h07@aluno.ifsc.edu.br>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }

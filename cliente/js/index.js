@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* Importação de objetos */
 import config from './config.js'
 import cena0 from './cena0.js'
