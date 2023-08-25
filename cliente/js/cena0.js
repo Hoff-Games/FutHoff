@@ -4,17 +4,22 @@ export default class cena0 extends Phaser.Scene {
     super('cena0')
   }
 
-  preload () {
-    this.load.image('abertura-1', '../assets/abertura-1.png')
-    this.load.image('abertura-2', '../assets/abertura-2.png')
+  preload() {
+    this.load.image('abertura', '../assets/abertura.png')
   }
 
-  create () {
-    this.add.image(600, 225, 'abertura-1')
-    this.add.image(200, 225, 'abertura-2')
+  create() { 
+    this.imagem = this.add
+      .image(400, 225, 'abertura')
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.imagem.destroy()
+        this.game.scene.start('cena1')
+      })
+   
   }
 
-  update () {
+  update() {
 
   }
 }
