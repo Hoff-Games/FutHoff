@@ -4,33 +4,23 @@ export default class cena1 extends Phaser.Scene {
     super('cena1')
   }
 
-  preload () {
-    this.load.image('pixil-frame-0', '../assets/pixil-frame-0.png')
-    this.load.spritesheet('skyler', '../assets/skyler.png', {
-      frameWidth: 64,
-      frameHeight: 64
-    })
+  preload() {
+    this.load.image('selecaopersonagem', '../assets/selecaopersonagem.png')
+    this.load.image('botaocampanha', '../assets/botaocampanha.png')
+    this.load.image('botaomultiplayer', '../assets/botaomultiplayer.png')
   }
 
-  create () {
-    this.add.image(400, 225, 'pixil-frame-0')
-    this.personagem = this.physics.add.sprite(400, 225, 'skyler')
-    .setInteractive()
-    .on('pointerdown', () => {
-      this.personagem.anims.play('skyler-direita')
-      this.personagem.setVelocityX(100)
-    })
-
-    this.anims.create({
-      key: 'skyler-direita',
-      frames: this.anims.generateFrameNumbers('skyler', {
-        start: 0,
-        end: 3
-      }),
-      frameRate: 8,
-      repeat: -1
-    })
-  }
+    create() {
+      this.add.image(400, 225, 'selecaopersonagem')
+      this.add.image(200, 225, 'botaocampanha')
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.game.scene.stop('cena1')
+          this.game.scene.start('cena2')
+        })
+      this.add.image(600, 225, 'botaomultiplayer')
+    }
+  
 
   update () {
 

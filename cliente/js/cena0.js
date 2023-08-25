@@ -13,7 +13,7 @@ export default class cena0 extends Phaser.Scene {
       .image(400, 225, 'abertura')
       .setInteractive()
       .on('pointerdown', () => {
-        this.imagem.destroy()
+        this.game.scene.stop ('cena0')
         this.game.scene.start('cena1')
       })
    
