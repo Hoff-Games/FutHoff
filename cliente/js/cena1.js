@@ -10,17 +10,21 @@ export default class cena1 extends Phaser.Scene {
     this.load.image('botaomultiplayer', '../assets/botaomultiplayer.png')
   }
 
-    create() {
-      this.add.image(400, 225, 'selecaopersonagem')
-      this.add.image(200, 225, 'botaocampanha')
-        .setInteractive()
-        .on('pointerdown', () => {
-          this.game.scene.stop('cena1')
-          this.game.scene.start('cena2')
-        })
-      this.add.image(600, 225, 'botaomultiplayer')
-    }
-  
+  create() {
+    this.add.image(400, 225, 'selecaopersonagem')
+    this.add.image(200, 225, 'botaocampanha')
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.game.scene.stop('cena1')
+        this.game.scene.start('cena2')
+      })
+    this.add.image(600, 225, 'botaomultiplayer')
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.game.scene.stop('cena1')
+        this.game.scene.start('cenaboss')
+      })
+  }
 
   update () {
 

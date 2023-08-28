@@ -4,6 +4,7 @@ import config from './config.js'
 import cena0 from './cena0.js'
 import cena1 from './cena1.js'
 import cena2 from './cena2.js'
+import cenaboss from './cenaboss.js'
 
 /* Definição do objeti Game */
 class Game extends Phaser.Game {
@@ -13,6 +14,7 @@ class Game extends Phaser.Game {
     this.scene.add('cena0', cena0)
     this.scene.add('cena1', cena1)
     this.scene.add('cena2', cena2)
+    this.scene.add('cenaboss', cenaboss)
 
     this.scene.start('cena0')
   }
