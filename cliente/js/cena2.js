@@ -13,6 +13,14 @@ export default class cena2 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64
     })
+    this.load.spritesheet('skilerstopdireita', '../assets/skilerstopdireita.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
+    this.load.spritesheet('skilerstopesquerda', '../assets/skilerstopesquerda.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
 
     /*botoes*/
     this.load.spritesheet('direita', '../assets/direita.png', {
@@ -35,12 +43,7 @@ export default class cena2 extends Phaser.Scene {
 
     /*personagens*/
     this.add.image(400, 225, 'mapa1')
-    this.personagem = this.physics.add.sprite(400, 225, 'skiler')
-      .setInteractive()
-      .on('pointerdown', () => {
-        this.personagem.anims.play('skiler-direita')
-        this.personagem.setVelocityX(100)
-      })
+    this.personagem = this.physics.add.sprite (400, 225, 'skilerstopdireita')
     
     /*animacoes*/
     /*animacoes dos personagens*/
@@ -58,6 +61,24 @@ export default class cena2 extends Phaser.Scene {
       frames: this.anims.generateFrameNumbers('skiler', {
         start: 0,
         end: 3
+      }),
+      frameRate: 8,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'skilerstopdireita',
+      frames: this.anims.generateFrameNumbers('skilerstopdireita', {
+        start: 0,
+        end: 1
+      }),
+      frameRate: 8,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'skilerstopesquerda',
+      frames: this.anims.generateFrameNumbers('skilerstopesquerda', {
+        start: 0,
+        end: 1
       }),
       frameRate: 8,
       repeat: -1
@@ -92,6 +113,7 @@ export default class cena2 extends Phaser.Scene {
       .on('pointerup', () => {
         this.direita.setFrame(0)
         this.personagem.setVelocityX(0)
+        this.personagem.anims.play('skilerstopdireita', true)
       })
     .setScrollFactor(0, 0)
 
@@ -105,6 +127,7 @@ export default class cena2 extends Phaser.Scene {
       .on('pointerup', () => {
         this.esquerda.setFrame(0)
         this.personagem.setVelocityX(0)
+        this.personagem.anims.play('skilerstopesquerda', true)
       })
       .setScrollFactor(0, 0)
     this.cameras.main.startFollow(this.personagem)
