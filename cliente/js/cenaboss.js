@@ -4,11 +4,11 @@ export default class cenaboss extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('cenabossmulti', '../assets/cenabossmulti.png')
+    this.load.image('cenaboss', '../assets/cenaboss.png')
   }
 
   create() {
-    this.add.image(400, 225, 'cenabossmulti')
+    this.add.image(400, 225, 'cenaboss')
   }
 
   update() {

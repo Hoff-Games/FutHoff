@@ -6,7 +6,7 @@ import cena1 from './cena1.js'
 import cena2 from './cena2.js'
 import cenaboss from './cenaboss.js'
 
-/* Definição do objeti Game */
+/* Definição do objeto Game */
 class Game extends Phaser.Game {
   constructor () {
     super(config)
