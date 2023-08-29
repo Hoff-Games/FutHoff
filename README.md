@@ -98,4 +98,29 @@ A história dos Irmãos Sturmhond é uma saga de ambição, rivalidade e determi
 - Após cada gol marcado, os jogadores retornam à posição inicial no campo e o jogo recomeça com um chute inicial do meio do campo.
 - O objetivo principal do jogo é marcar mais gols do que os Irmãos Sturmhond durante o tempo regulamentar da partida, nas fases mais difíceis o personagem precisa fazer uma quantidade mínima de gols ou receber um limite de gols também.
 
+## Fluxograma Das Cenas:
 
+```mermaid
+flowchart TD
+    A{{Cena Abertura}} --- |Clica na tela| B([Cena Modo de Jogo])
+    B --- |Jogador Escolhe Campanha| C[[Campanha]]
+    B --- |Jogador Escolhe Multiplayer| D[[Multiplayer]]
+    D --- E(Escolher Personagens) --- |Jogador escolhe seu personagem| F(Cena Salas)
+    F --- |Jogador escolhe uma sala| Y(Aguardando Jogador) --- |Jogador é encontrado| G(Jogo)
+    G --> H(Venceu?) --- J(Tela Vitória)
+    G --> I(Perdeu?) --- K(Tela Derrota)
+    J --> B(Cena Modo de Jogo)
+    K --> B(Cena Modo de Jogo)
+    C --- L(Escolher Personagens) --- |Jogador escolhe seu personagem| M(Cena Fases) 
+    M --- |Fase 1 Desloqueada| N(Fase 1)
+    N --- |Venceu?| Q(Cena Fases) --- |Fase 2 Desbloqueada| O(Fase 2)
+    N --> |Perdeu?| P(Cena tente novamente) --> N(Fase 1)
+    O --> |Perdeu?| P(Cena tente novamente) --> O(Fase 2)
+    O --- |Venceu?| R(Cena Fases) --- |Fase 3 Desbloqueada| S(Fase 3)
+    S --- |Venceu| W(Cena Fases) --- |Desbloqueia outra Fase| T(Assim por diante ...)
+    S --> |Perdeu?| P(Cena tente novamente) --> S(Fase 3)
+    T --- |Jogadores vencendo| U(Ultima Fase)
+    U --- |Venceu?| V(Cena Encerramento Vitória)
+    U --> |Perdeu?| P(Cena Tente Novamente)--> U(Ultima Fase)
+    V --> B(Cena Modo de Jogo)
+```
