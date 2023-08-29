@@ -99,6 +99,7 @@ export default class cena2 extends Phaser.Scene {
         this.esquerda.setFrame(0)
         this.personagem.setVelocityX(0)
       })
+    this.cameras.main.startFollow(this.personagem)
   }
 
   update() {
