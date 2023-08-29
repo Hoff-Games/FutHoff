@@ -92,7 +92,8 @@ export default class cena2 extends Phaser.Scene {
       .on('pointerup', () => {
         this.direita.setFrame(0)
         this.personagem.setVelocityX(0)
-       })
+      })
+    .setScrollFactor(0, 0)
 
     this.esquerda = this.add.sprite(50, 350, 'esquerda', 0)
       .setInteractive()
@@ -105,6 +106,7 @@ export default class cena2 extends Phaser.Scene {
         this.esquerda.setFrame(0)
         this.personagem.setVelocityX(0)
       })
+      .setScrollFactor(0, 0)
     this.cameras.main.startFollow(this.personagem)
 
     /*tela cheia*/
@@ -120,6 +122,7 @@ export default class cena2 extends Phaser.Scene {
           this.scale.startFullscreen()
         }
       })
+      .setScrollFactor(0, 0)
   }
 
   update() {
