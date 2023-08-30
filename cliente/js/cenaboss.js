@@ -9,16 +9,16 @@ export default class cenaboss extends Phaser.Scene {
 
     /*personagem*/
     this.load.spritesheet('skiler-arcade', '../assets/skiler-arcade.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 128,
+      frameHeight: 128
     })
     this.load.spritesheet('skiler-arcade-stop-direita', '../assets/skiler-arcade-stop-direita.png', {
       frameWidth: 64,
       frameHeight: 64
     })
     this.load.spritesheet('skiler-arcade-stop-esquerda', '../assets/skiler-arcade-stop-esquerda.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 128,
+      frameHeight: 128
     })
 
     /*botoes*/
