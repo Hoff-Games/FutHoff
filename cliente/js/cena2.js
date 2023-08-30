@@ -41,8 +41,10 @@ export default class cena2 extends Phaser.Scene {
 
   create() {
 
-    /*personagens*/
+    /*imagem de fundo*/
     this.add.image(400, 225, 'mapa1')
+
+    /*personagens*/
     this.personagem = this.physics.add.sprite (400, 225, 'skilerstopdireita')
     
     /*animacoes*/
@@ -83,6 +85,7 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 8,
       repeat: -1
     })
+    
     /*animacoes para botoes*/
     this.anims.create({
       key: 'skiler-direita',
