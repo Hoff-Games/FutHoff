@@ -71,7 +71,7 @@ export default class cena2 extends Phaser.Scene {
       key: 'skilerstopdireita',
       frames: this.anims.generateFrameNumbers('skilerstopdireita', {
         start: 0,
-        end: 1
+        end: 5
       }),
       frameRate: 8,
       repeat: -1
@@ -80,7 +80,7 @@ export default class cena2 extends Phaser.Scene {
       key: 'skilerstopesquerda',
       frames: this.anims.generateFrameNumbers('skilerstopesquerda', {
         start: 0,
-        end: 1
+        end: 5
       }),
       frameRate: 8,
       repeat: -1
@@ -111,7 +111,7 @@ export default class cena2 extends Phaser.Scene {
       .on('pointerdown', () => {
         this.direita.setFrame(1)
         this.personagem.anims.play('skiler-direita', true)
-        this.personagem.setVelocityX(100)
+        this.personagem.setVelocityX(150)
        })
       .on('pointerup', () => {
         this.direita.setFrame(0)
@@ -125,7 +125,7 @@ export default class cena2 extends Phaser.Scene {
       .on('pointerdown', () => {
         this.esquerda.setFrame(1)
         this.personagem.anims.play('skiler-esquerda', true)
-        this.personagem.setVelocityX(-100)
+        this.personagem.setVelocityX(-150)
       })
       .on('pointerup', () => {
         this.esquerda.setFrame(0)
