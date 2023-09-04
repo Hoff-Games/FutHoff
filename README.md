@@ -94,7 +94,8 @@ A história dos Irmãos Sturmhond é uma saga de ambição, rivalidade e determi
 
 ```mermaid
 flowchart
-    A[Cena Abertura] --> |Tocar a tela para iniciar| B(Escolher Personagem) 
+    A[Cena Abertura] --> |Tocar a tela para iniciar| F(Cena Salas) 
+    F --> |Escolher Salas| B(Escolher Personagem) 
     B --> C((Steve))
     B --> D((Skiler))
     B --> E((Outro Personagem?))
