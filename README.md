@@ -93,24 +93,23 @@ A história dos Irmãos Sturmhond é uma saga de ambição, rivalidade e determi
 ## Fluxograma Das Cenas:
 
 ```mermaid
-flowchart TD
-    A[Cena Abertura] --> B(escolher personagem) 
+flowchart
+    A[Cena Abertura] --> |Tocar a tela para iniciar| B(Escolher Personagem) 
     B --> C((Steve))
     B --> D((Skiler))
-    B --> E((Outro 
-    Personagem?))
-    C --> M(Cena Fases)
-    D --> M(Cena Fases)
-    E --> M(Cena Fases)
-    M --> |Fase 1 Desloqueada| N(Fase 1)
+    B --> E((Outro Personagem?))
+    C --> |Cena Fase 1 Desloqueada| N(Fase 1)
+    D --> |Cena Fase 1 Desloqueada| N(Fase 1)
+    E --> |Cena Fase 1 Desloqueada| N(Fase 1)
     N --> |Venceu?| Q(Cena Fases) --> |Fase 2 Desbloqueada| O(Fase 2)
     N --> |Perdeu?| P(Cena tente novamente) --> N(Fase 1)
     O --> |Perdeu?| P(Cena tente novamente) --> O(Fase 2)
     O --> |Venceu?| R(Cena Fases) --> |Fase 3 Desbloqueada| S(Fase 3)
     S --> |Venceu| W(Cena Fases) --> |Desbloqueia outra Fase| T(Assim por diante ...)
-    S --> |Perdeu?| P(Cena tente novamente)
+    S --> |Perdeu?| P(Cena tente novamente) --> S
     T --> |Jogadores vencendo| U(Ultima Fase)
     U --> |Venceu?| V(Cena Encerramento Vitória)
     U --> |Perdeu?| P(Cena Tente Novamente) --> U(Ultima fase)
     V --> A[Cena Abertura]
 ```
+
