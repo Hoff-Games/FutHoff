@@ -8,7 +8,6 @@
 
 - Super Mario (jogo/filme);
 - Sonic (jogo/filme);
-- Soccer Head;
 - CupHead (saga);
 
 ## Receita do jogo:
