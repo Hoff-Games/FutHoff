@@ -2,7 +2,7 @@
 
 ## Premissa do Jogo:
 
-"FutHoff: A Busca pelo Troféu Dourado" é um emocionante jogo de plataforma que acontece no mundo contemporâneo, na cidade de TownSide, um lugar onde o futebol é uma paixão unificadora. No entanto, problemas assolam a cidade e ameaçam a celebração do Torneio Troféu Dourado, um evento futebolístico de prestígio. Os personagens principais, inspirados pela determinação e espírito esportivo, devem enfrentar os irmãos Sturmhond, vilões cruéis e ambiciosos, para garantir que o troféu dourado permaneça em mãos justas. Os jogadores se envolverão na emocionante jornada dos personagens principais para proteger a cidade de TonwSide, celebrar o espírito esportivo e mostrar que o futebol pode ser um agente de mudança positiva no mundo contemporâneo. "FutHoff: A Busca pelo Troféu Dourado" é uma aventura épica que combina ação, plataforma e influências do futebol, proporcionando uma experiência emocionante e empolgante para os fãs do esporte e jogos de plataforma. O jogo ocorrerá de forma online, onde uma dupla jogará como Skiler e Steve para enfrentar os irmãos Sturmhond.
+"FutHoff: A Busca pelo Troféu Dourado" é um emocionante jogo de plataforma que acontece no mundo contemporâneo, na cidade de TownSide, um lugar onde o futebol é uma paixão unificadora. No entanto, problemas assolam a cidade e ameaçam a celebração do Torneio Troféu Dourado, um evento futebolístico de prestígio. Os personagens principais, inspirados pela determinação e espírito esportivo, devem enfrentar os irmãos Sturmhond, vilões cruéis e ambiciosos, para garantir que o troféu dourado permaneça em mãos justas. Os jogadores se envolverão na emocionante jornada dos personagens principais para proteger a cidade de TonwSide, celebrar o espírito esportivo e mostrar que o futebol pode ser um agente de mudança positiva no mundo contemporâneo. "FutHoff: A Busca pelo Troféu Dourado" é uma aventura épica que combina ação, plataforma e influências do futebol, proporcionando uma experiência emocionante e empolgante para os fãs do esporte e jogos de plataforma. O jogo ocorrerá de forma online, onde uma dupla jogará como Skiler ou Steve para enfrentar os irmãos Sturmhond.
 
 ## Referências do Jogo:
 
@@ -44,7 +44,7 @@
 - Irmãos Sturmhond - Os Vilões: Os irmãos Sturmhond são os antagonistas do jogo, buscando conquistar o Troféu Dourado para seus propósitos nefastos. Eles são mestres do futebol sujo e usam táticas desleais para vencer. Os jogadores devem enfrentar desafios difíceis para superar esses vilões habilidosos. 
 - Os  Craques Sombrios - fases: Para além dos BOSS's principais, o jogo terá inimigos que dificultarão a passagem dos heróis durante as fases de plataformas com suas habilidades, são ele, os craques sombrios.
 - Jogabilidade e Elementos: A jogabilidade é tipicamente de plataforma, onde os jogadores controlam Skiler (ou Steve) enquanto ela percorre vários níveis, superando obstáculos, coletando moedas e elementos especiais, derrotando inimigos e buscando ganhar o Torneio Troféu Dourado. 
-- Seleção e Progressã: Os jogadores podem selecionar o personagem que deseja jogar (menino ou menina), tornando-se verdadeiros campeões do futebol.
+- Seleção: Os jogadores podem selecionar o personagem que deseja jogar (menino ou menina), tornando-se verdadeiros campeões do futebol.
 - Trilha Sonora Empolgante: A trilha sonora do jogo é cheia de músicas empolgantes e emocionantes que complementam a atmosfera do futebol e realçam a ação e a emoção do gameplay, além de fazer referência ao mundo do futebol.
 
 ## Personagens:
@@ -82,7 +82,7 @@ A história dos Irmãos Sturmhond é uma saga de ambição, rivalidade e determi
 - Os jogadores podem controlar os personagens principais usando as teclas direcionais para se mover para a esquerda ou direita, bem como para pular e descer uma escada. Além disso, os personagens têm uma variedade de movimentos especiais relacionados ao futebol, como chutar a bola e derrubar inimigos com o famoso "carrinho", apertando a tecla especial na tela.
 - Os níveis são compostos por plataformas e obstáculos. Os jogadores devem pular entre as plataformas, evitar os obstáculos e usar suas habilidades.
 - Os jogadores enfrentarão inimigos padrões ao longo das fases, além dos "Craques Sombrios" e outros vilões em encontros especiais (Irmãos Sturmhond). Os inimigos podem ser derrotados usando movimentos especiais relacionados ao futebol ou evitados com agilidade e estratégia;
-- Normalmente, os craques sombrios poderão ser derrotados tanto por carrinho ou se o personagem pular em cima dele;
+- Normalmente, os craques sombrios poderão ser derrotados tanto por carrinho ou se o personagem pular em cima deles;
 - Os jogadores normalmente começam com um número limitado de vidas. Cada vez que o personagem é derrotado por inimigos ou cai em um obstáculo, ele perde uma vida. Quando todas as vidas são perdidas, o jogador deve recomeçar o nível.
 - Tomar cuidado com os ataques do inimigo para não ser eliminado; 
 - O jogo é dividido em várias fases que ocorrem em locais diversos de TonwSide, incluindo estádios, ruas da cidade e até mesmo locais inusitados. Cada fase apresenta desafios únicos, como obstáculos de plataforma e inimigos.
@@ -117,17 +117,17 @@ flowchart
 - Jogador clica na tela para avançar;
 
 ### Cena salas:
-- Fundo com bolas e com botões interativos falando o número da sala;
-- Jogador escolhe uma sala para jogar. Observação: tem q ser a mesma de seu amigo;
+- Fundo com bolas e com botões interativos falando o número das salas;
+- Jogador escolhe uma sala para jogar. Observação: tem que ser a mesma de seu amigo;
 	
 ### Cena escolher personagem:
 - Jogadores escolhem entre steve ou skiler, ambos não podem escolher o mesmo personagem;
 
 ### Cena "Prólogo --> Campeonato Troféu dourado":
-- Primeiro "cai" um papel na tela, jogador clica na tela;
+- Primeiro "cai" um papel na tela, jogador clica na tela para avançar;
   
 ### Cena panfleto sobre torneio:
-- Ao clicar na tela, vem o anúncio do torneiro troféu dourado)
+- Ao clicar na tela, vem o anúncio do torneiro troféu dourado;
 - Mensagem no panfleto:
   
 Anúncio Oficial: O Torneio Troféu Dourado Começou em TonwSide!
@@ -163,9 +163,9 @@ Mostre ao mundo do que você é capaz e torne-se uma lenda do futebol de platafo
   
 - Steve: (decidido) Absolutamente, Skyler! Estamos dentro. Vamos mostrar a todos que TonwSide tem os melhores jogadores de futebol e que estamos prontos para qualquer desafio!
 
-### Vem a primeira fase:
+### Vem a primeira fase;
 
-### Os heróis vencem a primeira fase:
+### Os heróis vencem a primeira fase;
 
 ### Fim da Primeira fase:
 
@@ -197,7 +197,7 @@ Mostre ao mundo do que você é capaz e torne-se uma lenda do futebol de platafo
 
 - Skyler: (olhando para o futuro) Com certeza, Steve. As próximas fases serão mais difíceis, mas estamos preparados. Vamos continuar treinando duro e nos apoiando. Nada vai nos deter!
 
-### Fim da segunda fase:
+### Fim da segunda fase;
 
 #### Heróis:
 
@@ -225,9 +225,9 @@ Mostre ao mundo do que você é capaz e torne-se uma lenda do futebol de platafo
 
 - Morgan Sturmhond: (com um sorriso sinistro) E quando encontrarmos os garotos da próxima vez, eles não terão ideia do que os atingiu.
 
-### Começa terceira fase:
+### Começa terceira fase;
 
-### Heróis vencem:
+### Heróis vencem;
 
 ### Fim terceira fase:
 
@@ -243,7 +243,7 @@ Mostre ao mundo do que você é capaz e torne-se uma lenda do futebol de platafo
 
 - Morgan Sturmhond: (com um sorriso sinistro) E quando encontrarmos os heróis da próxima vez, eles enfrentarão um desafio que nunca viram antes.
 
-### Início quarta fase (segunda fase Boss):
+### Início quarta fase (segunda fase Boss);
 
 ### Fim quarta fase:
 
@@ -255,9 +255,9 @@ Mostre ao mundo do que você é capaz e torne-se uma lenda do futebol de platafo
 
 - Morgan Sturmhond: (com um olhar sombrio) Não podemos subestimá-los, irmãos. Eles são mais habilidosos do que parecem. Precisamos repensar nossas estratégias.
 
-- Lion Sturmhond: (com determinação renovada) É isso mesmo. Não podemos deixar que eles se aproximem do Troféu Dourado. Devemos elimina-los desse torneiode uma vez por todas.
+- Lion Sturmhond: (com determinação renovada) É isso mesmo. Não podemos deixar que eles se aproximem do Troféu Dourado. Devemos elimina-los desse torneio de uma vez por todas.
 
-### Início quinta fase:
+### Início quinta fase;
 
 ### Heróis vencem quinta fase:
 
@@ -314,7 +314,7 @@ Mostre ao mundo do que você é capaz e torne-se uma lenda do futebol de platafo
 ### Cena Encerramento:
 - Herois com o troféu;
 
-### Volta para tela inicial:
+### Volta para tela inicial;
 
 ## Sobre as fases: 
 
