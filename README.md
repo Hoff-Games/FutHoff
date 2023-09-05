@@ -311,11 +311,22 @@ Mostre ao mundo do que você é capaz e torne-se uma lenda do futebol de platafo
 
 - Steve: (sorrindo) E este é apenas o começo, Skyler. Quem sabe o que o futuro reserva para nós? Estamos prontos para enfrentar qualquer desafio que vier.
 
-### Fim do jogo:
-
-### Cena Encerramento
+### Cena Encerramento:
 - Herois com o troféu;
 
-### Volta para tela inicial
+### Volta para tela inicial:
 
+## Sobre as fases: 
+
+### Fase 1:
+
+### Fase 2 (Fase Boss):
+
+### Fase 3:
+
+### Fase 4 (Fase Boss):
+
+### Fase 5:
+
+### Fase 6 (Fase Boss):
 
