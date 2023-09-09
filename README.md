@@ -318,9 +318,31 @@ Mostre ao mundo do que você é capaz e torne-se uma lenda do futebol de platafo
 
 ## Sobre as fases: 
 
-### Fase 1:
+### Fase 1 - Selva Noturna 
 
-### Fase 2 (Fase Boss):
+A primeira fase do Torneio FutHOff transporta os jogadores para uma emocionante selva noturna. Neste cenário desafiador, os participantes encontrarão:
+
+- *Plataformas Intrincadas:* Percorram plataformas suspensas e desafiadoras para alcançar a vitória.
+
+- *Coleta de Estrelas e Moedas:* Acumule estrelas brilhantes e moedas reluzentes para aumentar sua pontuação.
+
+- *Inimigos Astutos:* Enfrente inimigos habilidosos que farão de tudo para impedi-lo.
+
+- *Armadilhas Perigosas:* Esteja atento às armadilhas traiçoeiras que podem dificultar sua progressão.
+
+### Fase 2 (Fase Boss) - As Nuvens
+
+Na segunda fase do Torneio FutHOff, os jogadores serão transportados para um cenário celestial, nas alturas das nuvens. Aqui, eles encontrarão:
+
+- *Plataformas Desafiadoras nas Nuvens:* Enfrente obstáculos de plataforma em meio às nuvens, onde cada passo é uma aventura.
+
+- *A Caçada por Estrelas e Moedas Celestiais:* Continue coletando estrelas brilhantes e moedas cintilantes para fortalecer seu desempenho.
+
+- *Mais Inimigos:* Esteja pronto para enfrentar inimigos determinados e habilidosos.
+
+- *Armadas nas Nuvens:* Fique atento às armadilhas traiçoeiras que podem aparecer.
+
+- *Confronto com Erik Sturmhond:* O encerramento da fase 2 traz uma batalha épica nas nuvens. Enfrente o formidável Erik Sturmhond em um emocionante desafio de gols nas alturas.
 
 ### Fase 3:
 
