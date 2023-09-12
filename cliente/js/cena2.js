@@ -5,8 +5,30 @@ export default class cena2 extends Phaser.Scene {
 
   preload() {
 
-    /*imagem de fundo*/
-    this.load.image('mapa1', '../assets/cenas/mapa1.png')
+    /*mapas*/
+    this.load.tilemapTiledJSON('fase1', '../assets/fases/fase1.json')
+
+    /*tilesets*/
+    this.load.image('bbb', '../assets/fases/bbb.png')
+    this.load.image('c1', '../assets/fases/c1.png')
+    this.load.image('c2', '../assets/fases/c2.png')
+    this.load.image('c3', '../assets/fases/c3.png')
+    this.load.image('f0', '../assets/fases/f0.png')
+    this.load.image('f1', '../assets/fases/f1.png')
+    this.load.image('f2', '../assets/fases/f2.png')
+    this.load.image('tilearv', '../assets/fases/tilearv.png')
+    this.load.image('tilebloc', '../assets/fases/tilebloc.png')
+    this.load.image('tilebloc2', '../assets/fases/tilebloc2.png')
+    this.load.image('tiledec', '../assets/fases/tiledec.png')
+    this.load.image('tiledmapa3', '../assets/fases/tiledmapa3.png')
+    this.load.image('tileper', '../assets/fases/tileper.png')
+    this.load.image('tilesp', '../assets/fases/tilesp.png')
+    this.load.image('tiletrave', '../assets/fases/tiletrave.png')
+
+    /*moeda*/
+    this.load.spritesheet('moeda', '..assets/')
+
+
 
     /*personagens*/
     this.load.spritesheet('skiler', '../assets/personagens/skiler.png', {
@@ -41,8 +63,27 @@ export default class cena2 extends Phaser.Scene {
 
   create() {
 
-    /*imagem de fundo*/
-    this.add.image(400, 225, 'mapa1')
+    /*mapas*/
+    this.load.tilemapFase1 = this.make.tilemap({ key: 'fase1' })
+
+    /*tilesets*/
+    this.tilesetBbb = this.tilemapFase1.addTilesetImage('bbb')
+    this.tilesetC1 = this.tilemapFase1.addTilesetImage('c1')
+    this.tilesetC2 = this.tilemapFase1.addTilesetImage('c2')
+    this.tilesetC3 = this.tilemapFase1.addTilesetImage('c3')
+    this.tilesetF0 = this.tilemapFase1.addTilesetImage('f0')
+    this.tilesetF1 = this.tilemapFase1.addTilesetImage('f1')
+    this.tilesetF2 = this.tilemapFase1.addTilesetImage('f2')
+    this.tilesetTilearv = this.tilemapFase1.addTilesetImage('tilearv')
+    this.tilesetTilebloc = this.tilemapFase1.addTilesetImage('tilebloc')
+    this.tilesetTilebloc2 = this.tilemapFase1.addTilesetImage('tilebloc2')
+    this.tilesetTiledec = this.tilemapFase1.addTilesetImage('tiledec')
+    this.tilesetTiledmapa3 = this.tilemapFase1.addTilesetImage('tiledmapa3')
+    this.tilesetTileper = this.tilemapFase1.addTilesetImage('tileper')
+    this.tilesetTilesp = this.tilemapFase1.addTilesetImage('tilesp')
+    this.tilesetTiletrave = this.tilemapFase1.addTilesetImage('tiletrave')
+    
+
 
     /*personagens*/
     this.personagem = this.physics.add.sprite (400, 225, 'skilerstopdireita')
