@@ -6,7 +6,7 @@ export default class cena2 extends Phaser.Scene {
   preload() {
 
     /*mapas*/
-    this.load.tilemapTiledJSON('fase1', '../assets/fases/fase1.json')
+    this.load.tilemapTiledJSON('fase', '../assets/fases/fase.json')
 
     /*tilesets*/
     this.load.image('bbb', '../assets/fases/bbb.png')
@@ -26,9 +26,7 @@ export default class cena2 extends Phaser.Scene {
     this.load.image('tiletrave', '../assets/fases/tiletrave.png')
 
     /*moeda*/
-    this.load.spritesheet('moeda', '..assets/')
-
-
+    this.load.spritesheet('moeda', '..assets/fases/moeda.png')
 
     /*personagens*/
     this.load.spritesheet('skiler', '../assets/personagens/skiler.png', {
@@ -64,7 +62,7 @@ export default class cena2 extends Phaser.Scene {
   create() {
 
     /*mapas*/
-    this.load.tilemapFase1 = this.make.tilemap({ key: 'fase1' })
+    this.load.tilemapFase1 = this.make.tilemap({ key: 'fase' })
 
     /*tilesets*/
     this.tilesetBbb = this.tilemapFase1.addTilesetImage('bbb')
@@ -89,6 +87,18 @@ export default class cena2 extends Phaser.Scene {
     this.personagem = this.physics.add.sprite (400, 225, 'skilerstopdireita')
     
     /*animacoes*/
+
+    /*animação moeda*/
+    this.anims.create({
+      key: 'moeda-girando',
+      frames: this.anims.generateFrameNumbers('moeda', {
+        start: 0,
+        end: 3
+      }),
+      frameRate: 8,
+      repeat: -1
+    })
+
     /*animacoes dos personagens*/
     this.anims.create({
       key: 'skiler-direita',
