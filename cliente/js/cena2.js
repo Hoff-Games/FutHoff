@@ -6,34 +6,34 @@ export default class cena2 extends Phaser.Scene {
   preload() {
 
     /*imagem de fundo*/
-    this.load.image('mapa1', '../assets/mapa1.png')
+    this.load.image('mapa1', '../assets/cenas/mapa1.png')
 
     /*personagens*/
-    this.load.spritesheet('skiler', '../assets/skiler.png', {
+    this.load.spritesheet('skiler', '../assets/personagens/skiler.png', {
       frameWidth: 64,
       frameHeight: 64
     })
-    this.load.spritesheet('skilerstopdireita', '../assets/skilerstopdireita.png', {
+    this.load.spritesheet('skilerstopdireita', '../assets/personagens/skilerstopdireita.png', {
       frameWidth: 64,
       frameHeight: 64
     })
-    this.load.spritesheet('skilerstopesquerda', '../assets/skilerstopesquerda.png', {
+    this.load.spritesheet('skilerstopesquerda', '../assets/personagens/skilerstopesquerda.png', {
       frameWidth: 64,
       frameHeight: 64
     })
 
     /*botoes*/
-    this.load.spritesheet('direita', '../assets/direita.png', {
+    this.load.spritesheet('direita', '../assets/botoes/direita.png', {
       frameWidth: 64,
       frameHeight: 64
     })
-    this.load.spritesheet('esquerda', '../assets/esquerda.png', {
+    this.load.spritesheet('esquerda', '../assets/botoes/esquerda.png', {
       frameWidth: 64,
       frameHeight: 64
     })
 
     /*tela cheia*/
-    this.load.spritesheet('tela-cheia', './assets/tela-cheia.png', {
+    this.load.spritesheet('tela-cheia', './assets/botoes/tela-cheia.png', {
       frameWidth: 64,
       frameHeight: 64
     })

@@ -6,10 +6,10 @@ export default class cena0 extends Phaser.Scene {
 
   preload() {
     /*imagem de fundo*/
-    this.load.image('abertura', '../assets/abertura.png')
+    this.load.image('cenaabertura', '../assets/cenas/cenaabertura.png')
 
     /*tela cheia*/
-    this.load.spritesheet('tela-cheia', './assets/tela-cheia.png', {
+    this.load.spritesheet('tela-cheia', './assets/botoes/tela-cheia.png', {
       frameWidth: 64,
       frameHeight: 64
     })
@@ -17,7 +17,7 @@ export default class cena0 extends Phaser.Scene {
 
   create() { 
     this.imagem = this.add
-      .image(400, 225, 'abertura')
+      .image(400, 225, 'cenaabertura')
       .setInteractive()
       .on('pointerdown', () => {
         this.game.scene.stop ('cena0')

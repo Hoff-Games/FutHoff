@@ -6,15 +6,15 @@ export default class cena1 extends Phaser.Scene {
 
   preload() {
     this.load.image('selecaopersonagem', '../assets/selecaopersonagem.png')
-    this.load.image('sala1', '../assets/sala1.png')
-    this.load.image('sala2', '../assets/sala2.png')
-    this.load.image('sala3', '../assets/sala3.png')
-    this.load.image('sala4', '../assets/sala4.png')
-    this.load.image('sala5', '../assets/sala5.png')
-    this.load.image('sala6', '../assets/sala6.png')
-    this.load.image('sala7', '../assets/sala7.png')
-    this.load.image('sala8', '../assets/sala8.png')
-    this.load.image('sala9', '../assets/sala9.png')
+    this.load.image('sala1', '../assets/botoes/sala1.png')
+    this.load.image('sala2', '../assets/botoes/sala2.png')
+    this.load.image('sala3', '../assets/botoes/sala3.png')
+    this.load.image('sala4', '../assets/botoes/sala4.png')
+    this.load.image('sala5', '../assets/botoes/sala5.png')
+    this.load.image('sala6', '../assets/botoes/sala6.png')
+    this.load.image('sala7', '../assets/botoes/sala7.png')
+    this.load.image('sala8', '../assets/botoes/sala8.png')
+    this.load.image('sala9', '../assets/botoes/sala9.png')
   }
 
   create() {
