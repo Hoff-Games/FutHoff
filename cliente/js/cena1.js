@@ -5,7 +5,7 @@ export default class cena1 extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('selecaopersonagem', '../assets/selecaopersonagem.png')
+    this.load.image('cenaselecao', '../assets/cenas/cenaselecao.png')
     this.load.image('sala1', '../assets/botoes/sala1.png')
     this.load.image('sala2', '../assets/botoes/sala2.png')
     this.load.image('sala3', '../assets/botoes/sala3.png')
@@ -18,7 +18,7 @@ export default class cena1 extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(400, 225, 'selecaopersonagem')
+    this.add.image(400, 225, 'cenaselecao')
 
     this.add.image(150, 100, 'sala1')
       .setInteractive()
