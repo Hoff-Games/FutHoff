@@ -81,6 +81,8 @@ export default class cena2 extends Phaser.Scene {
     this.tilesetTilesp = this.tilemapFase1.addTilesetImage('tilesp')
     this.tilesetTiletrave = this.tilemapFase1.addTilesetImage('tiletrave')
     
+    /*camadas*/
+    this.layerTrave
 
 
     /*personagens*/
