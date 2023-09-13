@@ -6,23 +6,16 @@ export default class cena2 extends Phaser.Scene {
   preload() {
 
     /*mapas*/
-    this.load.tilemapTiledJSON('fase', '../assets/fases/fase.json')
+    this.load.tilemapTiledJSON('fase', '../assets/fases/fases.json')
 
     /*tilesets*/
-    this.load.image('bbb', '../assets/fases/bbb.png')
     this.load.image('c1', '../assets/fases/c1.png')
     this.load.image('c2', '../assets/fases/c2.png')
     this.load.image('c3', '../assets/fases/c3.png')
-    this.load.image('f0', '../assets/fases/f0.png')
-    this.load.image('f1', '../assets/fases/f1.png')
-    this.load.image('f2', '../assets/fases/f2.png')
     this.load.image('tilearv', '../assets/fases/tilearv.png')
     this.load.image('tilebloc', '../assets/fases/tilebloc.png')
-    this.load.image('tilebloc2', '../assets/fases/tilebloc2.png')
-    this.load.image('tiledec', '../assets/fases/tiledec.png')
-    this.load.image('tiledmapa3', '../assets/fases/tiledmapa3.png')
-    this.load.image('tileper', '../assets/fases/tileper.png')
-    this.load.image('tilesp', '../assets/fases/tilesp.png')
+    this.load.image('dec1', '../assets/fases/dec1.png')
+    this.load.image('dec2', '../assets/fases/dec2.png')
     this.load.image('tiletrave', '../assets/fases/tiletrave.png')
 
     /*moeda*/
@@ -65,48 +58,47 @@ export default class cena2 extends Phaser.Scene {
   create() {
 
     /*mapas*/
-    this.tilemapFase = this.make.tilemap({ key: 'fase' })
+    this.tilemapFases = this.make.tilemap({ key: 'fases' })
 
     /*tilesets*/
-    this.tilesetBbb = this.tilemapFase.addTilesetImage('bbb')
-    this.tilesetC1 = this.tilemapFase.addTilesetImage('c1')
-    this.tilesetC2 = this.tilemapFase.addTilesetImage('c2')
-    this.tilesetC3 = this.tilemapFase.addTilesetImage('c3')
-    this.tilesetF0 = this.tilemapFase.addTilesetImage('f0')
-    this.tilesetF1 = this.tilemapFase.addTilesetImage('f1')
-    this.tilesetF2 = this.tilemapFase.addTilesetImage('f2')
-    this.tilesetTilearv = this.tilemapFase.addTilesetImage('tilearv')
-    this.tilesetTilebloc = this.tilemapFase.addTilesetImage('tilebloc')
-    this.tilesetTilebloc2 = this.tilemapFase.addTilesetImage('tilebloc2')
-    this.tilesetTiledec = this.tilemapFase.addTilesetImage('tiledec')
-    this.tilesetTiledmapa3 = this.tilemapFase.addTilesetImage('tiledmapa3')
-    this.tilesetTileper = this.tilemapFase.addTilesetImage('tileper')
-    this.tilesetTilesp = this.tilemapFase.addTilesetImage('tilesp')
-    this.tilesetTiletrave = this.tilemapFase.addTilesetImage('tiletrave')
+    this.tilesetDec1 = this.tilemapFases.addTilesetImage('dec1')
+    this.tilesetDec2 = this.tilemapFases.addTilesetImage('dec2')
+    this.tilesetC1 = this.tilemapFases.addTilesetImage('c1')
+    this.tilesetC2 = this.tilemapFases.addTilesetImage('c2')
+    this.tilesetC3 = this.tilemapFases.addTilesetImage('c3')
+    this.tilesetTilearv = this.tilemapFases.addTilesetImage('tilearv')
+    this.tilesetTilebloc = this.tilemapFases.addTilesetImage('tilebloc')
+    this.tilesetTiletrave = this.tilemapFases.addTilesetImage('tiletrave')
     
     /*camadas*/
-    this.layerFundo = this.tilemapFase.createLayer('fundo', [this.tilesetC1, this.tilesetC2, this.tilesetF0, this.tilesetF1, this.tilesetF2])
-    this.layerPerigo = this.tilemapFase.createLayer('perigo', [this.tilesetTileper])
-    this.layerArvores = this.tilemapFase.createLayer('fundo', [this.tilesetTilearv])
-    this.layerBlocos = this.tilemapFase.createLayer('fundo', [this.tilesetTilebloc, this.tilesetTilebloc2, this.tilesetTiledec, this.tilesetTiledmapa3, this.tilesetTilesp])
-    this.layerEscada = this.tilemapFase.createLayer('fundo', [this.tilesetTilebloc])
-    this.layerDecoracao1 = this.tilemapFase.createLayer('fundo', [this.tilesetTilebloc, this.tilesetTiledec])
-    this.layerDecoracao2 = this.tilemapFase.createLayer('fundo', [this.tilesetTilebloc, this.tilesetTilearv, this.tilesetTiledec])
-    this.layerPlaca = this.tilemapFase.createLayer('fundo', [this.tilesetTiledec])
-    this.layerTrave1 = this.tilemapFase.createLayer('fundo', [this.tilesetTiletrave])
-    this.layerTrave2 = this.tilemapFase.createLayer('fundo', [this.tilesetTiletrave])
-    this.layerTrave3 = this.tilemapFase.createLayer('fundo', [this.tilesetTiletrave])
+    this.layerFundo = this.tilemapFases.createLayer('fundo', [this.tilesetC1, this.tilesetC2, this.tilesetC3])
+    this.layerArvores = this.tilemapFases.createLayer('arvores', [this.tilesetTilearv])
+    this.layerArvores2 = this.tilemapFases.createLayer('arvores2', [this.tilesetTilearv])
+    this.layerBlocos = this.tilemapFases.createLayer('blocos', [this.tilesetTilebloc])
+    this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
+    this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
+    this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
+    this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
+    this.layerTrave2 = this.tilemapFases.createLayer('trave2', [this.tilesetTiletrave])
+    this.layerTrave3 = this.tilemapFases.createLayer('trave3', [this.tilesetTiletrave])
     
     /*colisoes*/
-    this.layerPerigo.setCollisionByProperty({ colisao: true })
     this.layerBlocos.setCollisionByProperty({ colisao: true })
+    this.layerTrave1.setCollisionByProperty({ colisao: true })
+    this.layerTrave2.setCollisionByProperty({ colisao: true })
+    this.layerTrave3.setCollisionByProperty({ colisao: true })
 
-    this.physics.add.collider(this.personagem, this.layerPerigo)
+  
     this.physics.add.collider(this.personagem, this.layerBlocos)
+    this.physics.add.collider(this.personagem, this.layerTrave1)
+    this.physics.add.collider(this.personagem, this.layerTrave2)
+    this.physics.add.collider(this.personagem, this.layerTrave3)
+
 
     /*personagens*/
     this.personagem = this.physics.add.sprite (400, 225, 'skilerstopdireita')
     
+
     /*animacoes*/
 
     /*animação moeda*/
