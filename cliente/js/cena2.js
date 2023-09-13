@@ -47,6 +47,10 @@ export default class cena2 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64
     })
+    this.load.spritesheet('cima', '../assets/botoes/cima.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
 
     /*tela cheia*/
     this.load.spritesheet('tela-cheia', './assets/botoes/tela-cheia.png', {
@@ -167,6 +171,9 @@ export default class cena2 extends Phaser.Scene {
       }),
       frameRate: 1
     })
+    this.anims.create({
+      key: 'skiler-esquerda'
+    })
 
 
     /*botoes*/
@@ -197,6 +204,29 @@ export default class cena2 extends Phaser.Scene {
         this.personagem.anims.play('skilerstopesquerda', true)
       })
       .setScrollFactor(0, 0)
+    
+    /*PULARRRRRRRRRRRRRRRRR -------- UIIIIIIIIIIIII*/
+    this.cima = this.add.sprite(700, 400, 'cima', 0)
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.cima.setFrame(1);
+        this.personagem.setVelocityX(constant);
+      })
+      .on('pointerup', () => {
+        // Verifica se o personagem está colidindo com o "CHAO" na parte de baixo
+        const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1; // Ponto abaixo do personagem
+        const isCollidingWithLayer = this.layerchaocortina.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
+
+        if (isCollidingWithLayer) {
+          this.cima.setFrame(0);
+          this.personagem.setVelocityY(-100);
+        } else {
+          // Se não estiver colidindo, defina o frame como 0
+          this.cima.setFrame(0);
+        }
+      })
+      .setScrollFactor(0, 0);
+    
     this.cameras.main.startFollow(this.personagem)
 
     /*tela cheia*/
