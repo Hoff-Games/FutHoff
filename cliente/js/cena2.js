@@ -73,7 +73,7 @@ export default class cena2 extends Phaser.Scene {
     this.tilesetTilearv = this.tilemapFases.addTilesetImage('tilearv')
     this.tilesetTilebloc = this.tilemapFases.addTilesetImage('tilebloc')
     this.tilesetTiletrave = this.tilemapFases.addTilesetImage('tiletrave')
-    
+
     /*camadas*/
     this.layerFundo = this.tilemapFases.createLayer('fundo', [this.tilesetC1, this.tilesetC2, this.tilesetC3])
     this.layerArvores = this.tilemapFases.createLayer('arvores', [this.tilesetTilearv])
@@ -85,23 +85,20 @@ export default class cena2 extends Phaser.Scene {
     this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
     this.layerTrave2 = this.tilemapFases.createLayer('trave2', [this.tilesetTiletrave])
     this.layerTrave3 = this.tilemapFases.createLayer('trave3', [this.tilesetTiletrave])
-    
+
     /*colisoes*/
     this.layerBlocos.setCollisionByProperty({ colisao: true })
     this.layerTrave1.setCollisionByProperty({ colisao: true })
     this.layerTrave2.setCollisionByProperty({ colisao: true })
     this.layerTrave3.setCollisionByProperty({ colisao: true })
 
-  
+    /*personagens*/
+    this.personagem = this.physics.add.sprite(400, 225, 'skilerstopdireita')
+
     this.physics.add.collider(this.personagem, this.layerBlocos)
     this.physics.add.collider(this.personagem, this.layerTrave1)
     this.physics.add.collider(this.personagem, this.layerTrave2)
     this.physics.add.collider(this.personagem, this.layerTrave3)
-
-
-    /*personagens*/
-    this.personagem = this.physics.add.sprite (400, 225, 'skilerstopdireita')
-    
 
     /*animacoes*/
 
@@ -153,7 +150,7 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 8,
       repeat: -1
     })
-    
+
     /*animacoes para botoes*/
     this.anims.create({
       key: 'skiler-direita',
@@ -183,13 +180,13 @@ export default class cena2 extends Phaser.Scene {
         this.direita.setFrame(1)
         this.personagem.anims.play('skiler-direita', true)
         this.personagem.setVelocityX(150)
-       })
+      })
       .on('pointerup', () => {
         this.direita.setFrame(0)
         this.personagem.setVelocityX(0)
         this.personagem.anims.play('skilerstopdireita', true)
       })
-    .setScrollFactor(0, 0)
+      .setScrollFactor(0, 0)
 
     this.esquerda = this.add.sprite(50, 350, 'esquerda', 0)
       .setInteractive()
@@ -204,29 +201,19 @@ export default class cena2 extends Phaser.Scene {
         this.personagem.anims.play('skilerstopesquerda', true)
       })
       .setScrollFactor(0, 0)
-    
+
     /*PULARRRRRRRRRRRRRRRRR -------- UIIIIIIIIIIIII*/
     this.cima = this.add.sprite(700, 400, 'cima', 0)
       .setInteractive()
       .on('pointerdown', () => {
         this.cima.setFrame(1);
-        this.personagem.setVelocityX(constant);
+        this.personagem.setVelocityY(-200);
       })
       .on('pointerup', () => {
-        // Verifica se o personagem está colidindo com o "CHAO" na parte de baixo
-        const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1; // Ponto abaixo do personagem
-        const isCollidingWithLayer = this.layerchaocortina.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
-
-        if (isCollidingWithLayer) {
-          this.cima.setFrame(0);
-          this.personagem.setVelocityY(-100);
-        } else {
-          // Se não estiver colidindo, defina o frame como 0
-          this.cima.setFrame(0);
-        }
+        this.cima.setFrame(0);
       })
       .setScrollFactor(0, 0);
-    
+
     this.cameras.main.startFollow(this.personagem)
 
     /*tela cheia*/
@@ -245,7 +232,5 @@ export default class cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
   }
 
-  update() {
-
-      }
-    }
+  update() { }
+}
