@@ -4,7 +4,7 @@ export default class encerramento extends Phaser.Scene {
   }
 
   preload() {
-    this.load.spritesheet('cenaencerramento', '../fases/cenaencerramento.png', {
+    this.load.spritesheet('cenaencerramento', '../assets/cenas/cenaencerramento.png', {
       frameWidth: 800,
       frameHeight: 450
     })
@@ -12,17 +12,19 @@ export default class encerramento extends Phaser.Scene {
 
   create() {
 
-    this.image = this.physics.add.sprite(400, 225, 'cenaencerramento')
-    
+    this.image = this.add.sprite(400, 225, 'cenaencerramento')
+
     this.anims.create({
       key: 'cena-trocando',
       frames: this.anims.generateFrameNumbers('cenaencerramento', {
         start: 0,
         end: 1
       }),
-      frameRate: 8,
+      frameRate: 4,
       repeat: -1
     })
+
+    this.image.anims.play('cena-trocando')
   }
 
   update() {

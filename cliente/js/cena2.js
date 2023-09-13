@@ -207,7 +207,7 @@ export default class cena2 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.cima.setFrame(1);
-        this.personagem.setVelocityY(-200);
+        this.personagem.setVelocityY(-400);
       })
       .on('pointerup', () => {
         this.cima.setFrame(0);
