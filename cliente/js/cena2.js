@@ -6,7 +6,7 @@ export default class cena2 extends Phaser.Scene {
   preload() {
 
     /*mapas*/
-    this.load.tilemapTiledJSON('fase', '../assets/fases/fases.json')
+    this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
 
     /*tilesets*/
     this.load.image('c1', '../assets/fases/c1.png')
