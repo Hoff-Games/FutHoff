@@ -6,23 +6,16 @@ export default class cena2 extends Phaser.Scene {
   preload() {
 
     /*mapas*/
-    this.load.tilemapTiledJSON('fase', '../assets/fases/fase.json')
+    this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
 
     /*tilesets*/
-    this.load.image('bbb', '../assets/fases/bbb.png')
     this.load.image('c1', '../assets/fases/c1.png')
     this.load.image('c2', '../assets/fases/c2.png')
     this.load.image('c3', '../assets/fases/c3.png')
-    this.load.image('f0', '../assets/fases/f0.png')
-    this.load.image('f1', '../assets/fases/f1.png')
-    this.load.image('f2', '../assets/fases/f2.png')
     this.load.image('tilearv', '../assets/fases/tilearv.png')
     this.load.image('tilebloc', '../assets/fases/tilebloc.png')
-    this.load.image('tilebloc2', '../assets/fases/tilebloc2.png')
-    this.load.image('tiledec', '../assets/fases/tiledec.png')
-    this.load.image('tiledmapa3', '../assets/fases/tiledmapa3.png')
-    this.load.image('tileper', '../assets/fases/tileper.png')
-    this.load.image('tilesp', '../assets/fases/tilesp.png')
+    this.load.image('dec1', '../assets/fases/dec1.png')
+    this.load.image('dec2', '../assets/fases/dec2.png')
     this.load.image('tiletrave', '../assets/fases/tiletrave.png')
 
     /*moeda*/
@@ -54,6 +47,10 @@ export default class cena2 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64
     })
+    this.load.spritesheet('cima', '../assets/botoes/cima.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
 
     /*tela cheia*/
     this.load.spritesheet('tela-cheia', './assets/botoes/tela-cheia.png', {
@@ -65,48 +62,44 @@ export default class cena2 extends Phaser.Scene {
   create() {
 
     /*mapas*/
-    this.tilemapFase = this.make.tilemap({ key: 'fase' })
+    this.tilemapFases = this.make.tilemap({ key: 'fases' })
 
     /*tilesets*/
-    this.tilesetBbb = this.tilemapFase.addTilesetImage('bbb')
-    this.tilesetC1 = this.tilemapFase.addTilesetImage('c1')
-    this.tilesetC2 = this.tilemapFase.addTilesetImage('c2')
-    this.tilesetC3 = this.tilemapFase.addTilesetImage('c3')
-    this.tilesetF0 = this.tilemapFase.addTilesetImage('f0')
-    this.tilesetF1 = this.tilemapFase.addTilesetImage('f1')
-    this.tilesetF2 = this.tilemapFase.addTilesetImage('f2')
-    this.tilesetTilearv = this.tilemapFase.addTilesetImage('tilearv')
-    this.tilesetTilebloc = this.tilemapFase.addTilesetImage('tilebloc')
-    this.tilesetTilebloc2 = this.tilemapFase.addTilesetImage('tilebloc2')
-    this.tilesetTiledec = this.tilemapFase.addTilesetImage('tiledec')
-    this.tilesetTiledmapa3 = this.tilemapFase.addTilesetImage('tiledmapa3')
-    this.tilesetTileper = this.tilemapFase.addTilesetImage('tileper')
-    this.tilesetTilesp = this.tilemapFase.addTilesetImage('tilesp')
-    this.tilesetTiletrave = this.tilemapFase.addTilesetImage('tiletrave')
-    
-    /*camadas*/
-    this.layerFundo = this.tilemapFase.createLayer('fundo', [this.tilesetC1, this.tilesetC2, this.tilesetF0, this.tilesetF1, this.tilesetF2])
-    this.layerPerigo = this.tilemapFase.createLayer('perigo', [this.tilesetTileper])
-    this.layerArvores = this.tilemapFase.createLayer('fundo', [this.tilesetTilearv])
-    this.layerBlocos = this.tilemapFase.createLayer('fundo', [this.tilesetTilebloc, this.tilesetTilebloc2, this.tilesetTiledec, this.tilesetTiledmapa3, this.tilesetTilesp])
-    this.layerEscada = this.tilemapFase.createLayer('fundo', [this.tilesetTilebloc])
-    this.layerDecoracao1 = this.tilemapFase.createLayer('fundo', [this.tilesetTilebloc, this.tilesetTiledec])
-    this.layerDecoracao2 = this.tilemapFase.createLayer('fundo', [this.tilesetTilebloc, this.tilesetTilearv, this.tilesetTiledec])
-    this.layerPlaca = this.tilemapFase.createLayer('fundo', [this.tilesetTiledec])
-    this.layerTrave1 = this.tilemapFase.createLayer('fundo', [this.tilesetTiletrave])
-    this.layerTrave2 = this.tilemapFase.createLayer('fundo', [this.tilesetTiletrave])
-    this.layerTrave3 = this.tilemapFase.createLayer('fundo', [this.tilesetTiletrave])
-    
-    /*colisoes*/
-    this.layerPerigo.setCollisionByProperty({ colisao: true })
-    this.layerBlocos.setCollisionByProperty({ colisao: true })
+    this.tilesetDec1 = this.tilemapFases.addTilesetImage('dec1')
+    this.tilesetDec2 = this.tilemapFases.addTilesetImage('dec2')
+    this.tilesetC1 = this.tilemapFases.addTilesetImage('c1')
+    this.tilesetC2 = this.tilemapFases.addTilesetImage('c2')
+    this.tilesetC3 = this.tilemapFases.addTilesetImage('c3')
+    this.tilesetTilearv = this.tilemapFases.addTilesetImage('tilearv')
+    this.tilesetTilebloc = this.tilemapFases.addTilesetImage('tilebloc')
+    this.tilesetTiletrave = this.tilemapFases.addTilesetImage('tiletrave')
 
-    this.physics.add.collider(this.personagem, this.layerPerigo)
-    this.physics.add.collider(this.personagem, this.layerBlocos)
+    /*camadas*/
+    this.layerFundo = this.tilemapFases.createLayer('fundo', [this.tilesetC1, this.tilesetC2, this.tilesetC3])
+    this.layerArvores = this.tilemapFases.createLayer('arvores', [this.tilesetTilearv])
+    this.layerArvores2 = this.tilemapFases.createLayer('arvores2', [this.tilesetTilearv])
+    this.layerBlocos = this.tilemapFases.createLayer('blocos', [this.tilesetTilebloc])
+    this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
+    this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
+    this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
+    this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
+    this.layerTrave2 = this.tilemapFases.createLayer('trave2', [this.tilesetTiletrave])
+    this.layerTrave3 = this.tilemapFases.createLayer('trave3', [this.tilesetTiletrave])
+
+    /*colisoes*/
+    this.layerBlocos.setCollisionByProperty({ colisao: true })
+    this.layerTrave1.setCollisionByProperty({ colisao: true })
+    this.layerTrave2.setCollisionByProperty({ colisao: true })
+    this.layerTrave3.setCollisionByProperty({ colisao: true })
 
     /*personagens*/
-    this.personagem = this.physics.add.sprite (400, 225, 'skilerstopdireita')
-    
+    this.personagem = this.physics.add.sprite(400, 225, 'skilerstopdireita')
+
+    this.physics.add.collider(this.personagem, this.layerBlocos)
+    this.physics.add.collider(this.personagem, this.layerTrave1)
+    this.physics.add.collider(this.personagem, this.layerTrave2)
+    this.physics.add.collider(this.personagem, this.layerTrave3)
+
     /*animacoes*/
 
     /*animação moeda*/
@@ -157,7 +150,7 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 8,
       repeat: -1
     })
-    
+
     /*animacoes para botoes*/
     this.anims.create({
       key: 'skiler-direita',
@@ -175,6 +168,9 @@ export default class cena2 extends Phaser.Scene {
       }),
       frameRate: 1
     })
+    this.anims.create({
+      key: 'skiler-esquerda'
+    })
 
 
     /*botoes*/
@@ -184,13 +180,13 @@ export default class cena2 extends Phaser.Scene {
         this.direita.setFrame(1)
         this.personagem.anims.play('skiler-direita', true)
         this.personagem.setVelocityX(150)
-       })
+      })
       .on('pointerup', () => {
         this.direita.setFrame(0)
         this.personagem.setVelocityX(0)
         this.personagem.anims.play('skilerstopdireita', true)
       })
-    .setScrollFactor(0, 0)
+      .setScrollFactor(0, 0)
 
     this.esquerda = this.add.sprite(50, 350, 'esquerda', 0)
       .setInteractive()
@@ -205,6 +201,19 @@ export default class cena2 extends Phaser.Scene {
         this.personagem.anims.play('skilerstopesquerda', true)
       })
       .setScrollFactor(0, 0)
+
+    /*PULARRRRRRRRRRRRRRRRR -------- UIIIIIIIIIIIII*/
+    this.cima = this.add.sprite(700, 400, 'cima', 0)
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.cima.setFrame(1);
+        this.personagem.setVelocityY(-400);
+      })
+      .on('pointerup', () => {
+        this.cima.setFrame(0);
+      })
+      .setScrollFactor(0, 0);
+
     this.cameras.main.startFollow(this.personagem)
 
     /*tela cheia*/
@@ -223,7 +232,5 @@ export default class cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
   }
 
-  update() {
-
-      }
-    }
+  update() { }
+}

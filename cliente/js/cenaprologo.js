@@ -10,7 +10,13 @@ export default class cena0 extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(400, 225, 'cenaprologo')
+    this.imagem = this.add
+      .image(400, 225, 'cenaprologo')
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.game.scene.stop('cenaprologo')
+        this.game.scene.start('encerramento')
+      })
 
   }
 
