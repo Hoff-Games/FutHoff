@@ -37,6 +37,10 @@ export default class cena2 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64
     })
+    this.load.spritesheet('skilercarro', '../assets/personagens/skilercarro.png', {
+      frameWidth: 73,
+      frameHeight: 64
+    })
 
     /*botoes*/
     this.load.spritesheet('direita', '../assets/botoes/direita.png', {
@@ -48,6 +52,10 @@ export default class cena2 extends Phaser.Scene {
       frameHeight: 64
     })
     this.load.spritesheet('cima', '../assets/botoes/cima.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
+    this.load.spritesheet('baixo', '../assets/botoes/baixo.png', {
       frameWidth: 64,
       frameHeight: 64
     })
@@ -93,7 +101,7 @@ export default class cena2 extends Phaser.Scene {
     this.layerTrave3.setCollisionByProperty({ colisao: true })
 
     /*personagens*/
-    this.personagem = this.physics.add.sprite(400, 225, 'skilerstopdireita')
+    this.personagem = this.physics.add.sprite(-300, -400, 'skilerstopdireita')
 
     this.physics.add.collider(this.personagem, this.layerBlocos)
     this.physics.add.collider(this.personagem, this.layerTrave1)
@@ -150,6 +158,24 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 8,
       repeat: -1
     })
+    this.anims.create({
+      key: 'skilercarroesquerda',
+      frames: this.anims.generateFrameNumbers('skilercarro', {
+        start: 0,
+        end: 0
+      }),
+      frameRate: 8,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'skilercarrodireita',
+      frames: this.anims.generateFrameNumbers('skilercarro', {
+        start: 1,
+        end: 1
+      }),
+      frameRate: 8,
+      repeat: -1
+    })
 
     /*animacoes para botoes*/
     this.anims.create({
@@ -174,12 +200,12 @@ export default class cena2 extends Phaser.Scene {
 
 
     /*botoes*/
-    this.direita = this.add.sprite(175, 350, 'direita', 0)
+    this.direita = this.add.sprite(125, 430, 'direita', 0)
       .setInteractive()
       .on('pointerdown', () => {
         this.direita.setFrame(1)
         this.personagem.anims.play('skiler-direita', true)
-        this.personagem.setVelocityX(150)
+        this.personagem.setVelocityX(220)
       })
       .on('pointerup', () => {
         this.direita.setFrame(0)
@@ -188,12 +214,12 @@ export default class cena2 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
-    this.esquerda = this.add.sprite(50, 350, 'esquerda', 0)
+    this.esquerda = this.add.sprite(-10, 430, 'esquerda', 0)
       .setInteractive()
       .on('pointerdown', () => {
         this.esquerda.setFrame(1)
         this.personagem.anims.play('skiler-esquerda', true)
-        this.personagem.setVelocityX(-150)
+        this.personagem.setVelocityX(-220)
       })
       .on('pointerup', () => {
         this.esquerda.setFrame(0)
@@ -201,24 +227,39 @@ export default class cena2 extends Phaser.Scene {
         this.personagem.anims.play('skilerstopesquerda', true)
       })
       .setScrollFactor(0, 0)
+    this.baixo = this.add.sprite(800, 450, 'baixo', 0)
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.baixo.setFrame(1)
+        this.personagem.setVelocityX(0)
+        this.personagem.anims.play('skilercarroesquerda', true)
+      
+      })
+      .on('pointerup', () => {
+        this.baixo.setFrame(0)
+        this.personagem.setVelocityX(0)
+        this.personagem.anims.play('skilerstopesquerda', true)
+      })
+      .setScrollFactor(0, 0)
 
     /*PULARRRRRRRRRRRRRRRRR -------- UIIIIIIIIIIIII*/
-    this.cima = this.add.sprite(700, 400, 'cima', 0)
+    this.cima = this.add.sprite(800, 300, 'cima', 0)
       .setInteractive()
       .on('pointerdown', () => {
         this.cima.setFrame(1);
-        this.personagem.setVelocityY(-400);
+        this.personagem.setVelocityY(-450);
       })
       .on('pointerup', () => {
         this.cima.setFrame(0);
       })
       .setScrollFactor(0, 0);
-
-    this.cameras.main.startFollow(this.personagem)
+    
+    /*camera*/
+    this.cameras.main.startFollow(this.personagem).setZoom(0.8)
 
     /*tela cheia*/
     this.tela_cheia = this.add
-      .sprite(750, 50, 'tela-cheia', 0)
+      .sprite(850, 0, 'tela-cheia', 0)
       .setInteractive()
       .on('pointerdown', () => {
         if (this.scale.isFullscreen) {
