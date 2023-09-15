@@ -3,14 +3,14 @@ export default class encerramento extends Phaser.Scene {
     super('encerramento')
   }
 
-  preload() {
+  preload () {
     this.load.spritesheet('cenaencerramento', '../assets/cenas/cenaencerramento.png', {
       frameWidth: 800,
       frameHeight: 450
     })
   }
 
-  create() {
+  create () {
 
     this.image = this.add.sprite(400, 225, 'cenaencerramento')
 
@@ -27,7 +27,7 @@ export default class encerramento extends Phaser.Scene {
     this.image.anims.play('cena-trocando')
   }
 
-  update() {
+  update () {
 
   }
 }

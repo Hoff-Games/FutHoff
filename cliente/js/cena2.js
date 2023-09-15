@@ -3,7 +3,7 @@ export default class cena2 extends Phaser.Scene {
     super('cena2')
   }
 
-  preload() {
+  preload () {
 
     /*mapas*/
     this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
@@ -67,7 +67,7 @@ export default class cena2 extends Phaser.Scene {
     })
   }
 
-  create() {
+  create () {
 
     /*mapas*/
     this.tilemapFases = this.make.tilemap({ key: 'fases' })
@@ -233,7 +233,6 @@ export default class cena2 extends Phaser.Scene {
         this.baixo.setFrame(1)
         this.personagem.setVelocityX(0)
         this.personagem.anims.play('skilercarroesquerda', true)
-      
       })
       .on('pointerup', () => {
         this.baixo.setFrame(0)
@@ -253,7 +252,7 @@ export default class cena2 extends Phaser.Scene {
         this.cima.setFrame(0);
       })
       .setScrollFactor(0, 0);
-    
+
     /*camera*/
     this.cameras.main.startFollow(this.personagem).setZoom(0.8)
 
@@ -273,5 +272,5 @@ export default class cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
   }
 
-  update() { }
+  update () { }
 }
