@@ -4,7 +4,7 @@ export default class cena1 extends Phaser.Scene {
     super('cena1')
   }
 
-  preload() {
+  preload () {
     this.load.image('cenaselecao', '../assets/cenas/cenaselecao.png')
     this.load.image('sala1', '../assets/botoes/sala1.png')
     this.load.image('sala2', '../assets/botoes/sala2.png')
@@ -17,7 +17,7 @@ export default class cena1 extends Phaser.Scene {
     this.load.image('sala9', '../assets/botoes/sala9.png')
   }
 
-  create() {
+  create () {
     this.add.image(400, 225, 'cenaselecao')
 
     this.add.image(150, 100, 'sala1')

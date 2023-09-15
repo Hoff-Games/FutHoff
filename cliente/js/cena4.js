@@ -3,15 +3,15 @@ export default class cena4 extends Phaser.Scene {
     super('cena4')
   }
 
-  preload() {
+  preload () {
     this.load.image('pixil-frabeame-0', '../assets/pixil-frame-0.png')
   }
 
-  create() {
+  create () {
     this.add.image(400, 225, 'pixil-frame-0')
   }
 
-  update() {
+  update () {
 
   }
 }
