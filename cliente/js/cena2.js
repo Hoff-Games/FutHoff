@@ -3,7 +3,7 @@ export default class cena2 extends Phaser.Scene {
     super('cena2')
   }
 
-  preload () {
+  preload() {
 
     /*mapas*/
     this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
@@ -67,7 +67,7 @@ export default class cena2 extends Phaser.Scene {
     })
   }
 
-  create () {
+  create() {
 
     /*mapas*/
     this.tilemapFases = this.make.tilemap({ key: 'fases' })
@@ -176,6 +176,25 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 1,
       repeat: -1
     })
+    this.anims.create({
+      key: 'skilerpularesquerda',
+      frames: this.anims.generateFrameNumbers('skiler', {
+        start: 2,
+        end: 2
+      }),
+      frameRate: 1,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'skilerpulardireita',
+      frames: this.anims.generateFrameNumbers('skiler', {
+        start: 5,
+        end: 5
+      }),
+      frameRate: 1,
+      repeat: -1
+    })
+
 
     /*animacoes para botoes*/
     this.anims.create({
@@ -241,7 +260,7 @@ export default class cena2 extends Phaser.Scene {
         } else if (direita.test(anim)) {
           this.personagem.setVelocityX(300)
           this.personagem.anims.play('skilercarrodireita', true)
-        } 
+        }
       })
       .on('pointerup', () => {
         this.baixo.setFrame(0)
@@ -255,12 +274,31 @@ export default class cena2 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.cima.setFrame(1);
-        this.personagem.setVelocityY(-450);
+        let anim = this.personagem.anims.getName()
+        const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
+        const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
+        if (esquerda.test(anim)) {
+          this.personagem.setVelocityY(-450)
+          this.personagem.anims.play('skilerpularesquerda', true)
+        } else if (direita.test(anim)) {
+          this.personagem.setVelocityY(-450)
+          this.personagem.anims.play('skilerpulardireita', true)
+        }
       })
       .on('pointerup', () => {
-        this.cima.setFrame(0);
-      })
-      .setScrollFactor(0, 0);
+        this.cima.setFrame(0)
+        let anim = this.personagem.anims.getName()
+        const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
+        const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
+        if (esquerda.test(anim)) {
+          this.personagem.anims.play('skilerstopesquerda', true)
+        } else if (direita.test(anim)) {
+          this.personagem.anims.play('skilerstopdireita', true)
+        }
+        })
+  
+      .setScrollFactor(0, 0)
+
 
     /*camera*/
     this.cameras.main.startFollow(this.personagem).setZoom(0.8)
@@ -281,5 +319,5 @@ export default class cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
   }
 
-  update () { }
+  update() { }
 }
