@@ -4,8 +4,8 @@ export default class cena1 extends Phaser.Scene {
     super('cena1')
   }
 
-  preload() {
-    this.load.image('cenaselecao', '../assets/cenas/cenaselecao.png')
+  preload () {
+    this.load.image('cenasala', '../assets/cenas/cenasala.png')
     this.load.image('sala1', '../assets/botoes/sala1.png')
     this.load.image('sala2', '../assets/botoes/sala2.png')
     this.load.image('sala3', '../assets/botoes/sala3.png')
@@ -17,8 +17,8 @@ export default class cena1 extends Phaser.Scene {
     this.load.image('sala9', '../assets/botoes/sala9.png')
   }
 
-  create() {
-    this.add.image(400, 225, 'cenaselecao')
+  create () {
+    this.add.image(400, 225, 'cenasala')
 
     this.add.image(150, 100, 'sala1')
       .setInteractive()
@@ -66,7 +66,7 @@ export default class cena1 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.game.scene.stop('cena1')
-        this.game.scene.start('cena2')
+        this.game.scene.start('cenapersonagem')
       })
     this.add.image(650, 350, 'sala9')
       .setInteractive()
