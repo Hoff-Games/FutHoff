@@ -42,6 +42,12 @@ export default class cena2 extends Phaser.Scene {
       frameHeight: 64
     })
 
+    /*Inimigos*/
+    this.load.spritesheet('ini1walk', '../assets/personagens/ini1walk.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
+
     /*botoes*/
     this.load.spritesheet('direita', '../assets/botoes/direita.png', {
       frameWidth: 64,
@@ -101,12 +107,15 @@ export default class cena2 extends Phaser.Scene {
     this.layerTrave3.setCollisionByProperty({ colisao: true })
 
     /*personagens*/
-    this.personagem = this.physics.add.sprite(-300, -400, 'skilerstopdireita')
+    this.personagem = this.physics.add.sprite(-350, -400, 'skilerstopdireita')
 
     this.physics.add.collider(this.personagem, this.layerBlocos)
     this.physics.add.collider(this.personagem, this.layerTrave1)
     this.physics.add.collider(this.personagem, this.layerTrave2)
     this.physics.add.collider(this.personagem, this.layerTrave3)
+
+    /*Inimigos*/
+    this.ini1walk = this.physics.add.sprite(-250, -350, 'ini1walk')
 
     /*animacoes*/
 
@@ -195,7 +204,23 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
 
+    /*animações dos inimigos*/
+    this.anims.create({
+      key: 'ini1walk',
+      frames: this.anims.generateFrameNumbers('ini1walk', {
+        start: 0,
+        end: 3
+      }),
+      frameRate: 8,
+      repeat: -1
+    })
+    this.ini1walk.setVelocityY(100)
 
+    // Animações automáticas //
+    this.ini1walk.anims.play('ini1walk', true)
+
+
+F
     /*animacoes para botoes*/
     this.anims.create({
       key: 'skiler-direita',
