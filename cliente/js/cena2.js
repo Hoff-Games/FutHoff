@@ -106,8 +106,10 @@ export default class cena2 extends Phaser.Scene {
     this.layerTrave2.setCollisionByProperty({ colisao: true })
     this.layerTrave3.setCollisionByProperty({ colisao: true })
 
+    
+
     /*personagens*/
-    this.personagem = this.physics.add.sprite(-350, -400, 'skilerstopdireita')
+    this.personagem = this.physics.add.sprite(-450, -350, 'skilerstopdireita')
 
     this.physics.add.collider(this.personagem, this.layerBlocos)
     this.physics.add.collider(this.personagem, this.layerTrave1)
@@ -115,7 +117,12 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.layerTrave3)
 
     /*Inimigos*/
-    this.ini1walk = this.physics.add.sprite(-250, -350, 'ini1walk')
+    this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
+    this.physics.add.collider(this.ini1walk, this.layerBlocos)
+    this.physics.add.collider(this.ini1walk, this.layerTrave1)
+    this.physics.add.collider(this.ini1walk, this.layerTrave2)
+    this.physics.add.collider(this.ini1walk, this.layerTrave3)
+    
 
     /*animacoes*/
 
@@ -214,13 +221,11 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 8,
       repeat: -1
     })
-    this.ini1walk.setVelocityY(100)
+    this.ini1walk.setVelocity(-100, 0);
 
     // Animações automáticas //
     this.ini1walk.anims.play('ini1walk', true)
 
-
-F
     /*animacoes para botoes*/
     this.anims.create({
       key: 'skiler-direita',
