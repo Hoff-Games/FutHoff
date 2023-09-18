@@ -50,20 +50,20 @@ export default class cena2 extends Phaser.Scene {
 
     /*botoes*/
     this.load.spritesheet('direita', '../assets/botoes/direita.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 84,
+      frameHeight: 84
     })
     this.load.spritesheet('esquerda', '../assets/botoes/esquerda.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 84,
+      frameHeight: 84
     })
     this.load.spritesheet('cima', '../assets/botoes/cima.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 84,
+      frameHeight: 84
     })
     this.load.spritesheet('baixo', '../assets/botoes/baixo.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 84,
+      frameHeight: 84
     })
 
     /*tela cheia*/
@@ -106,7 +106,7 @@ export default class cena2 extends Phaser.Scene {
     this.layerTrave2.setCollisionByProperty({ colisao: true })
     this.layerTrave3.setCollisionByProperty({ colisao: true })
 
-    
+
 
     /*personagens*/
     this.personagem = this.physics.add.sprite(-450, -350, 'skilerstopdireita')
@@ -118,13 +118,11 @@ export default class cena2 extends Phaser.Scene {
 
     /*Inimigos*/
     this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
+
     this.physics.add.collider(this.ini1walk, this.layerBlocos)
     this.physics.add.collider(this.ini1walk, this.layerTrave1)
     this.physics.add.collider(this.ini1walk, this.layerTrave2)
     this.physics.add.collider(this.ini1walk, this.layerTrave3)
-    
-
-    /*animacoes*/
 
     /*animação moeda*/
     this.anims.create({
@@ -136,6 +134,33 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 8,
       repeat: -1
     })
+
+
+    /*moeda*/
+    this.moedas = [
+      {
+        x: 930,
+        y: -600
+      },
+      {
+        x: 980,
+        y: -600
+      }
+    ]
+
+    this.moedas.forEach((moeda) => {
+      moeda.objeto = this.physics.add.sprite(moeda.x, moeda.y, 'moeda')
+      moeda.objeto.anims.play('moeda-girando', true)
+      this.physics.add.collider(moeda.objeto, this.layerBlocos)
+      this.physics.add.collider(moeda.objeto, this.layerTrave1)
+      this.physics.add.collider(moeda.objeto, this.layerTrave2)
+      this.physics.add.collider(moeda.objeto, this.layerTrave3)
+      // this.physics.add.overlap(moeda.objeto, this.personagem, ...)
+    })
+
+
+
+    /*animacoes*/
 
     /*animacoes dos personagens*/
     this.anims.create({
@@ -226,6 +251,8 @@ export default class cena2 extends Phaser.Scene {
     // Animações automáticas //
     this.ini1walk.anims.play('ini1walk', true)
 
+    //this.moeda.anims.play('moeda-girando', true)
+
     /*animacoes para botoes*/
     this.anims.create({
       key: 'skiler-direita',
@@ -294,8 +321,16 @@ export default class cena2 extends Phaser.Scene {
       })
       .on('pointerup', () => {
         this.baixo.setFrame(0)
-        this.personagem.setVelocityX(0)
-        this.personagem.anims.play('skilerstopesquerda', true)
+        let anim = this.personagem.anims.getName()
+        const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
+        const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
+        if (esquerda.test(anim)) {
+          this.personagem.setVelocityX(0)
+          this.personagem.anims.play('skilerstopesquerda', true)
+        } else if (direita.test(anim)) {
+          this.personagem.setVelocityX(0)
+          this.personagem.anims.play('skilerstopdireita', true)
+        }
       })
       .setScrollFactor(0, 0)
 
@@ -325,8 +360,8 @@ export default class cena2 extends Phaser.Scene {
         } else if (direita.test(anim)) {
           this.personagem.anims.play('skilerstopdireita', true)
         }
-        })
-  
+      })
+
       .setScrollFactor(0, 0)
 
 
@@ -349,5 +384,8 @@ export default class cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
   }
 
-  update() { }
+  update() {
+
+  }
+
 }
