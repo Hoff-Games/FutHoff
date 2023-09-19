@@ -155,7 +155,8 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(moeda.objeto, this.layerTrave1)
       this.physics.add.collider(moeda.objeto, this.layerTrave2)
       this.physics.add.collider(moeda.objeto, this.layerTrave3)
-      // this.physics.add.overlap(moeda.objeto, this.personagem, ...)
+
+      this.physics.add.overlap(this.personagem, this.moedas, this.coletarmoedas, null, this)
     })
 
 
@@ -385,7 +386,13 @@ export default class cena2 extends Phaser.Scene {
   }
 
   update() {
+  }
 
+  coletarmoedas(personagem) {
+    this.moedas.disableBody(true, true)
+    this.game.scoreMoedas.score++
+    this.texto.setText(`moedas: ${this.game.scoreMoedas.score}`)
+    return false
   }
 
 }
