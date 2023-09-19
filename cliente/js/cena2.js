@@ -24,6 +24,12 @@ export default class cena2 extends Phaser.Scene {
       frameHeight: 32
     })
 
+    /*estrela*/
+    this.load.spritesheet('estrela', '../assets/fases/estrela.png', {
+      frameWidth: 48,
+      frameHeight: 48
+    })
+
     /*personagens*/
     this.load.spritesheet('skiler', '../assets/personagens/skiler.png', {
       frameWidth: 64,
@@ -170,7 +176,7 @@ export default class cena2 extends Phaser.Scene {
         x: 575,
         y: 100
       },
-      
+
     ]
 
     this.moedas.forEach((moeda) => {
@@ -181,8 +187,40 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(moeda.objeto, this.layerTrave1)
       this.physics.add.collider(moeda.objeto, this.layerTrave2)
       this.physics.add.collider(moeda.objeto, this.layerTrave3)
-      this.physics.add.overlap(moeda.objeto, this.personagem)
-      
+      this.physics.add.overlap(this.personagem, moeda.objeto, this.coletarmoeda, null, this)
+
+
+    })
+
+    /*animação estrela*/
+    this.anims.create({
+      key: 'estrela-piscando',
+      frames: this.anims.generateFrameNumbers('estrela', {
+        start: 0,
+        end: 4
+      }),
+      frameRate: 8,
+      repeat: -1
+    })
+    /*estrelas*/
+    this.estrelas = [
+      {
+        x: -400,
+        y: -600
+      }
+
+    ]
+
+    this.estrelas.forEach((estrela) => {
+      estrela.objeto = this.physics.add.sprite(estrela.x, estrela.y, 'estrela')
+        .setImmovable()
+      estrela.objeto.anims.play('estrela-piscando', true)
+      this.physics.add.collider(estrela.objeto, this.layerBlocos)
+      this.physics.add.collider(estrela.objeto, this.layerTrave1)
+      this.physics.add.collider(estrela.objeto, this.layerTrave2)
+      this.physics.add.collider(estrela.objeto, this.layerTrave3)
+      this.physics.add.overlap(this.personagem, estrela.objeto, this.coletarestrela, null, this)
+
 
     })
 
@@ -277,7 +315,6 @@ export default class cena2 extends Phaser.Scene {
     // Animações automáticas //
     this.ini1walk.anims.play('ini1walk', true)
 
-    //this.moeda.anims.play('moeda-girando', true)
 
     /*animacoes para botoes*/
     this.anims.create({
@@ -333,6 +370,7 @@ export default class cena2 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.baixo.setFrame(1)
+
         /* Verificar o lado do carrinho */
         let anim = this.personagem.anims.getName()
         const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
@@ -365,15 +403,17 @@ export default class cena2 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.cima.setFrame(1);
-        let anim = this.personagem.anims.getName()
-        const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
-        const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
-        if (esquerda.test(anim)) {
-          this.personagem.setVelocityY(-450)
-          this.personagem.anims.play('skilerpularesquerda', true)
-        } else if (direita.test(anim)) {
-          this.personagem.setVelocityY(-450)
-          this.personagem.anims.play('skilerpulardireita', true)
+        if (this.personagem.body.blocked.down) {
+          let anim = this.personagem.anims.getName()
+          const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
+          const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
+          if (esquerda.test(anim)) {
+            this.personagem.setVelocityY(-450)
+            this.personagem.anims.play('skilerpularesquerda', true)
+          } else if (direita.test(anim)) {
+            this.personagem.setVelocityY(-450)
+            this.personagem.anims.play('skilerpulardireita', true)
+          }
         }
       })
       .on('pointerup', () => {
@@ -408,19 +448,21 @@ export default class cena2 extends Phaser.Scene {
         }
       })
       .setScrollFactor(0, 0)
-    
-    this.physics.add.overlap(this.personagem, this.moedas, this.coletarmoedas, null, this)
+
+  
   }
 
-    
 
 
-update() {
-}
 
-coletarmoedas(personagem) {
-  this.moedas.disableBody(true, true)
-  return false
-}
+  update() {
+  }
+  coletarmoeda(personagem, moeda) {
+    moeda.disableBody(true, true)
+  }
 
+  coletarestrela(personagem, estrela) {
+    estrela.disableBody(true, true)
+  
+  }
 }
