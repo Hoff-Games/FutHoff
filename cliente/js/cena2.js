@@ -143,23 +143,48 @@ export default class cena2 extends Phaser.Scene {
         y: -600
       },
       {
-        x: 980,
+        x: 1540,
         y: -600
-      }
+      },
+      {
+        x: 320,
+        y: -600
+      },
+      {
+        x: -330,
+        y: -600
+      },
+      {
+        x: 1920,
+        y: -600
+      },
+      {
+        x: -195,
+        y: 100
+      },
+      {
+        x: 1535,
+        y: 100
+      },
+      {
+        x: 575,
+        y: 100
+      },
+      
     ]
 
     this.moedas.forEach((moeda) => {
       moeda.objeto = this.physics.add.sprite(moeda.x, moeda.y, 'moeda')
+        .setImmovable()
       moeda.objeto.anims.play('moeda-girando', true)
       this.physics.add.collider(moeda.objeto, this.layerBlocos)
       this.physics.add.collider(moeda.objeto, this.layerTrave1)
       this.physics.add.collider(moeda.objeto, this.layerTrave2)
       this.physics.add.collider(moeda.objeto, this.layerTrave3)
+      this.physics.add.overlap(moeda.objeto, this.personagem)
+      
 
-      this.physics.add.overlap(this.personagem, this.moedas, this.coletarmoedas, null, this)
     })
-
-
 
     /*animacoes*/
 
@@ -383,16 +408,19 @@ export default class cena2 extends Phaser.Scene {
         }
       })
       .setScrollFactor(0, 0)
+    
+    this.physics.add.overlap(this.personagem, this.moedas, this.coletarmoedas, null, this)
   }
 
-  update() {
-  }
+    
 
-  coletarmoedas(personagem) {
-    this.moedas.disableBody(true, true)
-    this.game.scoreMoedas.score++
-    this.texto.setText(`moedas: ${this.game.scoreMoedas.score}`)
-    return false
-  }
+
+update() {
+}
+
+coletarmoedas(personagem) {
+  this.moedas.disableBody(true, true)
+  return false
+}
 
 }
