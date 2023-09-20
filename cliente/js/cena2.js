@@ -104,12 +104,14 @@ export default class cena2 extends Phaser.Scene {
     this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
     this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
     this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
+    this.layerEscada = this.tilemapFases.createLayer('escada', [this.tilesetTilebloc])
     this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
     this.layerTrave2 = this.tilemapFases.createLayer('trave2', [this.tilesetTiletrave])
     this.layerTrave3 = this.tilemapFases.createLayer('trave3', [this.tilesetTiletrave])
 
     /*colisoes*/
     this.layerBlocos.setCollisionByProperty({ colisao: true })
+    this.layerEscada.setCollisionByProperty({ colisao: true })
     this.layerTrave1.setCollisionByProperty({ colisao: true })
     this.layerTrave2.setCollisionByProperty({ colisao: true })
     this.layerTrave3.setCollisionByProperty({ colisao: true })
@@ -117,9 +119,10 @@ export default class cena2 extends Phaser.Scene {
 
 
     /*personagens*/
-    this.personagem = this.physics.add.sprite(-450, -350, 'skilerstopdireita')
+    this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
 
     this.physics.add.collider(this.personagem, this.layerBlocos)
+    this.physics.add.collider(this.personagem, this.layerEscada)
     this.physics.add.collider(this.personagem, this.layerTrave1)
     this.physics.add.collider(this.personagem, this.layerTrave2)
     this.physics.add.collider(this.personagem, this.layerTrave3)
@@ -128,6 +131,7 @@ export default class cena2 extends Phaser.Scene {
     this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
 
     this.physics.add.collider(this.ini1walk, this.layerBlocos)
+    this.physics.add.collider(this.ini1walk, this.layerEscada)
     this.physics.add.collider(this.ini1walk, this.layerTrave1)
     this.physics.add.collider(this.ini1walk, this.layerTrave2)
     this.physics.add.collider(this.ini1walk, this.layerTrave3)
@@ -187,6 +191,7 @@ export default class cena2 extends Phaser.Scene {
         .setImmovable()
       moeda.objeto.anims.play('moeda-girando', true)
       this.physics.add.collider(moeda.objeto, this.layerBlocos)
+      this.physics.add.collider(moeda.objeto, this.layerEscada)
       this.physics.add.collider(moeda.objeto, this.layerTrave1)
       this.physics.add.collider(moeda.objeto, this.layerTrave2)
       this.physics.add.collider(moeda.objeto, this.layerTrave3)
@@ -211,8 +216,8 @@ export default class cena2 extends Phaser.Scene {
         y: -600
       },
       {
-        x: -350,
-        y: -300
+        x: 2450,
+        y: 1550
       }
 
     ]
@@ -222,6 +227,7 @@ export default class cena2 extends Phaser.Scene {
         .setImmovable()
       estrela.objeto.anims.play('estrela-piscando', true)
       this.physics.add.collider(estrela.objeto, this.layerBlocos)
+      this.physics.add.collider(estrela.objeto, this.layerEscada)
       this.physics.add.collider(estrela.objeto, this.layerTrave1)
       this.physics.add.collider(estrela.objeto, this.layerTrave2)
       this.physics.add.collider(estrela.objeto, this.layerTrave3)
@@ -437,7 +443,10 @@ export default class cena2 extends Phaser.Scene {
 
 
     /*camera*/
-    this.cameras.main.startFollow(this.personagem).setZoom(0.19)
+    this.personagem.setCollideWorldBounds(true)
+    this.physics.world.setBounds(-700, -834, 3133, 2390, true, true, true, false)
+    this.cameras.main.setBounds(-700, -832, 3133, 2390)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.8)
 
     /*tela cheia*/
     this.tela_cheia = this.add
