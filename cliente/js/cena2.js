@@ -23,12 +23,14 @@ export default class cena2 extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32
     })
+    this.load.audio('sommoeda', '../assets/audio/sommoeda.mp3')
 
     /*estrela*/
     this.load.spritesheet('estrela', '../assets/fases/estrela.png', {
       frameWidth: 48,
       frameHeight: 48
     })
+    this.load.audio('somestrela', '../assets/audio/somestrela.mp3')
 
     /*personagens*/
     this.load.spritesheet('skiler', '../assets/personagens/skiler.png', {
@@ -176,6 +178,7 @@ export default class cena2 extends Phaser.Scene {
         x: 575,
         y: 100
       },
+      
 
     ]
 
@@ -188,9 +191,8 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(moeda.objeto, this.layerTrave2)
       this.physics.add.collider(moeda.objeto, this.layerTrave3)
       this.physics.add.overlap(this.personagem, moeda.objeto, this.coletarmoeda, null, this)
-
-
     })
+    this.sommoeda = this.sound.add('sommoeda')
 
     /*animação estrela*/
     this.anims.create({
@@ -207,6 +209,10 @@ export default class cena2 extends Phaser.Scene {
       {
         x: -400,
         y: -600
+      },
+      {
+        x: -350,
+        y: -300
       }
 
     ]
@@ -220,9 +226,8 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(estrela.objeto, this.layerTrave2)
       this.physics.add.collider(estrela.objeto, this.layerTrave3)
       this.physics.add.overlap(this.personagem, estrela.objeto, this.coletarestrela, null, this)
-
-
     })
+    this.somestrela = this.sound.add('somestrela')
 
     /*animacoes*/
 
@@ -432,7 +437,7 @@ export default class cena2 extends Phaser.Scene {
 
 
     /*camera*/
-    this.cameras.main.startFollow(this.personagem).setZoom(0.8)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.19)
 
     /*tela cheia*/
     this.tela_cheia = this.add
@@ -459,10 +464,12 @@ export default class cena2 extends Phaser.Scene {
   }
   coletarmoeda(personagem, moeda) {
     moeda.disableBody(true, true)
+    this.sommoeda.play()
   }
 
   coletarestrela(personagem, estrela) {
     estrela.disableBody(true, true)
-  
+    this.somestrela.play()
   }
+
 }
