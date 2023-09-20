@@ -74,8 +74,8 @@ export default class cena2 extends Phaser.Scene {
 
     /*tela cheia*/
     this.load.spritesheet('tela-cheia', './assets/botoes/tela-cheia.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 84,
+      frameHeight: 84
     })
   }
 
