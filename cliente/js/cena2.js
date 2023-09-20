@@ -56,6 +56,12 @@ export default class cena2 extends Phaser.Scene {
       frameHeight: 64
     })
 
+    /*agua e lava*/
+    this.load.spritesheet('agua', '../assets/fases/agua.png', {
+      frameWidth: 64,
+      frameHeight: 128
+    })
+
     /*botoes*/
     this.load.spritesheet('direita', '../assets/botoes/direita.png', {
       frameWidth: 84,
@@ -96,10 +102,66 @@ export default class cena2 extends Phaser.Scene {
     this.tilesetTilebloc = this.tilemapFases.addTilesetImage('tilebloc')
     this.tilesetTiletrave = this.tilemapFases.addTilesetImage('tiletrave')
 
+    /*animações da agua e fogo*/
+    this.anims.create({
+      key: 'agua',
+      frames: this.anims.generateFrameNumbers('agua', {
+        start: 0,
+        end: 2
+      }),
+      frameRate: 6,
+      repeat: -1
+    })
+
+    /*agua e fogo*/
+    this.agua = [
+      {
+        x: 1323,
+        y: -180
+      },
+      {
+        x: 1387,
+        y: -180
+      },
+      {
+        x: 1451,
+        y: -180
+      },
+      {
+        x: 1515,
+        y: -180
+      },
+      {
+        x: 1579,
+        y: -180
+      }, ,
+      {
+        x: 1643,
+        y: -180
+      },
+      {
+        x: 1707,
+        y: -180
+      },
+      {
+        x: 1743,
+        y: -180
+      },
+
+    ]
+
     /*camadas*/
     this.layerFundo = this.tilemapFases.createLayer('fundo', [this.tilesetC1, this.tilesetC2, this.tilesetC3])
     this.layerArvores = this.tilemapFases.createLayer('arvores', [this.tilesetTilearv])
     this.layerArvores2 = this.tilemapFases.createLayer('arvores2', [this.tilesetTilearv])
+    
+    this.agua.forEach((agua) => {
+      agua.objeto = this.physics.add.sprite(agua.x, agua.y, 'agua')
+      agua.objeto.anims.play('agua', true)
+        .setImmovable()
+    })
+
+    
     this.layerBlocos = this.tilemapFases.createLayer('blocos', [this.tilesetTilebloc])
     this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
     this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
@@ -136,6 +198,17 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.ini1walk, this.layerTrave2)
     this.physics.add.collider(this.ini1walk, this.layerTrave3)
 
+    
+
+   
+    this.agua.forEach((agua) => {
+      this.physics.add.collider(agua.objeto, this.layerBlocos)
+      this.physics.add.collider(agua.objeto, this.layerEscada)
+      this.physics.add.collider(agua.objeto, this.layerTrave1)
+      this.physics.add.collider(agua.objeto, this.layerTrave2)
+      this.physics.add.collider(agua.objeto, this.layerTrave3)
+    })
+
     /*animação moeda*/
     this.anims.create({
       key: 'moeda-girando',
@@ -163,10 +236,6 @@ export default class cena2 extends Phaser.Scene {
         y: -600
       },
       {
-        x: -330,
-        y: -600
-      },
-      {
         x: 1920,
         y: -600
       },
@@ -182,8 +251,26 @@ export default class cena2 extends Phaser.Scene {
         x: 575,
         y: 100
       },
-      
-
+      {
+        x: -350,
+        y: 790
+      },
+      {
+        x: -160,
+        y: 1250
+      },
+      {
+        x: 15,
+        y: 920
+      },
+      {
+        x: 1150,
+        y: 1050
+      },
+      {
+        x: 1660,
+        y: 1050
+      }
     ]
 
     this.moedas.forEach((moeda) => {
@@ -212,14 +299,17 @@ export default class cena2 extends Phaser.Scene {
     /*estrelas*/
     this.estrelas = [
       {
-        x: -400,
+        x: -415,
         y: -600
       },
       {
-        x: 2450,
-        y: 1550
+        x: -450,
+        y: 40
+      },
+      {
+        x: 1400,
+        y: 790
       }
-
     ]
 
     this.estrelas.forEach((estrela) => {
@@ -325,6 +415,7 @@ export default class cena2 extends Phaser.Scene {
 
     // Animações automáticas //
     this.ini1walk.anims.play('ini1walk', true)
+    
 
 
     /*animacoes para botoes*/
@@ -444,9 +535,10 @@ export default class cena2 extends Phaser.Scene {
 
     /*camera*/
     this.personagem.setCollideWorldBounds(true)
-    this.physics.world.setBounds(-700, -834, 3133, 2390, true, true, true, false)
+    this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
     this.cameras.main.startFollow(this.personagem).setZoom(0.8)
+    this.cameras.main.followOffset.set(0,100)
 
     /*tela cheia*/
     this.tela_cheia = this.add
