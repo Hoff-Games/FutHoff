@@ -16,7 +16,7 @@ export default class cena1 extends Phaser.Scene {
     this.load.image('sala8', '../assets/botoes/sala8.png')
     this.load.image('sala9', '../assets/botoes/sala9.png')
 
-    //this.load.audio('trilha', '../assets/audio/musicadefundo.mp3')
+    this.load.audio('trilha', '../assets/audio/musicadefundo.mp3')
   }
 
   create () {
@@ -77,9 +77,9 @@ export default class cena1 extends Phaser.Scene {
         this.game.scene.start('cenaprologo')
       })
 
-    //this.trilha = this.sound.add('trilha')
-    //this.trilha.loop = true
-    //this.trilha.play
+    this.trilha = this.sound.add('trilha')
+    this.trilha.loop = true
+    this.trilha.play
   }
 
   update () {
