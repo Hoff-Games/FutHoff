@@ -148,7 +148,7 @@ export default class cena2 extends Phaser.Scene {
       {
         x: 1571,
         y: -180
-      }, ,
+      },
       {
         x: 1635,
         y: -180
@@ -184,7 +184,7 @@ export default class cena2 extends Phaser.Scene {
       {
         x: 1506,
         y: 350
-      }, ,
+      },
       {
         x: 1570,
         y: 350
@@ -264,7 +264,6 @@ export default class cena2 extends Phaser.Scene {
         x: 230,
         y: 1380
       }
-
     ]
 
     /* camadas */
@@ -303,7 +302,7 @@ export default class cena2 extends Phaser.Scene {
     this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
 
     this.physics.add.collider(this.personagem, this.layerBlocos)
-    this.physics.add.collider(this.personagem, this.layerEscada)
+    this.physics.add.overlap(this.personagem, this.layerEscada, this.moverPelaEscada, null, this)
     this.physics.add.collider(this.personagem, this.layerTrave1)
     this.physics.add.collider(this.personagem, this.layerTrave2)
     this.physics.add.collider(this.personagem, this.layerTrave3)
@@ -598,8 +597,8 @@ export default class cena2 extends Phaser.Scene {
 
         /* Verificar o lado do carrinho */
         const anim = this.personagem.anims.getName()
-        const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
-        const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
+        const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
+        const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
         if (esquerda.test(anim)) {
           this.personagem.setVelocityX(-300)
           this.personagem.anims.play('skilercarroesquerda', true)
@@ -611,8 +610,8 @@ export default class cena2 extends Phaser.Scene {
       .on('pointerup', () => {
         this.baixo.setFrame(0)
         const anim = this.personagem.anims.getName()
-        const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
-        const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
+        const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
+        const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
         if (esquerda.test(anim)) {
           this.personagem.setVelocityX(0)
           this.personagem.anims.play('skilerstopesquerda', true)
@@ -630,8 +629,8 @@ export default class cena2 extends Phaser.Scene {
         this.cima.setFrame(1)
         if (this.personagem.body.blocked.down) {
           const anim = this.personagem.anims.getName()
-          const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
-          const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
+          const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
+          const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
           if (esquerda.test(anim)) {
             this.personagem.setVelocityY(-450)
             this.personagem.anims.play('skilerpularesquerda', true)
@@ -644,8 +643,8 @@ export default class cena2 extends Phaser.Scene {
       .on('pointerup', () => {
         this.cima.setFrame(0)
         const anim = this.personagem.anims.getName()
-        const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
-        const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
+        const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
+        const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
         if (esquerda.test(anim)) {
           this.personagem.anims.play('skilerstopesquerda', true)
         } else if (direita.test(anim)) {
