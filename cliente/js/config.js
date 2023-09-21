@@ -5,6 +5,9 @@ export default {
   pixelArt: true,
   width: 800,
   height: 450,
+  input: {
+    activePointers: 3
+  },
   parent: 'game-container',
   physics: {
     default: 'arcade',
