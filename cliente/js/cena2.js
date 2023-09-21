@@ -8,6 +8,9 @@ export default class cena2 extends Phaser.Scene {
     /*mapas*/
     this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
 
+    /*cenas*/
+    this.load.image('cenaperdeu', '../assets/cenas/cenaperdeu.png')
+
     /*tilesets*/
     this.load.image('c1', '../assets/fases/c1.png')
     this.load.image('c2', '../assets/fases/c2.png')
@@ -61,6 +64,10 @@ export default class cena2 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 128
     })
+    this.load.spritesheet('lava', '../assets/fases/lava.png', {
+      frameWidth: 64,
+      frameHeight: 128
+    })
 
     /*botoes*/
     this.load.spritesheet('direita', '../assets/botoes/direita.png', {
@@ -102,7 +109,7 @@ export default class cena2 extends Phaser.Scene {
     this.tilesetTilebloc = this.tilemapFases.addTilesetImage('tilebloc')
     this.tilesetTiletrave = this.tilemapFases.addTilesetImage('tiletrave')
 
-    /*animações da agua e fogo*/
+    /*animações da agua e lava*/
     this.anims.create({
       key: 'agua',
       frames: this.anims.generateFrameNumbers('agua', {
@@ -112,41 +119,154 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 6,
       repeat: -1
     })
+    this.anims.create({
+      key: 'lava',
+      frames: this.anims.generateFrameNumbers('lava', {
+        start: 0,
+        end: 7
+      }),
+      frameRate: 6,
+      repeat: -1
+    })
 
-    /*agua e fogo*/
+    /*agua e lava*/
     this.agua = [
       {
-        x: 1323,
+        x: 1315,
         y: -180
       },
       {
-        x: 1387,
+        x: 1379,
         y: -180
       },
       {
-        x: 1451,
+        x: 1443,
         y: -180
       },
       {
-        x: 1515,
+        x: 1507,
         y: -180
       },
       {
-        x: 1579,
+        x: 1571,
         y: -180
       }, ,
       {
-        x: 1643,
+        x: 1635,
         y: -180
       },
       {
-        x: 1707,
+        x: 1699,
         y: -180
       },
       {
-        x: 1743,
+        x: 1763,
         y: -180
       },
+
+    ]
+
+    this.lava = [
+      {
+        x: 1250,
+        y: 350
+      },
+      {
+        x: 1314,
+        y: 350
+      },
+      {
+        x: 1378,
+        y: 350
+      },
+      {
+        x: 1442,
+        y: 350
+      },
+      {
+        x: 1506,
+        y: 350
+      }, ,
+      {
+        x: 1570,
+        y: 350
+      },
+      {
+        x: 1634,
+        y: 350
+      },
+      {
+        x: 1698,
+        y: 350
+      },
+      {
+        x: 1762,
+        y: 350
+      },
+      {
+        x: 1826,
+        y: 350
+      },
+      {
+        x: 1875,
+        y: 350
+      },
+      {
+        x: -550,
+        y: 1380
+      },
+      {
+        x: -486,
+        y: 1380
+      },
+      {
+        x: -422,
+        y: 1380
+      },
+      {
+        x: -358,
+        y: 1380
+      },
+      {
+        x: -294,
+        y: 1380
+      },
+      {
+        x: -230,
+        y: 1380
+      },
+      {
+        x: -166,
+        y: 1380
+      },
+      {
+        x: -102,
+        y: 1380
+      },
+      {
+        x: -38,
+        y: 1380
+      },
+      {
+        x: 26,
+        y: 1380
+      },
+      {
+        x: 90,
+        y: 1380
+      }, {
+        x: 154,
+        y: 1380
+      },
+      {
+        x: 218,
+        y: 1380
+      },
+      {
+        x: 230,
+        y: 1380
+      },
+      
 
     ]
 
@@ -160,7 +280,11 @@ export default class cena2 extends Phaser.Scene {
       agua.objeto.anims.play('agua', true)
         .setImmovable()
     })
-
+    this.lava.forEach((lava) => {
+      lava.objeto = this.physics.add.sprite(lava.x, lava.y, 'lava')
+      lava.objeto.anims.play('lava', true)
+        .setImmovable()
+    })
     
     this.layerBlocos = this.tilemapFases.createLayer('blocos', [this.tilesetTilebloc])
     this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
@@ -199,7 +323,7 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.ini1walk, this.layerTrave3)
 
     
-
+    /*colisao agua e lava*/
    
     this.agua.forEach((agua) => {
       this.physics.add.collider(agua.objeto, this.layerBlocos)
@@ -207,6 +331,15 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(agua.objeto, this.layerTrave1)
       this.physics.add.collider(agua.objeto, this.layerTrave2)
       this.physics.add.collider(agua.objeto, this.layerTrave3)
+    })
+    this.physics.add.collider(this.personagem, this.agua, this.morrer, null, this)
+
+    this.lava.forEach((lava) => {
+      this.physics.add.collider(lava.objeto, this.layerBlocos)
+      this.physics.add.collider(lava.objeto, this.layerEscada)
+      this.physics.add.collider(lava.objeto, this.layerTrave1)
+      this.physics.add.collider(lava.objeto, this.layerTrave2)
+      this.physics.add.collider(lava.objeto, this.layerTrave3)
     })
 
     /*animação moeda*/
@@ -538,7 +671,7 @@ export default class cena2 extends Phaser.Scene {
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
     this.cameras.main.startFollow(this.personagem).setZoom(0.8)
-    this.cameras.main.followOffset.set(0,100)
+    this.cameras.main.followOffset.set(0, 100)
 
     /*tela cheia*/
     this.tela_cheia = this.add
@@ -572,5 +705,14 @@ export default class cena2 extends Phaser.Scene {
     estrela.disableBody(true, true)
     this.somestrela.play()
   }
-
+  morrer(personagem) {
+    const centrox = this.cameras.main.worldView.x + this.cameras.main.width / 2
+    const centroy = this.cameras.main.worldView.y + this.cameras.main.height / 2
+    this.imagem = this.add.image(centrox, centroy, 'cenaperdeu')
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.game.scene.stop('cena2')
+        this.game.scene.start('cena1')
+      })
+  }
 }
