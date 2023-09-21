@@ -22,8 +22,6 @@ class Game extends Phaser.Game {
     this.scene.add('cena2', cena2)
     this.scene.add('encerramento', encerramento)
 
-
-
     this.scene.start('cena0')
   }
 }

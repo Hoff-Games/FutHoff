@@ -3,11 +3,11 @@ export default class fimDoJogo extends Phaser.Scene {
     super('fim-do-jogo')
   }
 
-  preload() {
+  preload () {
     this.load.image('ifsc-sj-2014', './assets/ifsc-sj-2014.png')
   }
 
-  create() {
+  create () {
     /* Imagem de fundo */
     this.imagem = this.add
       .image(400, 225, 'ifsc-sj-2014')

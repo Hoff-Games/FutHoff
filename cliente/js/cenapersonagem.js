@@ -3,12 +3,12 @@ export default class cenapersonagem extends Phaser.Scene {
     super('cenapersonagem')
   }
 
-  preload() {
+  preload () {
     this.load.image('cenaselecao', '../assets/cenas/cenaselecao.png')
     this.load.image('persona1', '../assets/botoes/persona1.png')
   }
 
-  create() {
+  create () {
     this.add.image(400, 225, 'cenaselecao')
 
     this.persona1 = this.add.sprite(200, 250, 'persona1')
@@ -22,14 +22,13 @@ export default class cenapersonagem extends Phaser.Scene {
           spriteWalking: '/skiler.png',
           spriteCarro: '/skilercarro.png',
           spriteGanha: '/skilerganha.png',
-          spriteEscada: '/skilerescada.png',
+          spriteEscada: '/skilerescada.png'
         }
         this.game.scene.start('cena2')
       })
   }
-  
 
-  update() {
+  update () {
 
   }
 }
