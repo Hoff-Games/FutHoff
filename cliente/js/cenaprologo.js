@@ -4,9 +4,8 @@ export default class cenaprologo extends Phaser.Scene {
   }
 
   preload () {
-    /*imagem de fundo*/
+    /* imagem de fundo */
     this.load.image('cenaprologo', '../assets/cenas/cenaprologo.png')
-
   }
 
   create () {
@@ -17,7 +16,6 @@ export default class cenaprologo extends Phaser.Scene {
         this.game.scene.stop('cenaprologo')
         this.game.scene.start('encerramento')
       })
-
   }
 
   update () {

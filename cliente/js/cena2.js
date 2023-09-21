@@ -3,15 +3,14 @@ export default class cena2 extends Phaser.Scene {
     super('cena2')
   }
 
-  preload() {
-
-    /*mapas*/
+  preload () {
+    /* mapas */
     this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
 
-    /*cenas*/
+    /* cenas */
     this.load.image('cenaperdeu', '../assets/cenas/cenaperdeu.png')
 
-    /*tilesets*/
+    /* tilesets */
     this.load.image('c1', '../assets/fases/c1.png')
     this.load.image('c2', '../assets/fases/c2.png')
     this.load.image('c3', '../assets/fases/c3.png')
@@ -21,21 +20,21 @@ export default class cena2 extends Phaser.Scene {
     this.load.image('dec2', '../assets/fases/dec2.png')
     this.load.image('tiletrave', '../assets/fases/tiletrave.png')
 
-    /*moeda*/
+    /* moeda */
     this.load.spritesheet('moeda', '../assets/fases/moeda.png', {
       frameWidth: 32,
       frameHeight: 32
     })
     this.load.audio('sommoeda', '../assets/audio/sommoeda.mp3')
 
-    /*estrela*/
+    /* estrela */
     this.load.spritesheet('estrela', '../assets/fases/estrela.png', {
       frameWidth: 48,
       frameHeight: 48
     })
     this.load.audio('somestrela', '../assets/audio/somestrela.mp3')
 
-    /*personagens*/
+    /* personagens */
     this.load.spritesheet('skiler', '../assets/personagens/skiler.png', {
       frameWidth: 64,
       frameHeight: 64
@@ -53,13 +52,13 @@ export default class cena2 extends Phaser.Scene {
       frameHeight: 64
     })
 
-    /*Inimigos*/
+    /* Inimigos */
     this.load.spritesheet('ini1walk', '../assets/personagens/ini1walk.png', {
       frameWidth: 64,
       frameHeight: 64
     })
 
-    /*agua e lava*/
+    /* agua e lava */
     this.load.spritesheet('agua', '../assets/fases/agua.png', {
       frameWidth: 64,
       frameHeight: 128
@@ -69,7 +68,7 @@ export default class cena2 extends Phaser.Scene {
       frameHeight: 128
     })
 
-    /*botoes*/
+    /* botoes */
     this.load.spritesheet('direita', '../assets/botoes/direita.png', {
       frameWidth: 84,
       frameHeight: 84
@@ -87,19 +86,18 @@ export default class cena2 extends Phaser.Scene {
       frameHeight: 84
     })
 
-    /*tela cheia*/
+    /* tela cheia */
     this.load.spritesheet('tela-cheia', './assets/botoes/tela-cheia.png', {
       frameWidth: 84,
       frameHeight: 84
     })
   }
 
-  create() {
-
-    /*mapas*/
+  create () {
+    /* mapas */
     this.tilemapFases = this.make.tilemap({ key: 'fases' })
 
-    /*tilesets*/
+    /* tilesets */
     this.tilesetDec1 = this.tilemapFases.addTilesetImage('dec1')
     this.tilesetDec2 = this.tilemapFases.addTilesetImage('dec2')
     this.tilesetC1 = this.tilemapFases.addTilesetImage('c1')
@@ -109,7 +107,7 @@ export default class cena2 extends Phaser.Scene {
     this.tilesetTilebloc = this.tilemapFases.addTilesetImage('tilebloc')
     this.tilesetTiletrave = this.tilemapFases.addTilesetImage('tiletrave')
 
-    /*animações da agua e lava*/
+    /* animações da agua e lava */
     this.anims.create({
       key: 'agua',
       frames: this.anims.generateFrameNumbers('agua', {
@@ -129,7 +127,7 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
 
-    /*agua e lava*/
+    /* agua e lava */
     this.agua = [
       {
         x: 1315,
@@ -162,7 +160,7 @@ export default class cena2 extends Phaser.Scene {
       {
         x: 1763,
         y: -180
-      },
+      }
 
     ]
 
@@ -265,16 +263,15 @@ export default class cena2 extends Phaser.Scene {
       {
         x: 230,
         y: 1380
-      },
-      
+      }
 
     ]
 
-    /*camadas*/
+    /* camadas */
     this.layerFundo = this.tilemapFases.createLayer('fundo', [this.tilesetC1, this.tilesetC2, this.tilesetC3])
     this.layerArvores = this.tilemapFases.createLayer('arvores', [this.tilesetTilearv])
     this.layerArvores2 = this.tilemapFases.createLayer('arvores2', [this.tilesetTilearv])
-    
+
     this.agua.forEach((agua) => {
       agua.objeto = this.physics.add.sprite(agua.x, agua.y, 'agua')
       agua.objeto.anims.play('agua', true)
@@ -285,7 +282,7 @@ export default class cena2 extends Phaser.Scene {
       lava.objeto.anims.play('lava', true)
         .setImmovable()
     })
-    
+
     this.layerBlocos = this.tilemapFases.createLayer('blocos', [this.tilesetTilebloc])
     this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
     this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
@@ -295,16 +292,14 @@ export default class cena2 extends Phaser.Scene {
     this.layerTrave2 = this.tilemapFases.createLayer('trave2', [this.tilesetTiletrave])
     this.layerTrave3 = this.tilemapFases.createLayer('trave3', [this.tilesetTiletrave])
 
-    /*colisoes*/
+    /* colisoes */
     this.layerBlocos.setCollisionByProperty({ colisao: true })
     this.layerEscada.setCollisionByProperty({ colisao: true })
     this.layerTrave1.setCollisionByProperty({ colisao: true })
     this.layerTrave2.setCollisionByProperty({ colisao: true })
     this.layerTrave3.setCollisionByProperty({ colisao: true })
 
-
-
-    /*personagens*/
+    /* personagens */
     this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
 
     this.physics.add.collider(this.personagem, this.layerBlocos)
@@ -313,7 +308,7 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.layerTrave2)
     this.physics.add.collider(this.personagem, this.layerTrave3)
 
-    /*Inimigos*/
+    /* Inimigos */
     this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
 
     this.physics.add.collider(this.ini1walk, this.layerBlocos)
@@ -322,9 +317,8 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.ini1walk, this.layerTrave2)
     this.physics.add.collider(this.ini1walk, this.layerTrave3)
 
-    
-    /*colisao agua e lava*/
-   
+    /* colisao agua e lava */
+
     this.agua.forEach((agua) => {
       this.physics.add.collider(agua.objeto, this.layerBlocos)
       this.physics.add.collider(agua.objeto, this.layerEscada)
@@ -342,7 +336,7 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(lava.objeto, this.layerTrave3)
     })
 
-    /*animação moeda*/
+    /* animação moeda */
     this.anims.create({
       key: 'moeda-girando',
       frames: this.anims.generateFrameNumbers('moeda', {
@@ -353,8 +347,7 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
 
-
-    /*moeda*/
+    /* moeda */
     this.moedas = [
       {
         x: 930,
@@ -419,7 +412,7 @@ export default class cena2 extends Phaser.Scene {
     })
     this.sommoeda = this.sound.add('sommoeda')
 
-    /*animação estrela*/
+    /* animação estrela */
     this.anims.create({
       key: 'estrela-piscando',
       frames: this.anims.generateFrameNumbers('estrela', {
@@ -429,7 +422,7 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 8,
       repeat: -1
     })
-    /*estrelas*/
+    /* estrelas */
     this.estrelas = [
       {
         x: -415,
@@ -458,9 +451,9 @@ export default class cena2 extends Phaser.Scene {
     })
     this.somestrela = this.sound.add('somestrela')
 
-    /*animacoes*/
+    /* animacoes */
 
-    /*animacoes dos personagens*/
+    /* animacoes dos personagens */
     this.anims.create({
       key: 'skiler-direita',
       frames: this.anims.generateFrameNumbers('skiler', {
@@ -534,7 +527,7 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
 
-    /*animações dos inimigos*/
+    /* animações dos inimigos */
     this.anims.create({
       key: 'ini1walk',
       frames: this.anims.generateFrameNumbers('ini1walk', {
@@ -544,14 +537,12 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 8,
       repeat: -1
     })
-    this.ini1walk.setVelocity(-100, 0);
+    this.ini1walk.setVelocity(-100, 0)
 
     // Animações automáticas //
     this.ini1walk.anims.play('ini1walk', true)
-    
 
-
-    /*animacoes para botoes*/
+    /* animacoes para botoes */
     this.anims.create({
       key: 'skiler-direita',
       frames: this.anims.generateFrameNumbers('skiler', {
@@ -572,8 +563,7 @@ export default class cena2 extends Phaser.Scene {
       key: 'skiler-esquerda'
     })
 
-
-    /*botoes*/
+    /* botoes */
     this.direita = this.add.sprite(125, 430, 'direita', 0)
       .setInteractive()
       .on('pointerdown', () => {
@@ -607,7 +597,7 @@ export default class cena2 extends Phaser.Scene {
         this.baixo.setFrame(1)
 
         /* Verificar o lado do carrinho */
-        let anim = this.personagem.anims.getName()
+        const anim = this.personagem.anims.getName()
         const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
         const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
         if (esquerda.test(anim)) {
@@ -620,7 +610,7 @@ export default class cena2 extends Phaser.Scene {
       })
       .on('pointerup', () => {
         this.baixo.setFrame(0)
-        let anim = this.personagem.anims.getName()
+        const anim = this.personagem.anims.getName()
         const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
         const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
         if (esquerda.test(anim)) {
@@ -633,13 +623,13 @@ export default class cena2 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
-    /*PULARRRRRRRRRRRRRRRRR -------- UIIIIIIIIIIIII*/
+    /* PULARRRRRRRRRRRRRRRRR -------- UIIIIIIIIIIIII */
     this.cima = this.add.sprite(800, 300, 'cima', 0)
       .setInteractive()
       .on('pointerdown', () => {
-        this.cima.setFrame(1);
+        this.cima.setFrame(1)
         if (this.personagem.body.blocked.down) {
-          let anim = this.personagem.anims.getName()
+          const anim = this.personagem.anims.getName()
           const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
           const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
           if (esquerda.test(anim)) {
@@ -653,7 +643,7 @@ export default class cena2 extends Phaser.Scene {
       })
       .on('pointerup', () => {
         this.cima.setFrame(0)
-        let anim = this.personagem.anims.getName()
+        const anim = this.personagem.anims.getName()
         const esquerda = new RegExp('.*esquerda.*') // qualquer expressão com a palavra 'esquerda'
         const direita = new RegExp('.*direita.*') // qualquer expressão com a palavra 'direita'
         if (esquerda.test(anim)) {
@@ -665,15 +655,14 @@ export default class cena2 extends Phaser.Scene {
 
       .setScrollFactor(0, 0)
 
-
-    /*camera*/
+    /* camera */
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
     this.cameras.main.startFollow(this.personagem).setZoom(0.8)
     this.cameras.main.followOffset.set(0, 100)
 
-    /*tela cheia*/
+    /* tela cheia */
     this.tela_cheia = this.add
       .sprite(850, 0, 'tela-cheia', 0)
       .setInteractive()
@@ -687,25 +676,22 @@ export default class cena2 extends Phaser.Scene {
         }
       })
       .setScrollFactor(0, 0)
-
-  
   }
 
-
-
-
-  update() {
+  update () {
   }
-  coletarmoeda(personagem, moeda) {
+
+  coletarmoeda (personagem, moeda) {
     moeda.disableBody(true, true)
     this.sommoeda.play()
   }
 
-  coletarestrela(personagem, estrela) {
+  coletarestrela (personagem, estrela) {
     estrela.disableBody(true, true)
     this.somestrela.play()
   }
-  morrer(personagem) {
+
+  morrer (personagem) {
     const centrox = this.cameras.main.worldView.x + this.cameras.main.width / 2
     const centroy = this.cameras.main.worldView.y + this.cameras.main.height / 2
     this.imagem = this.add.image(centrox, centroy, 'cenaperdeu')

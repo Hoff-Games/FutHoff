@@ -11,7 +11,6 @@ export default class encerramento extends Phaser.Scene {
   }
 
   create () {
-
     this.image = this.add.sprite(400, 225, 'cenaencerramento')
 
     this.anims.create({

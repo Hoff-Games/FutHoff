@@ -5,14 +5,14 @@ export default class cena0 extends Phaser.Scene {
   }
 
   preload () {
-    /*imagem de fundo*/
+    /* imagem de fundo */
     this.load.image('cenaabertura', '../assets/cenas/cenaabertura.png')
 
-    /*tela cheia*/
-   /* this.load.spritesheet('tela-cheia', './assets/botoes/tela-cheia.png', {
+    /* tela cheia */
+    /* this.load.spritesheet('tela-cheia', './assets/botoes/tela-cheia.png', {
       frameWidth: 64,
       frameHeight: 64
-    })*/
+    }) */
   }
 
   create () {
@@ -24,8 +24,8 @@ export default class cena0 extends Phaser.Scene {
         this.game.scene.start('cena1')
       })
 
-    /*tela cheia*/
-    /*this.tela_cheia = this.add
+    /* tela cheia */
+    /* this.tela_cheia = this.add
       .sprite(750, 50, 'tela-cheia', 0)
       .setInteractive()
       .on('pointerdown', () => {
@@ -36,8 +36,7 @@ export default class cena0 extends Phaser.Scene {
           this.tela_cheia.setFrame(1)
           this.scale.startFullscreen()
         }
-      })*/
-
+      }) */
   }
 
   update () {
