@@ -1,6 +1,8 @@
 export default class cena2 extends Phaser.Scene {
   constructor () {
     super('cena2')
+
+    this.gameover = false
   }
 
   preload () {
@@ -270,7 +272,12 @@ export default class cena2 extends Phaser.Scene {
     this.layerFundo = this.tilemapFases.createLayer('fundo', [this.tilesetC1, this.tilesetC2, this.tilesetC3])
     this.layerArvores = this.tilemapFases.createLayer('arvores', [this.tilesetTilearv])
     this.layerArvores2 = this.tilemapFases.createLayer('arvores2', [this.tilesetTilearv])
+    this.layerEscada = this.tilemapFases.createLayer('escada', [this.tilesetTilebloc])
 
+    /* personagem dentro da agua e lava */
+    this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
+
+    /* agua e lava */
     this.agua.forEach((agua) => {
       agua.objeto = this.physics.add.sprite(agua.x, agua.y, 'agua')
       agua.objeto.anims.play('agua', true)
@@ -281,12 +288,12 @@ export default class cena2 extends Phaser.Scene {
       lava.objeto.anims.play('lava', true)
         .setImmovable()
     })
-
+    /* camadas */
     this.layerBlocos = this.tilemapFases.createLayer('blocos', [this.tilesetTilebloc])
     this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
     this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
     this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
-    this.layerEscada = this.tilemapFases.createLayer('escada', [this.tilesetTilebloc])
+
     this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
     this.layerTrave2 = this.tilemapFases.createLayer('trave2', [this.tilesetTiletrave])
     this.layerTrave3 = this.tilemapFases.createLayer('trave3', [this.tilesetTiletrave])
@@ -298,8 +305,7 @@ export default class cena2 extends Phaser.Scene {
     this.layerTrave2.setCollisionByProperty({ colisao: true })
     this.layerTrave3.setCollisionByProperty({ colisao: true })
 
-    /* personagens */
-    this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
+    /* colisao personagens */
 
     this.physics.add.collider(this.personagem, this.layerBlocos)
     this.physics.add.overlap(this.personagem, this.layerEscada, this.moverPelaEscada, null, this)
@@ -317,15 +323,6 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.ini1walk, this.layerTrave3)
 
     /* colisao agua e lava */
-
-    this.agua.forEach((agua) => {
-      this.physics.add.collider(agua.objeto, this.layerBlocos)
-      this.physics.add.collider(agua.objeto, this.layerEscada)
-      this.physics.add.collider(agua.objeto, this.layerTrave1)
-      this.physics.add.collider(agua.objeto, this.layerTrave2)
-      this.physics.add.collider(agua.objeto, this.layerTrave3)
-    })
-    this.physics.add.collider(this.personagem, this.agua, this.morrer, null, this)
 
     this.lava.forEach((lava) => {
       this.physics.add.collider(lava.objeto, this.layerBlocos)
@@ -568,7 +565,7 @@ export default class cena2 extends Phaser.Scene {
       .on('pointerdown', () => {
         this.direita.setFrame(1)
         this.personagem.anims.play('skiler-direita', true)
-        this.personagem.setVelocityX(220)
+        this.personagem.setVelocityX(250)
       })
       .on('pointerup', () => {
         this.direita.setFrame(0)
@@ -582,7 +579,7 @@ export default class cena2 extends Phaser.Scene {
       .on('pointerdown', () => {
         this.esquerda.setFrame(1)
         this.personagem.anims.play('skiler-esquerda', true)
-        this.personagem.setVelocityX(-220)
+        this.personagem.setVelocityX(-250)
       })
       .on('pointerup', () => {
         this.esquerda.setFrame(0)
@@ -590,6 +587,7 @@ export default class cena2 extends Phaser.Scene {
         this.personagem.anims.play('skilerstopesquerda', true)
       })
       .setScrollFactor(0, 0)
+
     this.baixo = this.add.sprite(800, 450, 'baixo', 0)
       .setInteractive()
       .on('pointerdown', () => {
@@ -600,10 +598,10 @@ export default class cena2 extends Phaser.Scene {
         const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
         const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
         if (esquerda.test(anim)) {
-          this.personagem.setVelocityX(-300)
+          this.personagem.setVelocityX(-270)
           this.personagem.anims.play('skilercarroesquerda', true)
         } else if (direita.test(anim)) {
-          this.personagem.setVelocityX(300)
+          this.personagem.setVelocityX(270)
           this.personagem.anims.play('skilercarrodireita', true)
         }
       })
@@ -651,8 +649,44 @@ export default class cena2 extends Phaser.Scene {
           this.personagem.anims.play('skilerstopdireita', true)
         }
       })
-
       .setScrollFactor(0, 0)
+
+    this.agua.forEach((agua) => {
+      this.physics.add.collider(agua.objeto, this.layerBlocos)
+      this.physics.add.collider(agua.objeto, this.layerEscada)
+      this.physics.add.collider(agua.objeto, this.layerTrave1)
+      this.physics.add.collider(agua.objeto, this.layerTrave2)
+      this.physics.add.collider(agua.objeto, this.layerTrave3)
+      this.physics.add.overlap(this.personagem, agua.objeto, () => {
+        if (!this.gameover) {
+          this.gameover = true
+          this.agua.forEach((agua) => {
+
+          })
+          this.timer = 1
+          this.timedEvent = this.time.addEvent({
+            delay: 500,
+            callback: () => {
+              this.timer -= 1
+              if (this.timer <= 0) {
+                this.esquerda.destroy()
+                this.direita.destroy()
+                this.cima.destroy()
+                this.baixo.destroy()
+                this.add.image(this.personagem.x, this.personagem.y - 100, 'cenaperdeu')
+                  .setInteractive()
+                  .on('pointerdown', () => {
+                    this.game.scene.stop('cena2')
+                    this.game.scene.start('cena2')
+                  })
+              }
+            },
+            callbackScope: this,
+            loop: true
+          })
+        }
+      })
+    })
 
     /* camera */
     this.personagem.setCollideWorldBounds(true)
@@ -690,14 +724,7 @@ export default class cena2 extends Phaser.Scene {
     this.somestrela.play()
   }
 
-  morrer (personagem) {
-    const centrox = this.cameras.main.worldView.x + this.cameras.main.width / 2
-    const centroy = this.cameras.main.worldView.y + this.cameras.main.height / 2
-    this.imagem = this.add.image(centrox, centroy, 'cenaperdeu')
-      .setInteractive()
-      .on('pointerdown', () => {
-        this.game.scene.stop('cena2')
-        this.game.scene.start('cena1')
-      })
+  moverPelaEscada (personagem, escada) {
+
   }
 }
