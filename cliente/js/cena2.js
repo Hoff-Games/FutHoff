@@ -5,7 +5,7 @@ export default class cena2 extends Phaser.Scene {
     this.gameover = false
   }
 
-  preload () {
+  preload() {
     /* mapas */
     this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
 
@@ -95,7 +95,7 @@ export default class cena2 extends Phaser.Scene {
     })
   }
 
-  create () {
+  create() {
     /* mapas */
     this.tilemapFases = this.make.tilemap({ key: 'fases' })
 
@@ -273,6 +273,9 @@ export default class cena2 extends Phaser.Scene {
     this.layerArvores = this.tilemapFases.createLayer('arvores', [this.tilesetTilearv])
     this.layerArvores2 = this.tilemapFases.createLayer('arvores2', [this.tilesetTilearv])
     this.layerEscada = this.tilemapFases.createLayer('escada', [this.tilesetTilebloc])
+    this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
+    this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
+    this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
 
     /* personagem dentro da agua e lava */
     this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
@@ -290,9 +293,7 @@ export default class cena2 extends Phaser.Scene {
     })
     /* camadas */
     this.layerBlocos = this.tilemapFases.createLayer('blocos', [this.tilesetTilebloc])
-    this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
-    this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
-    this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
+    
 
     this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
     this.layerTrave2 = this.tilemapFases.createLayer('trave2', [this.tilesetTiletrave])
@@ -307,7 +308,7 @@ export default class cena2 extends Phaser.Scene {
 
     /* colisao personagens */
 
-    this.physics.add.collider(this.personagem, this.layerBlocos)
+    this.physics.add.collider(this.personagem, this.layerBlocos, this.noChao, null, this)
     this.physics.add.overlap(this.personagem, this.layerEscada, this.moverPelaEscada, null, this)
     this.physics.add.collider(this.personagem, this.layerTrave1)
     this.physics.add.collider(this.personagem, this.layerTrave2)
@@ -565,7 +566,7 @@ export default class cena2 extends Phaser.Scene {
       .on('pointerdown', () => {
         this.direita.setFrame(1)
         this.personagem.anims.play('skiler-direita', true)
-        this.personagem.setVelocityX(250)
+        this.personagem.setVelocityX(230)
       })
       .on('pointerup', () => {
         this.direita.setFrame(0)
@@ -579,7 +580,7 @@ export default class cena2 extends Phaser.Scene {
       .on('pointerdown', () => {
         this.esquerda.setFrame(1)
         this.personagem.anims.play('skiler-esquerda', true)
-        this.personagem.setVelocityX(-250)
+        this.personagem.setVelocityX(-230)
       })
       .on('pointerup', () => {
         this.esquerda.setFrame(0)
@@ -598,10 +599,10 @@ export default class cena2 extends Phaser.Scene {
         const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
         const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
         if (esquerda.test(anim)) {
-          this.personagem.setVelocityX(-270)
+          this.personagem.setVelocityX(-250)
           this.personagem.anims.play('skilercarroesquerda', true)
         } else if (direita.test(anim)) {
-          this.personagem.setVelocityX(270)
+          this.personagem.setVelocityX(250)
           this.personagem.anims.play('skilercarrodireita', true)
         }
       })
@@ -640,14 +641,6 @@ export default class cena2 extends Phaser.Scene {
       })
       .on('pointerup', () => {
         this.cima.setFrame(0)
-        const anim = this.personagem.anims.getName()
-        const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
-        const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
-        if (esquerda.test(anim)) {
-          this.personagem.anims.play('skilerstopesquerda', true)
-        } else if (direita.test(anim)) {
-          this.personagem.anims.play('skilerstopdireita', true)
-        }
       })
       .setScrollFactor(0, 0)
 
@@ -711,20 +704,41 @@ export default class cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
   }
 
-  update () {
+  update() {
   }
 
-  coletarmoeda (personagem, moeda) {
+  coletarmoeda(personagem, moeda) {
     moeda.disableBody(true, true)
     this.sommoeda.play()
   }
 
-  coletarestrela (personagem, estrela) {
+  coletarestrela(personagem, estrela) {
     estrela.disableBody(true, true)
     this.somestrela.play()
   }
 
-  moverPelaEscada (personagem, escada) {
+  noChao(personagem, bloco) {
+    if (this.direita.frame.name === 1) {
+      if (this.baixo.frame.name === 1) {
+        this.personagem.anims.play('skilercarrodireita')
+        this.personagem.setVelocityX(250)
+      } else {
+        this.personagem.anims.play('skiler-direita', true)
+        this.personagem.setVelocityX(230)
+      }
+    } else if (this.esquerda.frame.name === 1) {
+      if (this.baixo.frame.name === 1) {
+        this.personagem.anims.play('skilercarroesquerda')
+        this.personagem.setVelocityX(-250)
+      } else {
+        this.personagem.anims.play('skiler-esquerda', true)
+        this.personagem.setVelocityX(-230)
+      }
+    }
+
+  }
+
+  moverPelaEscada(personagem, escada) {
 
   }
 }
