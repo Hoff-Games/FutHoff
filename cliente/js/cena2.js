@@ -672,7 +672,7 @@ export default class cena2 extends Phaser.Scene {
 
 
         /*atacar*/
-        this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y+20, 'bola')
+        this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y+14, 'bola')
         this.bola.setVelocityX(500)
         this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this);
 
