@@ -16,11 +16,16 @@ export default class cena1 extends Phaser.Scene {
     this.load.image('sala8', '../assets/botoes/sala8.png')
     this.load.image('sala9', '../assets/botoes/sala9.png')
 
-    this.load.audio('trilha', '../assets/audio/musicadefundo.mp3')
+    this.load.audio('trilha', '../assets/audio/musicasalas.mp3')
   }
 
   create () {
     this.add.image(400, 225, 'cenasala')
+
+    this.trilha = this.sound.add('trilha')
+    this.trilha.loop = true
+    this.trilha.play()
+
 
     this.add.image(150, 100, 'sala1')
       .setInteractive()
@@ -69,6 +74,7 @@ export default class cena1 extends Phaser.Scene {
       .on('pointerdown', () => {
         this.game.scene.stop('cena1')
         this.game.scene.start('cenapersonagem')
+        
       })
     this.add.image(650, 350, 'sala9')
       .setInteractive()
@@ -77,9 +83,7 @@ export default class cena1 extends Phaser.Scene {
         this.game.scene.start('cenaprologo')
       })
 
-    this.trilha = this.sound.add('trilha')
-    this.trilha.loop = true
-    this.trilha.play()
+    
   }
 
   update () {
