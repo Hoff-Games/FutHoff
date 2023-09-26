@@ -54,6 +54,10 @@ export default class cena2 extends Phaser.Scene {
       frameHeight: 64
     })
 
+    /*atacar*/
+    /*
+    this.load.image('bola', '../assets/personagens/bola.png')*/
+
     /* Inimigos */
     this.load.spritesheet('ini1walk', '../assets/personagens/ini1walk.png', {
       frameWidth: 64,
@@ -87,6 +91,11 @@ export default class cena2 extends Phaser.Scene {
       frameWidth: 84,
       frameHeight: 84
     })
+    /*
+    this.load.spritesheet('atacar', '../assets/botoes/botaobola.png', {
+      frameWidth: 32,
+      frameHeight: 32
+    })*/
 
     /* tela cheia */
     this.load.spritesheet('tela-cheia', './assets/botoes/tela-cheia.png', {
@@ -313,6 +322,9 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.layerTrave1)
     this.physics.add.collider(this.personagem, this.layerTrave2)
     this.physics.add.collider(this.personagem, this.layerTrave3)
+   
+    /*atacar*//*
+    this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this);*/
 
     /* Inimigos */
     this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
@@ -643,7 +655,23 @@ export default class cena2 extends Phaser.Scene {
         this.cima.setFrame(0)
       })
       .setScrollFactor(0, 0)
-
+    /*
+    this.atacar = this.add.sprite(800, 150, 'botaobola', 0)
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.atacar.setFrame(1)
+        this.personagem.anims.play('skilerstopdireita', true)
+        this.personagem.setVelocityX(230)
+      })
+      .on('pointerup', () => {
+        this.atacar.setFrame(0)
+        this.personagem.setVelocityX(0)
+        this.personagem.anims.play('skilerstopdireita', true)
+      })
+      .setScrollFactor(0, 0)
+*/
+    
+      /*colisao agua*/
     this.agua.forEach((agua) => {
       this.physics.add.collider(agua.objeto, this.layerBlocos)
       this.physics.add.collider(agua.objeto, this.layerEscada)
@@ -741,4 +769,16 @@ export default class cena2 extends Phaser.Scene {
   moverPelaEscada(personagem, escada) {
 
   }
+/*
+  arremessarBola() {
+    const bola = bolas.create(skiler.x, skiler.y, 'bola');
+    bola.setVelocityX(400);
+    bola.setLifetime(2000);
+  }
+
+  bolalAtingeInimigo(bola, ini1walk) {
+    bola.destroy();
+    ini1walk.destroy();
+  }
+  */
 }
