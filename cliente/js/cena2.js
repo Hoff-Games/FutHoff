@@ -301,7 +301,6 @@ export default class cena2 extends Phaser.Scene {
     this.layerArvores = this.tilemapFases.createLayer('arvores', [this.tilesetTilearv])
     this.layerArvores2 = this.tilemapFases.createLayer('arvores2', [this.tilesetTilearv])
     this.layerBlocos = this.tilemapFases.createLayer('blocos', [this.tilesetTilebloc])
-    
     this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
     this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
     this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
@@ -311,16 +310,13 @@ export default class cena2 extends Phaser.Scene {
 
     
     /* camadas */
-    this.layerEscada = this.tilemapFases.createLayer('escada', [this.tilesetTilebloc])
     
-
     this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
     this.layerTrave2 = this.tilemapFases.createLayer('trave2', [this.tilesetTiletrave])
     this.layerTrave3 = this.tilemapFases.createLayer('trave3', [this.tilesetTiletrave])
 
     /* colisoes */
     this.layerBlocos.setCollisionByProperty({ colisao: true })
-    this.layerEscada.setCollisionByProperty({ colisao: true })
     this.layerTrave1.setCollisionByProperty({ colisao: true })
     this.layerTrave2.setCollisionByProperty({ colisao: true })
     this.layerTrave3.setCollisionByProperty({ colisao: true })
@@ -328,16 +324,13 @@ export default class cena2 extends Phaser.Scene {
     /* colisao personagens */
 
     this.physics.add.collider(this.personagem, this.layerBlocos, this.noChao, null, this)
-    this.physics.add.overlap(this.personagem, this.layerEscada, this.moverPelaEscada, null, this)
     this.physics.add.collider(this.personagem, this.layerTrave1)
     this.physics.add.collider(this.personagem, this.layerTrave2)
     this.physics.add.collider(this.personagem, this.layerTrave3)
    
     /* Inimigos */
     this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
-
     this.physics.add.collider(this.ini1walk, this.layerBlocos)
-    this.physics.add.collider(this.ini1walk, this.layerEscada)
     this.physics.add.collider(this.ini1walk, this.layerTrave1)
     this.physics.add.collider(this.ini1walk, this.layerTrave2)
     this.physics.add.collider(this.ini1walk, this.layerTrave3)
@@ -346,7 +339,6 @@ export default class cena2 extends Phaser.Scene {
 
     this.lava.forEach((lava) => {
       this.physics.add.collider(lava.objeto, this.layerBlocos)
-      this.physics.add.collider(lava.objeto, this.layerEscada)
       this.physics.add.collider(lava.objeto, this.layerTrave1)
       this.physics.add.collider(lava.objeto, this.layerTrave2)
       this.physics.add.collider(lava.objeto, this.layerTrave3)
@@ -420,7 +412,6 @@ export default class cena2 extends Phaser.Scene {
         .setImmovable()
       moeda.objeto.anims.play('moeda-girando', true)
       this.physics.add.collider(moeda.objeto, this.layerBlocos)
-      this.physics.add.collider(moeda.objeto, this.layerEscada)
       this.physics.add.collider(moeda.objeto, this.layerTrave1)
       this.physics.add.collider(moeda.objeto, this.layerTrave2)
       this.physics.add.collider(moeda.objeto, this.layerTrave3)
@@ -459,7 +450,6 @@ export default class cena2 extends Phaser.Scene {
         .setImmovable()
       estrela.objeto.anims.play('estrela-piscando', true)
       this.physics.add.collider(estrela.objeto, this.layerBlocos)
-      this.physics.add.collider(estrela.objeto, this.layerEscada)
       this.physics.add.collider(estrela.objeto, this.layerTrave1)
       this.physics.add.collider(estrela.objeto, this.layerTrave2)
       this.physics.add.collider(estrela.objeto, this.layerTrave3)
@@ -662,35 +652,66 @@ export default class cena2 extends Phaser.Scene {
         this.cima.setFrame(0)
       })
       .setScrollFactor(0, 0)
+
+      /*atacar*/
     
     this.atacar = this.add.sprite(800, 150, 'botaobola', 0)
       .setInteractive()
       .on('pointerdown', () => {
         this.atacar.setFrame(1)
-        this.personagem.anims.play('skilerstopdireita', true)
-        this.personagem.setVelocityX(230)
-
-
-        /*atacar*/
-        this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y+14, 'bola')
-        this.bola.setVelocityX(500)
+        
+        
+          const anim = this.personagem.anims.getName()
+          const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
+        const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
+          if (esquerda.test(anim)) {
+            this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y+14, 'bola')
+            this.bola.setVelocityX(-500)
+          this.personagem.setVelocityY(0)
+          this.personagem.anims.play('skilerstopesquerda', true)
+          } else if (direita.test(anim)) {
+            this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y + 14, 'bola')
+            this.bola.setVelocityX(500)
+          this.personagem.setVelocityY(0)
+          this.personagem.anims.play('skilerstopdireita', true)
+        }
+        
         this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this);
+       
 
       })
       .on('pointerup', () => {
         this.atacar.setFrame(0)
-        this.personagem.setVelocityX(0)
-        this.personagem.anims.play('skilerstopdireita', true)
+
+        if (this.personagem.body.blocked.down) {
+          const anim = this.personagem.anims.getName()
+          const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
+          const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
+          if (esquerda.test(anim)) {
+            this.personagem.setVelocityY(0)
+            this.personagem.anims.play('skilerstopesquerda', true)
+          } else if (direita.test(anim)) {
+            this.personagem.setVelocityY(0)
+            this.personagem.anims.play('skilerstopdireita', true)
+          }
+        }
       })
       .setScrollFactor(0, 0)
     
+    
+    /*colisao bola
+    this.physics.add.collider(this.bola, this.layerBlocos)
+    
+    this.physics.add.collider(this.bola, this.layerTrave1)
+    this.physics.add.collider(this.bola, this.layerTrave2)
+    this.physics.add.collider(this.bola, this.layerTrave3)
+    */
     
 
     
       /*colisao agua*/
     this.agua.forEach((agua) => {
       this.physics.add.collider(agua.objeto, this.layerBlocos)
-      this.physics.add.collider(agua.objeto, this.layerEscada)
       this.physics.add.collider(agua.objeto, this.layerTrave1)
       this.physics.add.collider(agua.objeto, this.layerTrave2)
       this.physics.add.collider(agua.objeto, this.layerTrave3)
@@ -790,9 +811,7 @@ export default class cena2 extends Phaser.Scene {
     this.fundo.play()*/
   }
 
-  moverPelaEscada(personagem, escada) {
-
-  }
+  
 /*
   arremessarBola() {
     const bola = bolas.create(skiler.x, skiler.y, 'bola');
