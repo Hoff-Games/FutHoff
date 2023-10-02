@@ -5,17 +5,17 @@ export default class cena2 extends Phaser.Scene {
     this.gameover = false
   }
 
-  preload() {
+  preload () {
     /* mapas */
     this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
 
-    /*musica de fundo*/
+    /* musica de fundo */
     this.load.audio('fundo', '../assets/audio/musicadefundo.mp3')
 
     /* cenas */
     this.load.image('fundopreto', '../assets/cenas/fundopreto.png')
     this.load.image('cenaperdeu', '../assets/cenas/cenaperdeu.png')
-    
+
     /* tilesets */
     this.load.image('c1', '../assets/fases/c1.png')
     this.load.image('c2', '../assets/fases/c2.png')
@@ -58,8 +58,8 @@ export default class cena2 extends Phaser.Scene {
       frameHeight: 64
     })
 
-    /*atacar*/
-    
+    /* atacar */
+
     this.load.image('bola', '../assets/personagens/bola.png')
 
     /* Inimigos */
@@ -95,7 +95,7 @@ export default class cena2 extends Phaser.Scene {
       frameWidth: 84,
       frameHeight: 84
     })
-    
+
     this.load.spritesheet('botaobola', '../assets/botoes/botaobola.png', {
       frameWidth: 84,
       frameHeight: 84
@@ -108,7 +108,7 @@ export default class cena2 extends Phaser.Scene {
     })
   }
 
-  create() {
+  create () {
     /* mapas */
     this.tilemapFases = this.make.tilemap({ key: 'fases' })
 
@@ -308,9 +308,8 @@ export default class cena2 extends Phaser.Scene {
     /* personagem dentro da agua e lava */
     this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
 
-    
     /* camadas */
-    
+
     this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
     this.layerTrave2 = this.tilemapFases.createLayer('trave2', [this.tilesetTiletrave])
     this.layerTrave3 = this.tilemapFases.createLayer('trave3', [this.tilesetTiletrave])
@@ -327,7 +326,7 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.layerTrave1)
     this.physics.add.collider(this.personagem, this.layerTrave2)
     this.physics.add.collider(this.personagem, this.layerTrave3)
-   
+
     /* Inimigos */
     this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
     this.physics.add.collider(this.ini1walk, this.layerBlocos)
@@ -653,32 +652,29 @@ export default class cena2 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
-      /*atacar*/
-    
+    /* atacar */
+
     this.atacar = this.add.sprite(800, 150, 'botaobola', 0)
       .setInteractive()
       .on('pointerdown', () => {
         this.atacar.setFrame(1)
-        
-        
-          const anim = this.personagem.anims.getName()
-          const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
+
+        const anim = this.personagem.anims.getName()
+        const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
         const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
-          if (esquerda.test(anim)) {
-            this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y+14, 'bola')
-            this.bola.setVelocityX(-500)
+        if (esquerda.test(anim)) {
+          this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y + 14, 'bola')
+          this.bola.setVelocityX(-500)
           this.personagem.setVelocityY(0)
           this.personagem.anims.play('skilerstopesquerda', true)
-          } else if (direita.test(anim)) {
-            this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y + 14, 'bola')
-            this.bola.setVelocityX(500)
+        } else if (direita.test(anim)) {
+          this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y + 14, 'bola')
+          this.bola.setVelocityX(500)
           this.personagem.setVelocityY(0)
           this.personagem.anims.play('skilerstopdireita', true)
         }
-        
-        this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this);
-       
 
+        this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this)
       })
       .on('pointerup', () => {
         this.atacar.setFrame(0)
@@ -697,19 +693,16 @@ export default class cena2 extends Phaser.Scene {
         }
       })
       .setScrollFactor(0, 0)
-    
-    
-    /*colisao bola
+
+    /* colisao bola
     this.physics.add.collider(this.bola, this.layerBlocos)
-    
+
     this.physics.add.collider(this.bola, this.layerTrave1)
     this.physics.add.collider(this.bola, this.layerTrave2)
     this.physics.add.collider(this.bola, this.layerTrave3)
     */
-    
 
-    
-      /*colisao agua*/
+    /* colisao agua */
     this.agua.forEach((agua) => {
       this.physics.add.collider(agua.objeto, this.layerBlocos)
       this.physics.add.collider(agua.objeto, this.layerTrave1)
@@ -770,23 +763,20 @@ export default class cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
   }
 
-
-  
-
-  update() {
+  update () {
   }
 
-  coletarmoeda(personagem, moeda) {
+  coletarmoeda (personagem, moeda) {
     moeda.disableBody(true, true)
     this.sommoeda.play()
   }
 
-  coletarestrela(personagem, estrela) {
+  coletarestrela (personagem, estrela) {
     estrela.disableBody(true, true)
     this.somestrela.play()
   }
 
-  noChao(personagem, bloco) {
+  noChao (personagem, bloco) {
     if (this.direita.frame.name === 1) {
       if (this.baixo.frame.name === 1) {
         this.personagem.anims.play('skilercarrodireita')
@@ -806,22 +796,21 @@ export default class cena2 extends Phaser.Scene {
     }
 
     this.game.scene.getScene('cena1').trilha.stop()
-    /*this.fundo = this.sound.add('fundo')
+    /* this.fundo = this.sound.add('fundo')
     this.fundo.loop = true
-    this.fundo.play()*/
+    this.fundo.play() */
   }
 
+  /*
+    arremessarBola() {
+      const bola = bolas.create(skiler.x, skiler.y, 'bola');
+      bola.setVelocityX(400);
+      bola.setLifetime(2000);
+    }
   
-/*
-  arremessarBola() {
-    const bola = bolas.create(skiler.x, skiler.y, 'bola');
-    bola.setVelocityX(400);
-    bola.setLifetime(2000);
-  }
-
-  bolalAtingeInimigo(bola, ini1walk) {
-    bola.destroy();
-    ini1walk.destroy();
-  }
-  */
+    bolalAtingeInimigo(bola, ini1walk) {
+      bola.destroy();
+      ini1walk.destroy();
+    }
+    */
 }
