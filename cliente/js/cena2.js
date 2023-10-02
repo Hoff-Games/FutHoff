@@ -87,24 +87,24 @@ export default class cena2 extends Phaser.Scene {
     /* botoes */
     this.load.spritesheet('direita', '../assets/botoes/direita.png', {
       frameWidth: 84,
-      frameHeight: 84
+      frameHeight: 80
     })
     this.load.spritesheet('esquerda', '../assets/botoes/esquerda.png', {
       frameWidth: 84,
-      frameHeight: 84
+      frameHeight: 80
     })
     this.load.spritesheet('cima', '../assets/botoes/cima.png', {
       frameWidth: 84,
-      frameHeight: 84
+      frameHeight: 80
     })
     this.load.spritesheet('baixo', '../assets/botoes/baixo.png', {
       frameWidth: 84,
-      frameHeight: 84
+      frameHeight: 80
     })
 
     this.load.spritesheet('botaobola', '../assets/botoes/botaobola.png', {
       frameWidth: 84,
-      frameHeight: 84
+      frameHeight: 80
     })
 
     /* tela cheia */
