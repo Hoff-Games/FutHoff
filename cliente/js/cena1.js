@@ -26,7 +26,6 @@ export default class cena1 extends Phaser.Scene {
     this.trilha.loop = true
     this.trilha.play()
 
-
     this.add.image(150, 100, 'sala1')
       .setInteractive()
       .on('pointerdown', () => {
@@ -74,7 +73,6 @@ export default class cena1 extends Phaser.Scene {
       .on('pointerdown', () => {
         this.game.scene.stop('cena1')
         this.game.scene.start('cenapersonagem')
-        
       })
     this.add.image(650, 350, 'sala9')
       .setInteractive()
@@ -82,8 +80,6 @@ export default class cena1 extends Phaser.Scene {
         this.game.scene.stop('cena1')
         this.game.scene.start('cenaprologo')
       })
-
-    
   }
 
   update () {
