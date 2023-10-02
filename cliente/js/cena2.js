@@ -57,9 +57,12 @@ export default class cena2 extends Phaser.Scene {
       frameWidth: 73,
       frameHeight: 64
     })
+    this.load.spritesheet('skiler-escada', '../assets/personagens/skilerescada.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
 
     /* atacar */
-
     this.load.image('bola', '../assets/personagens/bola.png')
 
     /* Inimigos */
@@ -77,6 +80,9 @@ export default class cena2 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 128
     })
+
+    /* escada */
+    this.load.image('escada', '../assets/fases/escada.png')
 
     /* botoes */
     this.load.spritesheet('direita', '../assets/botoes/direita.png', {
@@ -305,11 +311,14 @@ export default class cena2 extends Phaser.Scene {
     this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
     this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
 
+    /* escada */
+    this.escada = this.physics.add.sprite(-400, -288, 'escada')
+    this.escada.body.setAllowGravity(false)
+
     /* personagem dentro da agua e lava */
     this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
 
     /* camadas */
-
     this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
     this.layerTrave2 = this.tilemapFases.createLayer('trave2', [this.tilesetTiletrave])
     this.layerTrave3 = this.tilemapFases.createLayer('trave3', [this.tilesetTiletrave])
@@ -321,7 +330,6 @@ export default class cena2 extends Phaser.Scene {
     this.layerTrave3.setCollisionByProperty({ colisao: true })
 
     /* colisao personagens */
-
     this.physics.add.collider(this.personagem, this.layerBlocos, this.noChao, null, this)
     this.physics.add.collider(this.personagem, this.layerTrave1)
     this.physics.add.collider(this.personagem, this.layerTrave2)
@@ -532,6 +540,16 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
 
+    this.anims.create({
+      key: 'skiler-escada',
+      frames: this.anims.generateFrameNumbers('skiler-escada', {
+        start: 0,
+        end: 3
+      }),
+      frameRate: 4,
+      repeat: -1
+    })
+
     /* animações dos inimigos */
     this.anims.create({
       key: 'ini1walk',
@@ -634,21 +652,30 @@ export default class cena2 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.cima.setFrame(1)
-        if (this.personagem.body.blocked.down) {
-          const anim = this.personagem.anims.getName()
-          const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
-          const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
-          if (esquerda.test(anim)) {
-            this.personagem.setVelocityY(-450)
-            this.personagem.anims.play('skilerpularesquerda', true)
-          } else if (direita.test(anim)) {
-            this.personagem.setVelocityY(-450)
-            this.personagem.anims.play('skilerpulardireita', true)
+        if (this.naEscada) {
+          this.personagem.setVelocityY(-100)
+          this.personagem.anims.play('skiler-escada')
+        } else {
+          if (this.personagem.body.blocked.down) {
+            const anim = this.personagem.anims.getName()
+            const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
+            const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
+            if (esquerda.test(anim)) {
+              this.personagem.setVelocityY(-450)
+              this.personagem.anims.play('skilerpularesquerda', true)
+            } else if (direita.test(anim)) {
+              this.personagem.setVelocityY(-450)
+              this.personagem.anims.play('skilerpulardireita', true)
+            }
           }
         }
       })
       .on('pointerup', () => {
         this.cima.setFrame(0)
+        if (this.naEscada) {
+          this.personagem.setVelocityY(0)
+          this.personagem.anims.pause()
+        }
       })
       .setScrollFactor(0, 0)
 
@@ -764,6 +791,18 @@ export default class cena2 extends Phaser.Scene {
   }
 
   update () {
+    if (
+      Phaser.Geom.Intersects.RectangleToRectangle(
+        this.personagem.getBounds(),
+        this.escada.getBounds()
+      )
+    ) {
+      this.naEscada = true
+      this.personagem.body.setAllowGravity(false)
+    } else {
+      this.naEscada = false
+      this.personagem.body.setAllowGravity(true)
+    }
   }
 
   coletarmoeda (personagem, moeda) {
@@ -795,7 +834,7 @@ export default class cena2 extends Phaser.Scene {
       }
     }
 
-    this.game.scene.getScene('cena1').trilha.stop()
+    //    this.game.scene.getScene('cena1').trilha.stop()
     /* this.fundo = this.sound.add('fundo')
     this.fundo.loop = true
     this.fundo.play() */
@@ -807,7 +846,7 @@ export default class cena2 extends Phaser.Scene {
       bola.setVelocityX(400);
       bola.setLifetime(2000);
     }
-  
+
     bolalAtingeInimigo(bola, ini1walk) {
       bola.destroy();
       ini1walk.destroy();
