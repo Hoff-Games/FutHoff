@@ -834,10 +834,10 @@ export default class cena2 extends Phaser.Scene {
       }
     }
 
-    //    this.game.scene.getScene('cena1').trilha.stop()
-    /* this.fundo = this.sound.add('fundo')
+    this.game.scene.getScene('cena1').trilha.stop()
+    this.fundo = this.sound.add('fundo')
     this.fundo.loop = true
-    this.fundo.play() */
+    this.fundo.play() 
   }
 
   /*
