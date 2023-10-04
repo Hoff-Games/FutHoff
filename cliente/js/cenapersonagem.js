@@ -15,7 +15,7 @@ export default class cenapersonagem extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.game.scene.stop('cenapersonagem')
-        
+
         this.game.estadoPersonagem = {
           spriteId: 0,
           spriteStopEsquerda: '/skilerstopesquerda.png',

@@ -13,6 +13,17 @@ class Game extends Phaser.Game {
   constructor () {
     super(config)
 
+    this.socket = io()
+    this.socket.on('connect', () => {
+      console.log('Conectado ao Servidor')
+      this.socket.emit('entrar-na-sala', 1)
+
+      this.socket.on('jogadores', (jogadores) => {
+        console.log(jogadores)
+      })
+    })
+
+
     this.estadoPersonagem = {}
 
     this.scene.add('cena0', cena0)
