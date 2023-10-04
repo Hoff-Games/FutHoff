@@ -5,7 +5,7 @@ export default class cena2 extends Phaser.Scene {
     this.gameover = false
   }
 
-  preload () {
+  preload() {
     /* mapas */
     this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
 
@@ -114,7 +114,7 @@ export default class cena2 extends Phaser.Scene {
     })
   }
 
-  create () {
+  create() {
     /* mapas */
     this.tilemapFases = this.make.tilemap({ key: 'fases' })
 
@@ -122,7 +122,7 @@ export default class cena2 extends Phaser.Scene {
     this.fundo = this.sound.add('musicadefundo')
     this.fundo.loop = true
     this.fundo.play()
-    
+
 
     /* tilesets */
     this.tilesetDec1 = this.tilemapFases.addTilesetImage('dec1')
@@ -314,8 +314,22 @@ export default class cena2 extends Phaser.Scene {
     this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
 
     /* escada */
-    this.escada = this.physics.add.sprite(-400, -288, 'escada')
-    this.escada.body.setAllowGravity(false)
+    this.escada = [
+      {
+        x: -400,
+        y: -288
+      },
+      {
+        x: 1314,
+        y: 350
+      }
+    ]
+
+    this.escada.forEach((escada) => {
+      escada.objeto = this.physics.add.sprite(escada.x, escada.y, 'escada')
+      escada.objeto.body.setAllowGravity(false)
+    })
+
 
     /* personagem dentro da agua e lava */
     this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
@@ -703,7 +717,8 @@ export default class cena2 extends Phaser.Scene {
           this.personagem.anims.play('skilerstopdireita', true)
         }
 
-        this.physics.add.collider(this.bola, this.layerBlocos, this.bolaAtingeChao, this.ini1walk, this.bolalAtingeInimigo, null, this)
+        this.physics.add.collider(this.bola, this.layerBlocos, this.bolaAtingeChao, null, this)
+        this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this)
       })
       .on('pointerup', () => {
         this.atacar.setFrame(0)
@@ -723,13 +738,6 @@ export default class cena2 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
-    /* colisao bola
-    this.physics.add.collider(this.bola, this.layerBlocos)
-
-    this.physics.add.collider(this.bola, this.layerTrave1)
-    this.physics.add.collider(this.bola, this.layerTrave2)
-    this.physics.add.collider(this.bola, this.layerTrave3)
-    */
 
     /* colisao agua */
     this.agua.forEach((agua) => {
@@ -792,32 +800,43 @@ export default class cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
   }
 
-  update () {
-    if (
-      Phaser.Geom.Intersects.RectangleToRectangle(
-        this.personagem.getBounds(),
-        this.escada.getBounds()
-      )
-    ) {
-      this.naEscada = true
-      this.personagem.body.setAllowGravity(false)
-    } else {
-      this.naEscada = false
-      this.personagem.body.setAllowGravity(true)
+  update() {
+    try {
+      this.escada.forEach((escada) => {
+        if (
+          Phaser.Geom.Intersects.RectangleToRectangle(
+            this.personagem.getBounds(),
+            escada.objeto.getBounds()
+          )
+        ) {
+          this.naEscada = true
+          this.personagem.body.setAllowGravity(false)
+        } else {
+          this.naEscada = false
+          this.personagem.body.setAllowGravity(true)
+        }
+
+      })
     }
+    catch (err) {
+      console.log(err)
+    }
+
+
+
   }
 
-  coletarmoeda (personagem, moeda) {
+  coletarmoeda(personagem, moeda) {
     moeda.disableBody(true, true)
     this.sommoeda.play()
   }
 
-  coletarestrela (personagem, estrela) {
+  coletarestrela(personagem, estrela) {
     estrela.disableBody(true, true)
     this.somestrela.play()
   }
 
-  noChao (personagem, bloco) {
+  noChao(personagem, bloco) {
     if (this.direita.frame.name === 1) {
       if (this.baixo.frame.name === 1) {
         this.personagem.anims.play('skilercarrodireita')
@@ -836,23 +855,23 @@ export default class cena2 extends Phaser.Scene {
       }
     }
 
-    
+
   }
 
-  
-    /*arremessarBola() {
-      const bola = bolas.create(skiler.x, skiler.y, 'bola');
-      bola.setVelocityX(400);
-      bola.setLifetime(2000);
-    }*/
 
-    bolaAtingeChao(bola, layerBlocos) {
-      bola.setVelocityX(500);
-    }
-/*
-    bolalAtingeInimigo(bola, ini1walk) {
-      bola.destroy();
-      ini1walk.destroy();
-    }
-    */
+  /*arremessarBola() {
+    const bola = bolas.create(skiler.x, skiler.y, 'bola');
+    bola.setVelocityX(400);
+    bola.setLifetime(2000);
+  }*/
+  /*
+      bolaAtingeChao(bola, layerBlocos) {
+        bola.setVelocityX(500);
+      }
+  
+      bolalAtingeInimigo(bola, ini1walk) {
+        bola.destroy();
+        ini1walk.destroy();
+      }
+      */
 }
