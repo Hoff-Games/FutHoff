@@ -10,7 +10,7 @@ export default class cena2 extends Phaser.Scene {
     this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
 
     /* musica de fundo */
-    this.load.audio('fundo', '../assets/audio/musicadefundo.mp3')
+    this.load.audio('musicadefundo', '../assets/audio/musicadefundo.mp3')
 
     /* cenas */
     this.load.image('fundopreto', '../assets/cenas/fundopreto.png')
@@ -118,9 +118,11 @@ export default class cena2 extends Phaser.Scene {
     /* mapas */
     this.tilemapFases = this.make.tilemap({ key: 'fases' })
 
-    this.fundo = this.sound.add('fundo')
+    this.game.scene.getScene('cena1').trilha.stop()
+    this.fundo = this.sound.add('musicadefundo')
     this.fundo.loop = true
     this.fundo.play()
+    
 
     /* tilesets */
     this.tilesetDec1 = this.tilemapFases.addTilesetImage('dec1')
@@ -701,7 +703,7 @@ export default class cena2 extends Phaser.Scene {
           this.personagem.anims.play('skilerstopdireita', true)
         }
 
-        this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this)
+        this.physics.add.collider(this.bola, this.layerBlocos, this.bolaAtingeChao, this.ini1walk, this.bolalAtingeInimigo, null, this)
       })
       .on('pointerup', () => {
         this.atacar.setFrame(0)
@@ -834,19 +836,20 @@ export default class cena2 extends Phaser.Scene {
       }
     }
 
-    this.game.scene.getScene('cena1').trilha.stop()
-    this.fundo = this.sound.add('fundo')
-    this.fundo.loop = true
-    this.fundo.play() 
+    
   }
 
-  /*
-    arremessarBola() {
+  
+    /*arremessarBola() {
       const bola = bolas.create(skiler.x, skiler.y, 'bola');
       bola.setVelocityX(400);
       bola.setLifetime(2000);
-    }
+    }*/
 
+    bolaAtingeChao(bola, layerBlocos) {
+      bola.setVelocityX(500);
+    }
+/*
     bolalAtingeInimigo(bola, ini1walk) {
       bola.destroy();
       ini1walk.destroy();

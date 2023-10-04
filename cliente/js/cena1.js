@@ -72,7 +72,7 @@ export default class cena1 extends Phaser.Scene {
       .on('pointerup', () => {
       this.sala1.setFrame(0)
       this.game.scene.stop('cena1')
-      this.game.scene.start('cena2')
+        this.game.scene.start('cenapersonagem')
       })
     
     this.sala2 = this.add.sprite(150, 225, 'sala2')
@@ -83,7 +83,7 @@ export default class cena1 extends Phaser.Scene {
       .on('pointerup', () => {
         this.sala2.setFrame(0)
         this.game.scene.stop('cena1')
-        this.game.scene.start('cena2')
+        this.game.scene.start('cenapersonagem')
       })
     this.sala3 = this.add.sprite(150, 350, 'sala3')
       .setInteractive()
@@ -93,7 +93,7 @@ export default class cena1 extends Phaser.Scene {
       .on('pointerup', () => {
         this.sala3.setFrame(0)
         this.game.scene.stop('cena1')
-        this.game.scene.start('cena2')
+        this.game.scene.start('cenapersonagem')
       })
     this.sala4 = this.add.sprite(400, 100, 'sala4')
       .setInteractive()
@@ -103,7 +103,7 @@ export default class cena1 extends Phaser.Scene {
       .on('pointerup', () => {
         this.sala4.setFrame(0)
         this.game.scene.stop('cena1')
-        this.game.scene.start('cena2')
+        this.game.scene.start('cenapersonagem')
       })
     this.sala5 = this.add.sprite(400, 225, 'sala5')
       .setInteractive()
@@ -113,7 +113,7 @@ export default class cena1 extends Phaser.Scene {
       .on('pointerup', () => {
         this.sala5.setFrame(0)
         this.game.scene.stop('cena1')
-        this.game.scene.start('cena2')
+        this.game.scene.start('cenapersonagem')
       })
     this.sala6 = this.add.sprite(400, 350, 'sala6')
       .setInteractive()
@@ -123,7 +123,7 @@ export default class cena1 extends Phaser.Scene {
       .on('pointerup', () => {
         this.sala6.setFrame(0)
         this.game.scene.stop('cena1')
-        this.game.scene.start('cena2')
+        this.game.scene.start('cenapersonagem')
       })
     this.sala7 = this.add.sprite(650, 100, 'sala7')
       .setInteractive()
@@ -133,7 +133,7 @@ export default class cena1 extends Phaser.Scene {
       .on('pointerup', () => {
         this.sala7.setFrame(0)
         this.game.scene.stop('cena1')
-        this.game.scene.start('cena2')
+        this.game.scene.start('cenapersonagem')
       })
     this.sala8 = this.add.sprite(650, 225, 'sala8')
       .setInteractive()
@@ -143,7 +143,7 @@ export default class cena1 extends Phaser.Scene {
       .on('pointerup', () => {
         this.sala8.setFrame(0)
         this.game.scene.stop('cena1')
-        this.game.scene.start('cena2')
+        this.game.scene.start('cenapersonagem')
       })
     this.sala9 = this.add.sprite(650, 350, 'sala9')
       .setInteractive()
@@ -153,7 +153,7 @@ export default class cena1 extends Phaser.Scene {
       .on('pointerup', () => {
         this.sala9.setFrame(0)
         this.game.scene.stop('cena1')
-        this.game.scene.start('cena2')
+        this.game.scene.start('cenaprologo')
       })
 
 
