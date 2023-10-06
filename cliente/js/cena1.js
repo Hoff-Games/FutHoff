@@ -109,10 +109,19 @@ export default class cena1 extends Phaser.Scene {
     this.salas.forEach((sala) => {
       sala.botao = this.add.sprite(sala.x, sala.y, 'sala' + sala.numero)
         .setInteractive()
-        .on('pointerup', () => {
+        .on('pointerdown', () => {
+          this.game.socket.on('jogadores', (jogadores) => {
+            this.game.jogadores = jogadores
+            console.log(jogadores)
+            this.game.scene.stop('cena1')
+            this.game.scene.start('cena2')
+          })
           this.game.socket.emit('entrar-na-sala', sala.numero)
-          this.game.scene.stop('cena1')
-          this.game.scene.start('cena2')
+          this.aguarde = this.add
+            .text(this.game.config.width / 2,
+              this.game.config.heigth / 2,
+              'Conectando...'
+            )
         })
     })
   }

@@ -62,6 +62,11 @@ export default class cena2 extends Phaser.Scene {
       frameHeight: 64
     })
 
+    this.load.spritesheet('steve', '../assets/personagens/steve.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    }) 
+
     /* atacar */
     this.load.image('bola', '../assets/personagens/bola.png')
 
@@ -309,30 +314,23 @@ export default class cena2 extends Phaser.Scene {
     this.layerArvores = this.tilemapFases.createLayer('arvores', [this.tilesetTilearv])
     this.layerArvores2 = this.tilemapFases.createLayer('arvores2', [this.tilesetTilearv])
     this.layerBlocos = this.tilemapFases.createLayer('blocos', [this.tilesetTilebloc])
+
+    /* escada */
+    this.escada = this.physics.add.sprite(2270, 0, 'escada')
+    this.escada.body.setAllowGravity(false)
+
     this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
     this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
     this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
 
-    /* escada */
-    this.escada = [
-      {
-        x: -400,
-        y: -288
-      },
-      {
-        x: 1314,
-        y: 350
-      }
-    ]
+    if (this.game.jogadores.primeiro === this.game.socket.id) {
+      this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
+    } else if (this.game.jogadores.segundo === this.game.socket.id) {
+      this.personagem = this.physics.add.sprite(-550, -400, 'steve')
+    }
 
-    this.escada.forEach((escada) => {
-      escada.objeto = this.physics.add.sprite(escada.x, escada.y, 'escada')
-      escada.objeto.body.setAllowGravity(false)
-    })
-
-
-    /* personagem dentro da agua e lava */
-    this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
+    /* personagem dentro da agua e lava 
+    this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')*/
 
     /* camadas */
     this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
@@ -801,29 +799,18 @@ export default class cena2 extends Phaser.Scene {
   }
 
   update() {
-    try {
-      this.escada.forEach((escada) => {
-        if (
-          Phaser.Geom.Intersects.RectangleToRectangle(
-            this.personagem.getBounds(),
-            escada.objeto.getBounds()
-          )
-        ) {
-          this.naEscada = true
-          this.personagem.body.setAllowGravity(false)
-        } else {
-          this.naEscada = false
-          this.personagem.body.setAllowGravity(true)
-        }
-
-      })
+    if (
+      Phaser.Geom.Intersects.RectangleToRectangle(
+        this.personagem.getBounds(),
+        this.escada.getBounds()
+      )
+    ) {
+      this.naEscada = true
+      this.personagem.body.setAllowGravity(false)
+    } else {
+      this.naEscada = false
+      this.personagem.body.setAllowGravity(true)
     }
-    catch (err) {
-      console.log(err)
-    }
-
-
-
   }
 
   coletarmoeda(personagem, moeda) {
