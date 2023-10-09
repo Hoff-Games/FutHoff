@@ -723,6 +723,10 @@ export default class cena2 extends Phaser.Scene {
           this.personagem.anims.play('skilerstopdireita', true)
         }
 
+        this.time.delayedCall(500, () => {
+          this.bola.destroy();
+        });
+
         this.physics.add.collider(this.bola, this.layerBlocos, this.bolaAtingeChao, null, this)
         this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this)
       })
@@ -818,7 +822,11 @@ export default class cena2 extends Phaser.Scene {
       this.naEscada = false
       this.personagem.body.setAllowGravity(true)
     }
+
+    
   }
+
+  
 
   coletarmoeda(personagem, moeda) {
     moeda.disableBody(true, true)
@@ -848,8 +856,6 @@ export default class cena2 extends Phaser.Scene {
         this.personagem.setVelocityX(-230)
       }
     }
-
-
   }
 
 
@@ -859,9 +865,6 @@ export default class cena2 extends Phaser.Scene {
     bola.setLifetime(2000);
   }*/
   /*
-      bolaAtingeChao(bola, layerBlocos) {
-        bola.setVelocityX(500);
-      }
 
       bolalAtingeInimigo(bola, ini1walk) {
         bola.destroy();
