@@ -3,7 +3,6 @@
 <div align="center">
 
 ![alemdasmontanha-logo](https://github.com/Hoff-Games/FutHoff_-_A_Busca_pelo_Trofeu_Dourado/assets/141068432/a0df9a4d-e489-4ce5-8aeb-4570885f6a95)
-)
 </div>
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Hoff-Games/FutHoff_-_A_Busca_pelo_Trofeu_Dourado)
