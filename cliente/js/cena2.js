@@ -65,7 +65,7 @@ export default class cena2 extends Phaser.Scene {
     this.load.spritesheet('steve', '../assets/personagens/steve.png', {
       frameWidth: 64,
       frameHeight: 64
-    }) 
+    })
 
     /* atacar */
     this.load.image('bola', '../assets/personagens/bola.png')
@@ -351,6 +351,25 @@ export default class cena2 extends Phaser.Scene {
 
     /* Inimigos */
     this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
+   /* this.time.addEvent({
+      delay: 500, // Intervalo de tempo entre os arremessos (em milissegundos)
+      callback: throwObject,
+      callbackScope: this,
+      loop: true // Isso fará com que o evento de arremesso seja repetido indefinidamente
+    });
+
+    throwObject(this.bola, this.ini1walk) {
+      const bola = this.physics.add.sprite(this.ini1walk.x, this.ini1walk.y, 'bola'); // Substitua 'projectile' pelo nome do seu sprite de projétil
+      this.bola.setVelocityX(-300); // Define a velocidade horizontal do projétil (pode ajustar conforme necessário)
+      // Adicione outras configurações ao objeto, como colisões e animações
+
+      // Configure uma função de remoção quando o projétil sair da tela ou atingir algo
+      this.physics.world.setBoundsCollision(true, true, true, true);
+      this.bola.setCollideWorldBounds(true);
+      this.bola.setBounce(1); // Borda de rebote total
+      this.bola.setGravityY(300); // Adicione gravidade para que o projétil caia após atingir algo ou sair da tela
+    }*/
+
     this.physics.add.collider(this.ini1walk, this.layerBlocos)
     this.physics.add.collider(this.ini1walk, this.layerTrave1)
     this.physics.add.collider(this.ini1walk, this.layerTrave2)
@@ -823,10 +842,9 @@ export default class cena2 extends Phaser.Scene {
       this.personagem.body.setAllowGravity(true)
     }
 
-    
+
   }
 
-  
 
   coletarmoeda(personagem, moeda) {
     moeda.disableBody(true, true)
