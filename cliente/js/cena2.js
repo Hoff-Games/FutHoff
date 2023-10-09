@@ -316,7 +316,7 @@ export default class cena2 extends Phaser.Scene {
     this.layerBlocos = this.tilemapFases.createLayer('blocos', [this.tilesetTilebloc])
 
     /* escada */
-    this.escada = this.physics.add.sprite(2270, 0, 'escada')
+    this.escada = this.physics.add.sprite(2270, 18, 'escada')
     this.escada.body.setAllowGravity(false)
 
     this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
@@ -633,21 +633,29 @@ export default class cena2 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.baixo.setFrame(1)
-
-        /* Verificar o lado do carrinho */
-        const anim = this.personagem.anims.getName()
-        const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
-        const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
-        if (esquerda.test(anim)) {
-          this.personagem.setVelocityX(-250)
-          this.personagem.anims.play('skilercarroesquerda', true)
-        } else if (direita.test(anim)) {
-          this.personagem.setVelocityX(250)
-          this.personagem.anims.play('skilercarrodireita', true)
+        if (this.naEscada) {
+          this.personagem.setVelocityY(100)
+          this.personagem.anims.play('skiler-escada')
+        } else {
+          /* Verificar o lado do carrinho */
+          const anim = this.personagem.anims.getName()
+          const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
+          const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
+          if (esquerda.test(anim)) {
+            this.personagem.setVelocityX(-250)
+            this.personagem.anims.play('skilercarroesquerda', true)
+          } else if (direita.test(anim)) {
+            this.personagem.setVelocityX(250)
+            this.personagem.anims.play('skilercarrodireita', true)
+          }
         }
       })
       .on('pointerup', () => {
         this.baixo.setFrame(0)
+        if (this.naEscada) {
+          this.personagem.setVelocityY(0)
+          this.personagem.anims.pause()
+        }
         const anim = this.personagem.anims.getName()
         const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
         const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
@@ -735,7 +743,6 @@ export default class cena2 extends Phaser.Scene {
         }
       })
       .setScrollFactor(0, 0)
-
 
     /* colisao agua */
     this.agua.forEach((agua) => {
@@ -855,7 +862,7 @@ export default class cena2 extends Phaser.Scene {
       bolaAtingeChao(bola, layerBlocos) {
         bola.setVelocityX(500);
       }
-  
+
       bolalAtingeInimigo(bola, ini1walk) {
         bola.destroy();
         ini1walk.destroy();
