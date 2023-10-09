@@ -7,24 +7,36 @@
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Hoff-Games/FutHoff_-_A_Busca_pelo_Trofeu_Dourado)
 </div>
 
+<div align="center">
+	
 ## Premissa do Jogo:
+</div>
 
 "FutHoff: A Busca pelo Troféu Dourado" é um emocionante jogo de plataforma que acontece no mundo contemporâneo, na cidade de TownSide, um lugar onde o futebol é uma paixão unificadora. No entanto, problemas assolam a cidade e ameaçam a celebração do Torneio Troféu Dourado, um evento futebolístico de prestígio. Os personagens principais, inspirados pela determinação e espírito esportivo, devem enfrentar os irmãos Sturmhond, vilões cruéis e ambiciosos, para garantir que o troféu dourado permaneça em mãos justas. Os jogadores se envolverão na emocionante jornada dos personagens principais para proteger a cidade de TonwSide, celebrar o espírito esportivo e mostrar que o futebol pode ser um agente de mudança positiva no mundo contemporâneo. "FutHoff: A Busca pelo Troféu Dourado" é uma aventura épica que combina ação, plataforma e influências do futebol, proporcionando uma experiência emocionante e empolgante para os fãs do esporte e jogos de plataforma. O jogo ocorrerá de forma online, onde uma dupla jogará como Skiler ou Steve para enfrentar os irmãos Sturmhond.
 
+<div align="center">
+	
 ## Referências do Jogo:
+</div>
 
 - Super Mario (jogo/filme);
 - Sonic (jogo/filme);
 - CupHead (saga);
 
+<div align="center">
+	
 ## Receita do jogo:
+</div>
 
 - Versão gratuita com Anúncios;
 - Versão premium sem Anúncios;
 - Parcerias e patrocínios com empresas (principalmente de jogos);
 - Compras dentro do jogo;
 
+<div align="center">
+	
 ## Enredo do Jogo:
+</div>
 
   Em um mundo contemporâneo onde o futebol é uma paixão unificadora, a cidade de TownSide é conhecida por sua vibrante cultura esportiva. A cada ano, o Torneio Troféu Dourado é realizado, onde as melhores equipes de futebol competem para levantar o cobiçado troféu dourado. No entanto, um mal está prestes a ameaçar a celebração anual do torneio.
   
@@ -42,7 +54,10 @@
   
   O destino de TownSide está nas mãos dos jogadores, e cabe a eles derrotar os vilões, proteger o Troféu Dourado e restaurar a paixão e a justiça na cidade do futebol. 
 
+<div align="center">
+	
 ## Sobre o Universo do Jogo:
+</div>
 
 - Cenários das fases: O jogador explorará cenarios vivos e vibrantes, os quais contam com desafios perigosos e inimigos determinados para impedir o jogador de conquistar o troféu.
 - Personagens Jogáveis: Os jogadores podem escolher entre 2 personagens principais, cada um com habilidades relacionadas ao futebol. Eles são jovens apaixonados pelo esporte que se unem para salvar o torneio e a cidade. 
@@ -54,7 +69,10 @@
 - Seleção: Os jogadores podem selecionar o personagem que deseja jogar (menino ou menina), tornando-se verdadeiros campeões do futebol.
 - Trilha Sonora Empolgante: A trilha sonora do jogo é cheia de músicas empolgantes e emocionantes que complementam a atmosfera do futebol e realçam a ação e a emoção do gameplay, além de fazer referência ao mundo do futebol.
 
+<div align="center">
+	
 ## Personagens:
+</div>
 
 A história dos personagens principais, Skiler e Steve, em "TonwSide", é uma jornada de amizade, superação e trabalho em equipe, à medida que eles enfrentam os desafios impostos pelos irmãos Sturmhond e buscam proteger o torneio de futebol e conquistar o cobiçado troféu dourado.
 
@@ -76,7 +94,10 @@ A história dos Irmãos Sturmhond é uma saga de ambição, rivalidade e determi
 
 - Morgan Sturmhond: Morgan, a irmã mais nova, cresceu em um ambiente competitivo e procurou encontrar seu lugar único dentro da família. Ela sempre observou a rivalidade entre seus irmãos mais velhos e escolheu um caminho diferente. Sua beleza e charme a tornaram mestra na arte da ilusão. Ela anseia por se destacar e ser valorizada por suas habilidades únicas. Por trás de sua aparência encantadora, Morgan esconde inseguranças e uma busca por identidade. Seu psicológico é uma mistura complexa de autoafirmação e constante busca por aceitação. 
 
+<div align="center">
+	
 ## Objetivos do Jogo:
+</div>
 
 - Conquistar o Troféu Dourado: O objetivo dos personagens principais é vencer o Torneio Troféu Dourado, uma competição de futebol de prestígio em TonwSide. Para isso, eles devem progredir através das fases, enfrentar desafios e chefes, como os irmãos Stumrhond.
 - Derrotar os Irmãos Sturmhond: Os personagens principais devem enfrentar os maléficos irmãos Sturmhond, que estão determinados a vencer o torneio de forma desonesta e dominar a cidade. Os jogadores devem superar os obstáculos criados pelos vilões e confrontá-los em batalhas emocionantes para restaurar a justiça no futebol e proteger o Troféu Dourado.
@@ -84,7 +105,11 @@ A história dos Irmãos Sturmhond é uma saga de ambição, rivalidade e determi
 - Enfrentar os “craques sombrios”: Ao longo do jogo, os personagens principais encontrarão como inimigos também os “craques sombrios”, capangas dos irmãos Sturmhond. Os jogadores devem derrotar esses inimigos usando suas habilidades inspiradas no futebol.
 - Alcançar a Pontuação Máxima: O jogo incentiva os jogadores a buscar a pontuação máxima em cada fase, coletando moedas, derrotando inimigos e concluindo desafios bônus. A competição pela melhor pontuação pode levar a recompensas adicionais.
 
+<div align="center">
+	
 ## Regras do Jogo (Plataforma):
+</div>
+
 - Os jogadores podem coletar itens espalhados pelos níveis, como moedas, power-ups e outros bônus. Esses itens podem conceder vidas extras ou fornecer outras vantagens temporárias.
 - Os jogadores podem controlar os personagens principais usando as teclas direcionais para se mover para a esquerda ou direita, bem como para pular e descer uma escada. Além disso, os personagens têm uma variedade de movimentos especiais relacionados ao futebol, como chutar a bola e derrubar inimigos com o famoso "carrinho", apertando a tecla especial na tela.
 - Os níveis são compostos por plataformas e obstáculos. Os jogadores devem pular entre as plataformas, evitar os obstáculos e usar suas habilidades.
@@ -96,7 +121,10 @@ A história dos Irmãos Sturmhond é uma saga de ambição, rivalidade e determi
 - Os jogadores não podem alternar entre os personagens principais durante o jogo, cada um deve escolher o seu personagem, ou Skiler ou Steve. 
 - O principal objetivo do jogo é derrotar os vilões, os irmãos Sturmhond, e seus aliados, os "Craques Sombrios", para proteger a cidade de TonwSide e ganhar o Troféu Dourado.
 
+<div align="center">
+	
 ## Fluxograma Das Cenas:
+</div>
 
 ```mermaid
 flowchart
@@ -117,7 +145,10 @@ flowchart
     U --> |Perdeu?| P(Cena Tente Novamente) --> U(Ultima fase)
     V --> A[Cena Abertura]
 ```
+<div align="center">
+	
  ## Desenvolvimento do Jogo: 
+</div>
 
 ### Cena abertura:
 - Os dois personagens jogando bola e inimigos atrás;
@@ -323,7 +354,10 @@ Mostre ao mundo do que você é capaz e torne-se uma lenda do futebol de platafo
 
 ### Volta para tela inicial;
 
+<div align="center">
+	
 ## Sobre as fases: 
+</div>
 
 ### Fase 1 - Selva Noturna 
 
