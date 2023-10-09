@@ -5,7 +5,7 @@ export default class cena2 extends Phaser.Scene {
     this.gameover = false
   }
 
-  preload() {
+  preload () {
     /* mapas */
     this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
 
@@ -324,9 +324,23 @@ export default class cena2 extends Phaser.Scene {
     this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
 
     if (this.game.jogadores.primeiro === this.game.socket.id) {
-      this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita')
+      this.localParadoDireita = 'skilerstopdireita'
+      this.localParadoEsquerda = 'skilerstopesquerda'
+      this.localAndando = 'skiler'
+      this.remoto = 'steve'
+      this.personagem = this.physics.add.sprite(-450, -400, this.localParado, 'skilerstopdireita')
+      this.personagemRemoto = this.add.sprite(-550, -400, this.remoto, 'steve')
     } else if (this.game.jogadores.segundo === this.game.socket.id) {
-      this.personagem = this.physics.add.sprite(-550, -400, 'steve')
+      this.localParadoDireita = 'stevestopdireita'
+      this.localParadoEsquerda = 'stevestopesquerda'
+      this.local = 'steve'
+      this.remotoParadoDireita = 'skilerstopdireita'
+      this.remotoParadoEsquerda = 'skilerstopesquerda'
+      this.remotoAndando = 'skiler'
+      this.personagemRemoto = this.add.sprite(-450, -400, this.remotoParado, 'skilerstopdireita')
+      this.personagem = this.physics.add.sprite(-550, -400, this.local, 'steve')
+    } else {
+      // jogador em sala cheia
     }
 
     /* personagem dentro da agua e lava 
@@ -351,24 +365,24 @@ export default class cena2 extends Phaser.Scene {
 
     /* Inimigos */
     this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
-   /* this.time.addEvent({
-      delay: 500, // Intervalo de tempo entre os arremessos (em milissegundos)
-      callback: throwObject,
-      callbackScope: this,
-      loop: true // Isso fará com que o evento de arremesso seja repetido indefinidamente
-    });
-
-    throwObject(this.bola, this.ini1walk) {
-      const bola = this.physics.add.sprite(this.ini1walk.x, this.ini1walk.y, 'bola'); // Substitua 'projectile' pelo nome do seu sprite de projétil
-      this.bola.setVelocityX(-300); // Define a velocidade horizontal do projétil (pode ajustar conforme necessário)
-      // Adicione outras configurações ao objeto, como colisões e animações
-
-      // Configure uma função de remoção quando o projétil sair da tela ou atingir algo
-      this.physics.world.setBoundsCollision(true, true, true, true);
-      this.bola.setCollideWorldBounds(true);
-      this.bola.setBounce(1); // Borda de rebote total
-      this.bola.setGravityY(300); // Adicione gravidade para que o projétil caia após atingir algo ou sair da tela
-    }*/
+    /* this.time.addEvent({
+       delay: 500, // Intervalo de tempo entre os arremessos (em milissegundos)
+       callback: throwObject,
+       callbackScope: this,
+       loop: true // Isso fará com que o evento de arremesso seja repetido indefinidamente
+     });
+ 
+     throwObject(this.bola, this.ini1walk) {
+       const bola = this.physics.add.sprite(this.ini1walk.x, this.ini1walk.y, 'bola'); // Substitua 'projectile' pelo nome do seu sprite de projétil
+       this.bola.setVelocityX(-300); // Define a velocidade horizontal do projétil (pode ajustar conforme necessário)
+       // Adicione outras configurações ao objeto, como colisões e animações
+ 
+       // Configure uma função de remoção quando o projétil sair da tela ou atingir algo
+       this.physics.world.setBoundsCollision(true, true, true, true);
+       this.bola.setCollideWorldBounds(true);
+       this.bola.setBounce(1); // Borda de rebote total
+       this.bola.setGravityY(300); // Adicione gravidade para que o projétil caia após atingir algo ou sair da tela
+     }*/
 
     this.physics.add.collider(this.ini1walk, this.layerBlocos)
     this.physics.add.collider(this.ini1walk, this.layerTrave1)
@@ -501,8 +515,8 @@ export default class cena2 extends Phaser.Scene {
 
     /* animacoes dos personagens */
     this.anims.create({
-      key: 'skiler-direita',
-      frames: this.anims.generateFrameNumbers('skiler', {
+      key: 'personagem-direita',
+      frames: this.anims.generateFrameNumbers(this.localAndando, {
         start: 4,
         end: 7
       }),
@@ -510,8 +524,8 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
     this.anims.create({
-      key: 'skiler-esquerda',
-      frames: this.anims.generateFrameNumbers('skiler', {
+      key: 'personagem-esquerda',
+      frames: this.anims.generateFrameNumbers(this.localAndando, {
         start: 0,
         end: 3
       }),
@@ -519,8 +533,8 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
     this.anims.create({
-      key: 'skilerstopdireita',
-      frames: this.anims.generateFrameNumbers('skilerstopdireita', {
+      key: 'personagem-stop-direita',
+      frames: this.anims.generateFrameNumbers(this.localParadoDireita, {
         start: 0,
         end: 5
       }),
@@ -599,7 +613,7 @@ export default class cena2 extends Phaser.Scene {
     this.ini1walk.anims.play('ini1walk', true)
 
     /* animacoes para botoes */
-    this.anims.create({
+    /*this.anims.create({
       key: 'skiler-direita',
       frames: this.anims.generateFrameNumbers('skiler', {
         start: 0,
@@ -617,20 +631,20 @@ export default class cena2 extends Phaser.Scene {
     })
     this.anims.create({
       key: 'skiler-esquerda'
-    })
+    })*/
 
     /* botoes */
     this.direita = this.add.sprite(125, 430, 'direita', 0)
       .setInteractive()
       .on('pointerdown', () => {
         this.direita.setFrame(1)
-        this.personagem.anims.play('skiler-direita', true)
+        this.personagem.anims.play('personagem-direita', true)
         this.personagem.setVelocityX(230)
       })
       .on('pointerup', () => {
         this.direita.setFrame(0)
         this.personagem.setVelocityX(0)
-        this.personagem.anims.play('skilerstopdireita', true)
+        this.personagem.anims.play('personagem-stop-direita', true)
       })
       .setScrollFactor(0, 0)
 
@@ -638,13 +652,13 @@ export default class cena2 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.esquerda.setFrame(1)
-        this.personagem.anims.play('skiler-esquerda', true)
+        this.personagem.anims.play('personagem-esquerda', true)
         this.personagem.setVelocityX(-230)
       })
       .on('pointerup', () => {
         this.esquerda.setFrame(0)
         this.personagem.setVelocityX(0)
-        this.personagem.anims.play('skilerstopesquerda', true)
+        this.personagem.anims.play('personagem-stop-esquerda', true)
       })
       .setScrollFactor(0, 0)
 
