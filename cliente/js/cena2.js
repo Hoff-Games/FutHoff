@@ -40,7 +40,8 @@ export default class cena2 extends Phaser.Scene {
     })
     this.load.audio('somestrela', '../assets/audio/somestrela.mp3')
 
-    /* personagens */
+    /* PERSONAGENS */
+    //skiler
     this.load.spritesheet('skiler', '../assets/personagens/skiler.png', {
       frameWidth: 64,
       frameHeight: 64
@@ -54,16 +55,32 @@ export default class cena2 extends Phaser.Scene {
       frameHeight: 64
     })
     this.load.spritesheet('skilercarro', '../assets/personagens/skilercarro.png', {
-      frameWidth: 73,
+      frameWidth: 47,
+      frameHeight: 73
+    })
+    this.load.spritesheet('skilerescada', '../assets/personagens/skilerescada.png', {
+      frameWidth: 54,
       frameHeight: 64
     })
-    this.load.spritesheet('skiler-escada', '../assets/personagens/skilerescada.png', {
-      frameWidth: 64,
-      frameHeight: 64
-    })
-
+    //steve
     this.load.spritesheet('steve', '../assets/personagens/steve.png', {
       frameWidth: 64,
+      frameHeight: 64
+    })
+    this.load.spritesheet('stevestopdireita', '../assets/personagens/stevestopdireita.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
+    this.load.spritesheet('stevestopesquerda', '../assets/personagens/stevestopesquerda.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
+    this.load.spritesheet('stevecarro', '../assets/personagens/stevecarro.png', {
+      frameWidth: 47,
+      frameHeight: 73
+    })
+    this.load.spritesheet('steveescada', '../assets/personagens/steveescada.png', {
+      frameWidth: 54,
       frameHeight: 64
     })
 
@@ -323,22 +340,39 @@ export default class cena2 extends Phaser.Scene {
     this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
     this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
 
+    // PERSONAGENS
     if (this.game.jogadores.primeiro === this.game.socket.id) {
+
       this.localParadoDireita = 'skilerstopdireita'
       this.localParadoEsquerda = 'skilerstopesquerda'
       this.localAndando = 'skiler'
-      this.remoto = 'steve'
-      this.personagem = this.physics.add.sprite(-450, -400, this.localParado, 'skilerstopdireita')
-      this.personagemRemoto = this.add.sprite(-550, -400, this.remoto, 'steve')
+      this.localEscada = 'skilerescada'
+      this.localCarro = 'skilercarro'
+
+      this.remotoParadoDireita = 'stevestopdireita'
+      this.remotoParadoEsquerda = 'stevestopesquerda'
+      this.remotoAndando = 'steve'
+      this.remotoEscada = 'steveescada'
+      this.remotoCarro = 'stevecarro'
+
+      this.personagem = this.physics.add.sprite(-450, -400, this.localParadoDireita, 'skilerstopdireita')
+      this.personagemRemoto = this.add.sprite(-550, -400, this.remotoParadoDireita, 'stevestopdireita')
     } else if (this.game.jogadores.segundo === this.game.socket.id) {
+
       this.localParadoDireita = 'stevestopdireita'
       this.localParadoEsquerda = 'stevestopesquerda'
-      this.local = 'steve'
+      this.localAndando = 'steve'
+      this.localEscada = 'steveescada'
+      this.localCarro = 'stevecarro'
+
       this.remotoParadoDireita = 'skilerstopdireita'
       this.remotoParadoEsquerda = 'skilerstopesquerda'
       this.remotoAndando = 'skiler'
-      this.personagemRemoto = this.add.sprite(-450, -400, this.remotoParado, 'skilerstopdireita')
-      this.personagem = this.physics.add.sprite(-550, -400, this.local, 'steve')
+      this.remotoEscada = 'skilerescada'
+      this.remotoCarro = 'skilercarro'
+
+      this.personagemRemoto = this.add.sprite(-450, -400, this.remotoParadoDireita, 'skilerstopdireita')
+      this.personagem = this.physics.add.sprite(-550, -400, this.localParadoDireita, 'stevestopdireita')
     } else {
       // jogador em sala cheia
     }
@@ -364,25 +398,24 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.layerTrave3)
 
     /* Inimigos */
-    this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
-    /* this.time.addEvent({
-       delay: 500, // Intervalo de tempo entre os arremessos (em milissegundos)
-       callback: throwObject,
-       callbackScope: this,
-       loop: true // Isso fará com que o evento de arremesso seja repetido indefinidamente
-     });
+    this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')/*
+    this.timedEvent = this.time.addEvent({
+      delay: 500,
+      callback: () => {
+        const bola = this.physics.add.sprite(this.ini1walk.x, this.ini1walk.y, 'bola'); // Substitua 'projectile' pelo nome do seu sprite de projétil
+        this.bola.setVelocityX(-300); // Define a velocidade horizontal do projétil (pode ajustar conforme necessário)
+        // Adicione outras configurações ao objeto, como colisões e animações
+
+        // Configure uma função de remoção quando o projétil sair da tela ou atingir algo
+        this.physics.world.setBoundsCollision(true, true, true, true);
+        this.bola.setCollideWorldBounds(true);
+        this.bola.setBounce(1); // Borda de rebote total
+        this.bola.setGravityY(300); // Adicione gravidade para que o projétil caia após atingir algo ou sair da tela
+      },
+      callbackScope: this,
+      loop: true
+    })*/
  
-     throwObject(this.bola, this.ini1walk) {
-       const bola = this.physics.add.sprite(this.ini1walk.x, this.ini1walk.y, 'bola'); // Substitua 'projectile' pelo nome do seu sprite de projétil
-       this.bola.setVelocityX(-300); // Define a velocidade horizontal do projétil (pode ajustar conforme necessário)
-       // Adicione outras configurações ao objeto, como colisões e animações
- 
-       // Configure uma função de remoção quando o projétil sair da tela ou atingir algo
-       this.physics.world.setBoundsCollision(true, true, true, true);
-       this.bola.setCollideWorldBounds(true);
-       this.bola.setBounce(1); // Borda de rebote total
-       this.bola.setGravityY(300); // Adicione gravidade para que o projétil caia após atingir algo ou sair da tela
-     }*/
 
     this.physics.add.collider(this.ini1walk, this.layerBlocos)
     this.physics.add.collider(this.ini1walk, this.layerTrave1)
@@ -542,8 +575,8 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
     this.anims.create({
-      key: 'skilerstopesquerda',
-      frames: this.anims.generateFrameNumbers('skilerstopesquerda', {
+      key: 'personagem-stop-esquerda',
+      frames: this.anims.generateFrameNumbers(this.localParadoEsquerda, {
         start: 0,
         end: 5
       }),
@@ -551,8 +584,8 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
     this.anims.create({
-      key: 'skilercarroesquerda',
-      frames: this.anims.generateFrameNumbers('skilercarro', {
+      key: 'personagem-carro-esquerda',
+      frames: this.anims.generateFrameNumbers(this.localCarro, {
         start: 0,
         end: 0
       }),
@@ -560,8 +593,8 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
     this.anims.create({
-      key: 'skilercarrodireita',
-      frames: this.anims.generateFrameNumbers('skilercarro', {
+      key: 'personagem-carro-direita',
+      frames: this.anims.generateFrameNumbers(this.localCarro, {
         start: 1,
         end: 1
       }),
@@ -569,8 +602,8 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
     this.anims.create({
-      key: 'skilerpularesquerda',
-      frames: this.anims.generateFrameNumbers('skiler', {
+      key: 'personagem-pular-esquerda',
+      frames: this.anims.generateFrameNumbers(this.localAndando, {
         start: 2,
         end: 2
       }),
@@ -578,8 +611,8 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
     this.anims.create({
-      key: 'skilerpulardireita',
-      frames: this.anims.generateFrameNumbers('skiler', {
+      key: 'personagem-pular-direita',
+      frames: this.anims.generateFrameNumbers(this.localAndando, {
         start: 5,
         end: 5
       }),
@@ -588,8 +621,8 @@ export default class cena2 extends Phaser.Scene {
     })
 
     this.anims.create({
-      key: 'skiler-escada',
-      frames: this.anims.generateFrameNumbers('skiler-escada', {
+      key: 'personagem-escada',
+      frames: this.anims.generateFrameNumbers(this.localEscada, {
         start: 0,
         end: 3
       }),
@@ -668,7 +701,7 @@ export default class cena2 extends Phaser.Scene {
         this.baixo.setFrame(1)
         if (this.naEscada) {
           this.personagem.setVelocityY(100)
-          this.personagem.anims.play('skiler-escada')
+          this.personagem.anims.play('personagem-escada')
         } else {
           /* Verificar o lado do carrinho */
           const anim = this.personagem.anims.getName()
@@ -676,10 +709,10 @@ export default class cena2 extends Phaser.Scene {
           const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
           if (esquerda.test(anim)) {
             this.personagem.setVelocityX(-250)
-            this.personagem.anims.play('skilercarroesquerda', true)
+            this.personagem.anims.play('personagem-carro-esquerda', true)
           } else if (direita.test(anim)) {
             this.personagem.setVelocityX(250)
-            this.personagem.anims.play('skilercarrodireita', true)
+            this.personagem.anims.play('personagem-carro-direita', true)
           }
         }
       })
@@ -694,10 +727,10 @@ export default class cena2 extends Phaser.Scene {
         const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
         if (esquerda.test(anim)) {
           this.personagem.setVelocityX(0)
-          this.personagem.anims.play('skilerstopesquerda', true)
+          this.personagem.anims.play('personagem-stop-esquerda', true)
         } else if (direita.test(anim)) {
           this.personagem.setVelocityX(0)
-          this.personagem.anims.play('skilerstopdireita', true)
+          this.personagem.anims.play('personagem-stop-direita', true)
         }
       })
       .setScrollFactor(0, 0)
@@ -709,7 +742,7 @@ export default class cena2 extends Phaser.Scene {
         this.cima.setFrame(1)
         if (this.naEscada) {
           this.personagem.setVelocityY(-100)
-          this.personagem.anims.play('skiler-escada')
+          this.personagem.anims.play('personagem-escada')
         } else {
           if (this.personagem.body.blocked.down) {
             const anim = this.personagem.anims.getName()
@@ -717,10 +750,10 @@ export default class cena2 extends Phaser.Scene {
             const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
             if (esquerda.test(anim)) {
               this.personagem.setVelocityY(-450)
-              this.personagem.anims.play('skilerpularesquerda', true)
+              this.personagem.anims.play('personagem-pular-esquerda', true)
             } else if (direita.test(anim)) {
               this.personagem.setVelocityY(-450)
-              this.personagem.anims.play('skilerpulardireita', true)
+              this.personagem.anims.play('personagem-pular-direita', true)
             }
           }
         }
@@ -748,12 +781,12 @@ export default class cena2 extends Phaser.Scene {
           this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y + 14, 'bola')
           this.bola.setVelocityX(-500)
           this.personagem.setVelocityY(0)
-          this.personagem.anims.play('skilerstopesquerda', true)
+          this.personagem.anims.play('personagem-stop-esquerda', true)
         } else if (direita.test(anim)) {
           this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y + 14, 'bola')
           this.bola.setVelocityX(500)
           this.personagem.setVelocityY(0)
-          this.personagem.anims.play('skilerstopdireita', true)
+          this.personagem.anims.play('personagem-stop-direita', true)
         }
 
         this.time.delayedCall(500, () => {
@@ -772,10 +805,10 @@ export default class cena2 extends Phaser.Scene {
           const direita = /.*direita.*/ // qualquer expressão com a palavra 'direita'
           if (esquerda.test(anim)) {
             this.personagem.setVelocityY(0)
-            this.personagem.anims.play('skilerstopesquerda', true)
+            this.personagem.anims.play('personagem-stop-esquerda', true)
           } else if (direita.test(anim)) {
             this.personagem.setVelocityY(0)
-            this.personagem.anims.play('skilerstopdireita', true)
+            this.personagem.anims.play('personagem-stop-direita', true)
           }
         }
       })
@@ -808,7 +841,7 @@ export default class cena2 extends Phaser.Scene {
                   .setInteractive()
                   .on('pointerdown', () => {
                     this.game.scene.stop('cena2')
-                    this.game.scene.start('cena2')
+                    this.game.scene.start('cena1')
                   })
               }
             },
@@ -873,18 +906,18 @@ export default class cena2 extends Phaser.Scene {
   noChao(personagem, bloco) {
     if (this.direita.frame.name === 1) {
       if (this.baixo.frame.name === 1) {
-        this.personagem.anims.play('skilercarrodireita')
+        this.personagem.anims.play('personagem-carro-direita')
         this.personagem.setVelocityX(250)
       } else {
-        this.personagem.anims.play('skiler-direita', true)
+        this.personagem.anims.play('personagem-direita', true)
         this.personagem.setVelocityX(230)
       }
     } else if (this.esquerda.frame.name === 1) {
       if (this.baixo.frame.name === 1) {
-        this.personagem.anims.play('skilercarroesquerda')
+        this.personagem.anims.play('personagem-carro-esquerda')
         this.personagem.setVelocityX(-250)
       } else {
-        this.personagem.anims.play('skiler-esquerda', true)
+        this.personagem.anims.play('personagem-esquerda', true)
         this.personagem.setVelocityX(-230)
       }
     }
