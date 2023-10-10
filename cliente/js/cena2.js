@@ -5,7 +5,7 @@ export default class cena2 extends Phaser.Scene {
     this.gameover = false
   }
 
-  preload () {
+  preload() {
     /* mapas */
     this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
 
@@ -415,7 +415,7 @@ export default class cena2 extends Phaser.Scene {
       callbackScope: this,
       loop: true
     })*/
- 
+
 
     this.physics.add.collider(this.ini1walk, this.layerBlocos)
     this.physics.add.collider(this.ini1walk, this.layerTrave1)
@@ -873,9 +873,28 @@ export default class cena2 extends Phaser.Scene {
         }
       })
       .setScrollFactor(0, 0)
+
+    this.game.socket.on('estado-notificar', ({ cena, x, y, anims, frame }) => {
+      this.personagemRemoto.x = x
+      this.personagemRemoto.y = y
+      this.personagemRemoto.setTexture(anims)
+      this.personagemRemoto.setFrame(frame)
+    })
   }
 
   update() {
+    try {
+      this.game.socket.emit('estado-publicar', this.game.sala, {
+        cena: 'cena2',
+        x: this.personagem.x,
+        y: this.personagem.y,
+        anims: this.personagem.anims.getName(),
+        frame: this.personagem.frame.name
+      })
+    } catch (error) {
+      console.error(error)
+    }
+
     if (
       Phaser.Geom.Intersects.RectangleToRectangle(
         this.personagem.getBounds(),

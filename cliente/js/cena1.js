@@ -57,8 +57,7 @@ export default class cena1 extends Phaser.Scene {
     this.trilha.loop = true
     this.trilha.play()
 
-
-    this.salas=[
+    this.salas = [
       {
         numero: 1,
         x: 150,
@@ -117,6 +116,7 @@ export default class cena1 extends Phaser.Scene {
             this.game.scene.start('cena2')
           })
           this.game.socket.emit('entrar-na-sala', sala.numero)
+          this.game.sala = sala.numero
           this.aguarde = this.add
             .text(this.game.config.width / 2,
               this.game.config.heigth / 2,
@@ -126,5 +126,5 @@ export default class cena1 extends Phaser.Scene {
     })
   }
 
-  update() {}
+  update() { }
 }
