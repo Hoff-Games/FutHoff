@@ -56,7 +56,7 @@ export default class cena1 extends Phaser.Scene {
     this.trilha = this.sound.add('trilha')
     this.trilha.loop = true
     this.trilha.play()
-
+    
     this.salas = [
       {
         numero: 1,
@@ -124,6 +124,7 @@ export default class cena1 extends Phaser.Scene {
             )
         })
     })
+    this.game.scene.getScene('cena2').fundo.stop()
   }
 
   update() { }
