@@ -821,7 +821,9 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(agua.objeto, this.layerTrave2)
       this.physics.add.collider(agua.objeto, this.layerTrave3)
       this.physics.add.overlap(this.personagem, agua.objeto, () => {
-        if (!this.gameover) {
+        this.game.scene.stop('cena2')
+        this.game.scene.start('gameover')
+        /*if (!this.gameover) {
           this.gameover = true
           this.agua.forEach((agua) => {
 
@@ -849,9 +851,9 @@ export default class cena2 extends Phaser.Scene {
             loop: true
           })
         }
+      })*/
       })
     })
-
     /* camera */
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
