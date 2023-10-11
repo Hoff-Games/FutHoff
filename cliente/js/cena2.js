@@ -876,12 +876,13 @@ export default class cena2 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
-    this.game.socket.on('estado-notificar', ({ cena, x, y, anims, frame }) => {
+    this.game.socket.on('estado-notificar', ({ cena, x, y, frame }) => {
       this.personagemRemoto.x = x
       this.personagemRemoto.y = y
-      this.personagemRemoto.setTexture(anims)
       this.personagemRemoto.setFrame(frame)
     })
+
+
   }
 
   update() {
@@ -917,11 +918,17 @@ export default class cena2 extends Phaser.Scene {
   coletarmoeda(personagem, moeda) {
     moeda.disableBody(true, true)
     this.sommoeda.play()
+    this.game.socket.emit("artefatos-publicar", this.game.sala, {
+      moedas: this.moedas.map((moeda) => moeda.objeto.visible),
+    });
   }
 
   coletarestrela(personagem, estrela) {
-    estrela.disableBody(true, true)
-    this.somestrela.play()
+    estrela.disableBody(true, true);
+    this.somestrela.play();
+    this.game.socket.emit("artefatos-publicar", this.game.sala, {
+      estrelas: this.estrelas.map((estrela) => estrela.objeto.visible),
+    });
   }
 
   noChao(personagem, bloco) {
