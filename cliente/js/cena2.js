@@ -45,7 +45,7 @@ export default class cena2 extends Phaser.Scene {
     this.load.spritesheet('skiler', '../assets/personagens/skiler.png', {
       frameWidth: 64,
       frameHeight: 64
-    })
+    })/*
     this.load.spritesheet('skilerstopdireita', '../assets/personagens/skilerstopdireita.png', {
       frameWidth: 64,
       frameHeight: 64
@@ -61,12 +61,12 @@ export default class cena2 extends Phaser.Scene {
     this.load.spritesheet('skilerescada', '../assets/personagens/skilerescada.png', {
       frameWidth: 54,
       frameHeight: 64
-    })
+    })*/
     //steve
     this.load.spritesheet('steve', '../assets/personagens/steve.png', {
       frameWidth: 64,
       frameHeight: 64
-    })
+    })/*
     this.load.spritesheet('stevestopdireita', '../assets/personagens/stevestopdireita.png', {
       frameWidth: 64,
       frameHeight: 64
@@ -82,7 +82,7 @@ export default class cena2 extends Phaser.Scene {
     this.load.spritesheet('steveescada', '../assets/personagens/steveescada.png', {
       frameWidth: 54,
       frameHeight: 64
-    })
+    })*/
 
     /* atacar */
     this.load.image('bola', '../assets/personagens/bola.png')
@@ -342,37 +342,15 @@ export default class cena2 extends Phaser.Scene {
 
     // PERSONAGENS
     if (this.game.jogadores.primeiro === this.game.socket.id) {
-
-      this.localParadoDireita = 'skilerstopdireita'
-      this.localParadoEsquerda = 'skilerstopesquerda'
-      this.localAndando = 'skiler'
-      this.localEscada = 'skilerescada'
-      this.localCarro = 'skilercarro'
-
-      this.remotoParadoDireita = 'stevestopdireita'
-      this.remotoParadoEsquerda = 'stevestopesquerda'
-      this.remotoAndando = 'steve'
-      this.remotoEscada = 'steveescada'
-      this.remotoCarro = 'stevecarro'
-
-      this.personagem = this.physics.add.sprite(-450, -400, this.localParadoDireita, 'skilerstopdireita')
-      this.personagemRemoto = this.add.sprite(-550, -400, this.remotoParadoDireita, 'stevestopdireita')
+      this.local = 'skiler'
+      this.remoto = 'steve'
+      this.personagem = this.physics.add.sprite(-450, -400, this.local, 'skiler', 38)
+      this.personagemRemoto = this.add.sprite(-550, -400, this.remoto, 'steve', 38)
     } else if (this.game.jogadores.segundo === this.game.socket.id) {
-
-      this.localParadoDireita = 'stevestopdireita'
-      this.localParadoEsquerda = 'stevestopesquerda'
-      this.localAndando = 'steve'
-      this.localEscada = 'steveescada'
-      this.localCarro = 'stevecarro'
-
-      this.remotoParadoDireita = 'skilerstopdireita'
-      this.remotoParadoEsquerda = 'skilerstopesquerda'
-      this.remotoAndando = 'skiler'
-      this.remotoEscada = 'skilerescada'
-      this.remotoCarro = 'skilercarro'
-
-      this.personagemRemoto = this.add.sprite(-450, -400, this.remotoParadoDireita, 'skilerstopdireita')
-      this.personagem = this.physics.add.sprite(-550, -400, this.localParadoDireita, 'stevestopdireita')
+      this.local = 'steve'
+      this.remoto = 'skiler'
+      this.personagemRemoto = this.add.sprite(-450, -400, this.remoto, 'skiler', 38)
+      this.personagem = this.physics.add.sprite(-550, -400, this.local, 'steve', 38)
     } else {
       // jogador em sala cheia
     }
@@ -549,7 +527,7 @@ export default class cena2 extends Phaser.Scene {
     /* animacoes dos personagens */
     this.anims.create({
       key: 'personagem-direita',
-      frames: this.anims.generateFrameNumbers(this.localAndando, {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 4,
         end: 7
       }),
@@ -558,7 +536,7 @@ export default class cena2 extends Phaser.Scene {
     })
     this.anims.create({
       key: 'personagem-esquerda',
-      frames: this.anims.generateFrameNumbers(this.localAndando, {
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 0,
         end: 3
       }),
@@ -567,34 +545,43 @@ export default class cena2 extends Phaser.Scene {
     })
     this.anims.create({
       key: 'personagem-stop-direita',
-      frames: this.anims.generateFrameNumbers(this.localParadoDireita, {
-        start: 0,
-        end: 5
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 34,
+        end: 39
       }),
       frameRate: 8,
       repeat: -1
     })
     this.anims.create({
       key: 'personagem-stop-esquerda',
-      frames: this.anims.generateFrameNumbers(this.localParadoEsquerda, {
-        start: 0,
-        end: 5
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 28,
+        end: 33
       }),
       frameRate: 8,
       repeat: -1
     })
     this.anims.create({
       key: 'personagem-carro-esquerda',
-      frames: this.anims.generateFrameNumbers(this.localCarro, {
-        start: 0,
-        end: 0
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 8,
+        end: 8
       }),
       frameRate: 1,
       repeat: -1
     })
     this.anims.create({
       key: 'personagem-carro-direita',
-      frames: this.anims.generateFrameNumbers(this.localCarro, {
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 9,
+        end: 9
+      }),
+      frameRate: 1,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'personagem-pular-esquerda',
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 1,
         end: 1
       }),
@@ -602,19 +589,10 @@ export default class cena2 extends Phaser.Scene {
       repeat: -1
     })
     this.anims.create({
-      key: 'personagem-pular-esquerda',
-      frames: this.anims.generateFrameNumbers(this.localAndando, {
-        start: 2,
-        end: 2
-      }),
-      frameRate: 1,
-      repeat: -1
-    })
-    this.anims.create({
       key: 'personagem-pular-direita',
-      frames: this.anims.generateFrameNumbers(this.localAndando, {
-        start: 5,
-        end: 5
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 4,
+        end: 4
       }),
       frameRate: 1,
       repeat: -1
@@ -622,9 +600,9 @@ export default class cena2 extends Phaser.Scene {
 
     this.anims.create({
       key: 'personagem-escada',
-      frames: this.anims.generateFrameNumbers(this.localEscada, {
-        start: 0,
-        end: 3
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 10,
+        end: 11
       }),
       frameRate: 4,
       repeat: -1
