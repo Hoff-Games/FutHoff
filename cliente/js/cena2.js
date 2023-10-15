@@ -749,6 +749,9 @@ export default class cena2 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.atacar.setFrame(1)
+        if (this.bola) {
+          this.bola.destroy()
+        }
 
         const anim = this.personagem.anims.getName()
         const esquerda = /.*esquerda.*/ // qualquer expressão com a palavra 'esquerda'
@@ -764,13 +767,18 @@ export default class cena2 extends Phaser.Scene {
           this.personagem.setVelocityY(0)
           this.personagem.anims.play('personagem-stop-direita', true)
         }
-
+        this.game.socket.emit('artefatos-publicar', this.game.sala, {
+          bola: {
+            x: this.bola.x,
+            y: this.bola.y,
+            velocityX: this.bola.body.velocity.x
+          }
+        })
+        this.physics.add.collider(this.bola, this.layerBlocos, this.bolaAtingeChao, null, this)
+        this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this)
         this.time.delayedCall(500, () => {
           this.bola.destroy()
         })
-
-        this.physics.add.collider(this.bola, this.layerBlocos, this.bolaAtingeChao, null, this)
-        this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this)
       })
       .on('pointerup', () => {
         this.atacar.setFrame(0)
@@ -857,6 +865,35 @@ export default class cena2 extends Phaser.Scene {
       this.personagemRemoto.y = y
       this.personagemRemoto.setFrame(frame)
     })
+
+    this.game.socket.on('artefatos-notificar', (artefatos) => {
+      if (artefatos.moedas) {
+        for (let i = 0; i < artefatos.moedas.length; i++) {
+          if (!artefatos.moedas[i]) {
+            this.moedas[i].objeto.disableBody(true, true)
+          }
+        }
+      }
+      if (artefatos.estrelas) {
+        for (let i = 0; i < artefatos.estrelas.length; i++) {
+          if (!artefatos.estrelas[i]) {
+            this.estrelas[i].objeto.disableBody(true, true)
+          }
+        }
+      }
+      if (artefatos.bola) {
+        if (this.bola) {
+          this.bola.destroy()
+        }
+        this.bola = this.physics.add.sprite(artefatos.bola.x, artefatos.bola.y + 14, 'bola')
+        this.bola.setVelocityX(artefatos.bola.velocityX)
+        this.physics.add.collider(this.bola, this.layerBlocos, this.bolaAtingeChao, null, this)
+        this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this)
+        this.time.delayedCall(500, () => {
+          this.bola.destroy()
+        })
+      }
+    })
   }
 
   update () {
@@ -865,7 +902,6 @@ export default class cena2 extends Phaser.Scene {
         cena: 'cena2',
         x: this.personagem.x,
         y: this.personagem.y,
-        anims: this.personagem.anims.getName(),
         frame: this.personagem.frame.name
       })
     } catch (error) {
@@ -927,11 +963,9 @@ export default class cena2 extends Phaser.Scene {
     bola.setVelocityX(400);
     bola.setLifetime(2000);
   } */
-  /*
 
-      bolalAtingeInimigo(bola, ini1walk) {
-        bola.destroy();
-        ini1walk.destroy();
-      }
-      */
+  bolalAtingeInimigo (bola, ini1walk) {
+    bola.destroy()
+    ini1walk.destroy()
+  }
 }
