@@ -4,12 +4,11 @@ export default class cena1 extends Phaser.Scene {
     super('cena1')
   }
 
-  preload() {
-
-    /*fundo*/
+  preload () {
+    /* fundo */
     this.load.image('cenasala', '../assets/cenas/cenasala.png')
 
-    /*botoes de salas*/
+    /* botoes de salas */
     this.load.spritesheet('sala1', '../assets/botoes/sala1.png', {
       frameWidth: 120,
       frameHeight: 60
@@ -50,13 +49,13 @@ export default class cena1 extends Phaser.Scene {
     this.load.audio('trilha', '../assets/audio/musicasalas.mp3')
   }
 
-  create() {
+  create () {
     this.add.image(400, 225, 'cenasala')
 
     this.trilha = this.sound.add('trilha')
     this.trilha.loop = true
     this.trilha.play()
-    
+
     this.salas = [
       {
         numero: 1,
@@ -127,5 +126,5 @@ export default class cena1 extends Phaser.Scene {
     this.game.scene.getScene('cena2').fundo.stop()
   }
 
-  update() { }
+  update () { }
 }

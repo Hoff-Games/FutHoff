@@ -3,36 +3,33 @@ export default class cena4 extends Phaser.Scene {
     super('gameover')
   }
 
-  preload() {
+  preload () {
     this.load.image('fundopreto', '../assets/cenas/fundopreto.png')
   }
 
-  create() {
+  create () {
     this.bg = this.add.image(400, 225, 'fundopreto')
 
     this.messageRestart = this.add
-      .text(175, 250, "[Voltar ao Menu]", {
-        fontFamily: "monospace",
-        font: "24px Courier",
-        fill: "#cccccc",
+      .text(175, 250, '[Voltar ao Menu]', {
+        fontFamily: 'monospace',
+        font: '24px Courier',
+        fill: '#cccccc'
       })
-      .setInteractive();
+      .setInteractive()
 
     this.messageRestart.on(
-      "pointerdown",
+      'pointerdown',
       function () {
-        this.messageRestart.destroy();
-        this.bg.destroy();
-        this.game.scene.start("cena1");
+        this.messageRestart.destroy()
+        this.bg.destroy()
+        this.game.scene.start('cena1')
       },
       this
-    );
-
-    
+    )
   }
 
-
-  update() {
+  update () {
 
   }
 }
