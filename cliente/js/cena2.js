@@ -45,44 +45,12 @@ export default class cena2 extends Phaser.Scene {
     this.load.spritesheet('skiler', '../assets/personagens/skiler.png', {
       frameWidth: 64,
       frameHeight: 64
-    })/*
-    this.load.spritesheet('skilerstopdireita', '../assets/personagens/skilerstopdireita.png', {
-      frameWidth: 64,
-      frameHeight: 64
     })
-    this.load.spritesheet('skilerstopesquerda', '../assets/personagens/skilerstopesquerda.png', {
-      frameWidth: 64,
-      frameHeight: 64
-    })
-    this.load.spritesheet('skilercarro', '../assets/personagens/skilercarro.png', {
-      frameWidth: 47,
-      frameHeight: 73
-    })
-    this.load.spritesheet('skilerescada', '../assets/personagens/skilerescada.png', {
-      frameWidth: 54,
-      frameHeight: 64
-    }) */
     // steve
     this.load.spritesheet('steve', '../assets/personagens/steve.png', {
       frameWidth: 64,
       frameHeight: 64
-    })/*
-    this.load.spritesheet('stevestopdireita', '../assets/personagens/stevestopdireita.png', {
-      frameWidth: 64,
-      frameHeight: 64
     })
-    this.load.spritesheet('stevestopesquerda', '../assets/personagens/stevestopesquerda.png', {
-      frameWidth: 64,
-      frameHeight: 64
-    })
-    this.load.spritesheet('stevecarro', '../assets/personagens/stevecarro.png', {
-      frameWidth: 47,
-      frameHeight: 73
-    })
-    this.load.spritesheet('steveescada', '../assets/personagens/steveescada.png', {
-      frameWidth: 54,
-      frameHeight: 64
-    }) */
 
     /* atacar */
     this.load.image('bola', '../assets/personagens/bola.png')
@@ -711,6 +679,8 @@ export default class cena2 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
+    // this.physics.add.overlap(this.personagem, this.escada, this.diminuirPersonagem, null, this)
+
     /* PULARRRRRRRRRRRRRRRRR -------- UIIIIIIIIIIIII */
     this.cima = this.add.sprite(800, 300, 'cima', 0)
       .setInteractive()
@@ -916,9 +886,14 @@ export default class cena2 extends Phaser.Scene {
     ) {
       this.naEscada = true
       this.personagem.body.setAllowGravity(false)
+      this.personagem.setSize(32, 64)
     } else {
       this.naEscada = false
       this.personagem.body.setAllowGravity(true)
+      this.personagem.setSize(64, 64)
+    }
+    if (this.baixo.frame.name === 1 && this.naEscada === false) {
+      this.personagem.setSize(64, 32).setOffset(0, 32)
     }
   }
 
