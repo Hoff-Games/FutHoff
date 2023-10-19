@@ -12,6 +12,10 @@ export default class cena2 extends Phaser.Scene {
     /* musica de fundo */
     this.load.audio('musicadefundo', '../assets/audio/musicadefundo.mp3')
 
+    //score
+    this.load.image('scoremoeda', '../assets/fases/scoremoeda.png')
+    this.load.image('scoreestrela', '../assets/fases/scoreestrela.png')
+
     /* cenas */
     this.load.image('fundopreto', '../assets/cenas/fundopreto.png')
     this.load.image('cenaperdeu', '../assets/cenas/cenaperdeu.png')
@@ -450,6 +454,19 @@ export default class cena2 extends Phaser.Scene {
     })
     this.sommoeda = this.sound.add('sommoeda')
 
+    // Score Moedas//
+    this.moedinhas = this.add.image(-65, 15, 'scoremoeda')
+    this.moedinhas.setScrollFactor(0)
+
+    this.texto = this.add.text(-40, 0, `x ${this.game.scoreMoeda.score}`, {
+      fontFamily: 'Silkscreen',
+      fontSize: '25px',
+      stroke: '#000000',
+      strokeThickness: 4,
+      fill: '#ffffff'
+    })
+    this.texto.setScrollFactor(0)
+
     /* animação estrela */
     this.anims.create({
       key: 'estrela-piscando',
@@ -487,6 +504,19 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.overlap(this.personagem, estrela.objeto, this.coletarestrela, null, this)
     })
     this.somestrela = this.sound.add('somestrela')
+
+    // Score Estrela//
+    this.estrelinhas = this.add.image(-65, 50, 'scoreestrela')
+    this.estrelinhas.setScrollFactor(0)
+
+    this.texto = this.add.text(-40, 37, `x ${this.game.scoreEstrela.score}`, {
+      fontFamily: 'Silkscreen',
+      fontSize: '25px',
+      stroke: '#000000',
+      strokeThickness: 4,
+      fill: '#ffffff'
+    })
+    this.texto.setScrollFactor(0)
 
     /* animacoes */
 
@@ -899,6 +929,8 @@ export default class cena2 extends Phaser.Scene {
 
   coletarmoeda (personagem, moeda) {
     moeda.disableBody(true, true)
+    this.game.scoreMoeda.score++
+    this.texto.setText(`x ${this.game.scoreMoeda.score}`)
     this.sommoeda.play()
     this.game.socket.emit('artefatos-publicar', this.game.sala, {
       moedas: this.moedas.map((moeda) => moeda.objeto.visible)
@@ -907,6 +939,8 @@ export default class cena2 extends Phaser.Scene {
 
   coletarestrela (personagem, estrela) {
     estrela.disableBody(true, true)
+    this.game.scoreEstrela.score++
+    this.texto.setText(`x ${this.game.scoreEstrela.score}`)
     this.somestrela.play()
     this.game.socket.emit('artefatos-publicar', this.game.sala, {
       estrelas: this.estrelas.map((estrela) => estrela.objeto.visible)

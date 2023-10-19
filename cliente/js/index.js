@@ -25,6 +25,12 @@ class Game extends Phaser.Game {
     })
 
     this.estadoPersonagem = {}
+    this.scoreMoeda = {
+      score: 0
+    }
+    this.scoreEstrela = {
+      score: 0
+    }
 
     this.scene.add('cena0', cena0)
     this.scene.add('cena1', cena1)
