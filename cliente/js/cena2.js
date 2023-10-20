@@ -2,7 +2,7 @@ export default class cena2 extends Phaser.Scene {
   constructor () {
     super('cena2')
 
-    this.gameover = false
+    this.gameover = true
   }
 
   preload () {
@@ -326,9 +326,6 @@ export default class cena2 extends Phaser.Scene {
       // jogador em sala cheia
     }
 
-    /* personagem dentro da agua e lava
-    this.personagem = this.physics.add.sprite(-450, -400, 'skilerstopdireita') */
-
     /* camadas */
     this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
     this.layerTrave2 = this.tilemapFases.createLayer('trave2', [this.tilesetTiletrave])
@@ -619,26 +616,6 @@ export default class cena2 extends Phaser.Scene {
     // Animações automáticas //
     this.ini1walk.anims.play('ini1walk', true)
 
-    /* animacoes para botoes */
-    /* this.anims.create({
-      key: 'skiler-direita',
-      frames: this.anims.generateFrameNumbers('skiler', {
-        start: 0,
-        end: 0
-      }),
-      frameRate: 1
-    })
-    this.anims.create({
-      key: 'skiler-esquerda',
-      frames: this.anims.generateFrameNumbers('skiler', {
-        start: 0,
-        end: 0
-      }),
-      frameRate: 1
-    })
-    this.anims.create({
-      key: 'skiler-esquerda'
-    }) */
 
     /* botoes */
     this.direita = this.add.sprite(125, 430, 'direita', 0)
@@ -804,9 +781,10 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(agua.objeto, this.layerTrave1)
       this.physics.add.collider(agua.objeto, this.layerTrave2)
       this.physics.add.collider(agua.objeto, this.layerTrave3)
-      this.physics.add.overlap(this.personagem, agua.objeto, () => {
-        this.game.scene.stop('cena2')
-        this.game.scene.start('gameover')
+      this.physics.add.collider(this.personagem, agua.objeto, this.gameover, null, this)
+      //this.physics.add.overlap(this.personagem, agua.objeto, () => {
+       // this.game.scene.stop('cena2')
+        //this.game.scene.start('gameover')
         /* if (!this.gameover) {
           this.gameover = true
           this.agua.forEach((agua) => {
@@ -836,7 +814,7 @@ export default class cena2 extends Phaser.Scene {
           })
         }
       }) */
-      })
+     // })
     })
     /* camera */
     this.personagem.setCollideWorldBounds(true)
@@ -976,5 +954,9 @@ export default class cena2 extends Phaser.Scene {
   bolalAtingeInimigo (bola, ini1walk) {
     bola.destroy()
     ini1walk.destroy()
+  }
+  gameover () {
+    this.game.scene.stop('cena2')
+    this.game.scene.start('gameover')
   }
 }

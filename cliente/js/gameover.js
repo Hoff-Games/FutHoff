@@ -5,28 +5,47 @@ export default class cena4 extends Phaser.Scene {
 
   preload () {
     this.load.image('fundopreto', '../assets/cenas/fundopreto.png')
+    this.load.spritesheet('repetir', '../assets/botoes/repetir.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
+    this.load.spritesheet('menu', '../assets/botoes/menu.png', {
+      frameWidth: 128,
+      frameHeight: 64
+    })
   }
 
   create () {
-    this.bg = this.add.image(400, 225, 'fundopreto')
+    const centrox = this.cameras.main.worldView.x + this.cameras.main.width / 2
+    const centroy = this.cameras.main.worldView.y + this.cameras.main.height / 2
 
-    this.messageRestart = this.add
-      .text(175, 250, '[Voltar ao Menu]', {
-        fontFamily: 'monospace',
-        font: '24px Courier',
-        fill: '#cccccc'
-      })
+    this.imagem = this.add
+    this.add.image(400, 225, 'fundopreto')
+
+    this.repetir = this.add.sprite(centrox - 70, centroy + 100, 'repetir', 0)
       .setInteractive()
-
-    this.messageRestart.on(
-      'pointerdown',
-      function () {
-        this.messageRestart.destroy()
-        this.bg.destroy()
+      .on('pointerover', () => {
+        this.repetir.setFrame(1)
+      })
+      .on('pointerout', () => {
+        this.repetir.setFrame(0)
+      })
+      .on('pointerdown', () => {
+        this.game.scene.stop('gameover')
         this.game.scene.start('cena1')
-      },
-      this
-    )
+      })
+    this.menu = this.add.sprite(centrox + 70, centroy + 100, 'menu', 0)
+      .setInteractive()
+      .on('pointerover', () => {
+        this.menu.setFrame(1)
+      })
+      .on('pointerout', () => {
+        this.menu.setFrame(0)
+      })
+      .on('pointerdown', () => {
+        this.game.scene.stop('gameover')
+        this.game.scene.start('cena0')
+      })
   }
 
   update () {
