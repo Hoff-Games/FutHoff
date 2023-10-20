@@ -67,12 +67,12 @@ export default class cena2 extends Phaser.Scene {
 
     /* agua e lava */
     this.load.spritesheet('agua', '../assets/fases/agua.png', {
-      frameWidth: 64,
-      frameHeight: 128
+      frameWidth: 128,
+      frameHeight: 192
     })
     this.load.spritesheet('lava', '../assets/fases/lava.png', {
       frameWidth: 64,
-      frameHeight: 128
+      frameHeight: 192
     })
 
     /* escada */
@@ -309,7 +309,7 @@ export default class cena2 extends Phaser.Scene {
 
     this.layerDecbloc = this.tilemapFases.createLayer('decbloc', [this.tilesetDec1, this.tilesetDec2])
     this.layerDecarv = this.tilemapFases.createLayer('decarv', [this.tilesetDec1, this.tilesetDec2])
-    this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1])
+    this.layerOutros = this.tilemapFases.createLayer('outros', [this.tilesetTilebloc, this.tilesetDec1, this.tilesetDec2])
 
     // PERSONAGENS
     if (this.game.jogadores.primeiro === this.game.socket.id) {
