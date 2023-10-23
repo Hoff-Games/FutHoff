@@ -52,6 +52,12 @@ export default class cena1 extends Phaser.Scene {
   create () {
     this.add.image(400, 225, 'cenasala')
 
+    this.mensagem = this.add.text(100, 50, 'Escolha uma sala para entrar:', {
+      fontFamily: 'monospace',
+      font: '32px Courier',
+      fill: '#cccccc'
+    })
+
     this.trilha = this.sound.add('trilha')
     this.trilha.loop = true
     this.trilha.play()
@@ -108,20 +114,30 @@ export default class cena1 extends Phaser.Scene {
       sala.botao = this.add.sprite(sala.x, sala.y, 'sala' + sala.numero)
         .setInteractive()
         .on('pointerdown', () => {
-          this.game.socket.on('jogadores', (jogadores) => {
-            this.game.jogadores = jogadores
-            console.log(jogadores)
-            this.game.scene.stop('cena1')
-            this.game.scene.start('cena2')
+          this.salas.forEach((item) => {
+            item.botao.destroy()
           })
-          this.game.socket.emit('entrar-na-sala', sala.numero)
           this.game.sala = sala.numero
-          this.aguarde = this.add
-            .text(this.game.config.width / 2,
-              this.game.config.heigth / 2,
-              'Conectando...'
-            )
+          this.game.socket.emit('entrar-na-sala', this.game.sala)
         })
+
+      this.game.socket.on('jogadores', (jogadores) => {
+        console.log(jogadores)
+        if (jogadores.segundo) {
+          this.mensagem.setText('Conectando...')
+          this.game.jogadores = jogadores
+          this.game.scene.stop('cena1')
+          this.game.scene.start('cena2')
+        } else if (jogadores.primeiro) {
+          this.mensagem.setText('Aguardando segundo jogador...')
+          navigator.mediaDevices
+            .getUserMedia({ video: false, audio: true })
+            .then((stream) => {
+              this.game.midias = stream
+            })
+            .catch((error) => console.error(error))
+        }
+      })
     })
     this.game.scene.getScene('cena2').fundo.stop()
   }
