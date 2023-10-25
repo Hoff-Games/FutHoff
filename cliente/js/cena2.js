@@ -322,9 +322,55 @@ export default class cena2 extends Phaser.Scene {
       this.remoto = 'skiler'
       this.personagemRemoto = this.add.sprite(-450, -400, this.remoto, 'skiler', 38)
       this.personagem = this.physics.add.sprite(-550, -400, this.local, 'steve', 38)
-    } else {
-      // jogador em sala cheia
+
+      navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+        .then((stream) => {
+          this.game.localConnection = new RTCPeerConnection(this.game.ice_servers)
+
+          this.game.localConnection.onicecandidate = ({ candidate }) =>
+            candidate && this.game.socket.emit('candidate', this.game.sala, candidate)
+
+          this.game.localConnection.ontrack = ({ streams: [stream] }) =>
+            this.game.audio.srcObject = stream
+
+          stream.getTracks()
+            .forEach((track) => this.game.localConnection.addTrack(track, stream))
+
+          this.game.localConnection.createOffer()
+            .then((offer) => this.game.localConnection.setLocalDescription(offer))
+            .then(() => this.game.socket.emit('offer', this.game.sala, this.game.localConnection.localDescription))
+
+          this.game.midias = stream
+        })
+        .catch((error) => console.error(error))
     }
+
+    this.game.socket.on('offer', (description) => {
+      this.game.remoteConnection = new RTCPeerConnection(this.game.ice_servers)
+
+      this.game.remoteConnection.onicecandidate = ({ candidate }) =>
+        candidate && this.game.socket.emit('candidate', this.game.sala, candidate)
+
+      this.game.remoteConnection.ontrack = ({ streams: [midia] }) =>
+        this.game.audio.srcObject = midia
+
+      this.game.midias.getTracks()
+        .forEach((track) => this.game.remoteConnection.addTrack(track, this.game.midias))
+
+      this.game.remoteConnection.setRemoteDescription(description)
+        .then(() => this.game.remoteConnection.createAnswer())
+        .then((answer) => this.game.remoteConnection.setLocalDescription(answer))
+        .then(() => this.game.socket.emit('answer', this.game.sala, this.game.remoteConnection.localDescription))
+    })
+
+    this.game.socket.on('answer', (description) =>
+      this.game.localConnection.setRemoteDescription(description)
+    )
+
+    this.game.socket.on('candidate', (candidate) => {
+      const conn = this.game.localConnection || this.game.remoteConnection
+      conn.addIceCandidate(new RTCIceCandidate(candidate))
+    })
 
     /* camadas */
     this.layerTrave1 = this.tilemapFases.createLayer('trave1', [this.tilesetTiletrave])
@@ -783,38 +829,38 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(agua.objeto, this.layerTrave3)
       this.physics.add.collider(this.personagem, agua.objeto, this.gameover, null, this)
       //this.physics.add.overlap(this.personagem, agua.objeto, () => {
-       // this.game.scene.stop('cena2')
-        //this.game.scene.start('gameover')
-        /* if (!this.gameover) {
-          this.gameover = true
-          this.agua.forEach((agua) => {
+      // this.game.scene.stop('cena2')
+      //this.game.scene.start('gameover')
+      /* if (!this.gameover) {
+        this.gameover = true
+        this.agua.forEach((agua) => {
 
-          })
-          this.timer = 1
-          this.timedEvent = this.time.addEvent({
-            delay: 500,
-            callback: () => {
-              this.timer -= 1
-              if (this.timer <= 0) {
-                this.esquerda.destroy()
-                this.direita.destroy()
-                this.cima.destroy()
-                this.baixo.destroy()
-                this.add.image(this.personagem.x, this.personagem.y - 100, 'fundopreto')
-                this.add.image(this.personagem.x, this.personagem.y - 100, 'cenaperdeu')
-                  .setInteractive()
-                  .on('pointerdown', () => {
-                    this.game.scene.stop('cena2')
-                    this.game.scene.start('cena1')
-                  })
-              }
-            },
-            callbackScope: this,
-            loop: true
-          })
-        }
-      }) */
-     // })
+        })
+        this.timer = 1
+        this.timedEvent = this.time.addEvent({
+          delay: 500,
+          callback: () => {
+            this.timer -= 1
+            if (this.timer <= 0) {
+              this.esquerda.destroy()
+              this.direita.destroy()
+              this.cima.destroy()
+              this.baixo.destroy()
+              this.add.image(this.personagem.x, this.personagem.y - 100, 'fundopreto')
+              this.add.image(this.personagem.x, this.personagem.y - 100, 'cenaperdeu')
+                .setInteractive()
+                .on('pointerdown', () => {
+                  this.game.scene.stop('cena2')
+                  this.game.scene.start('cena1')
+                })
+            }
+          },
+          callbackScope: this,
+          loop: true
+        })
+      }
+    }) */
+      // })
     })
     /* camera */
     this.personagem.setCollideWorldBounds(true)
