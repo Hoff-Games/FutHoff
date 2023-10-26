@@ -13,7 +13,7 @@ import encerramento from './encerramento.js'
 class Game extends Phaser.Game {
   constructor () {
     super(config)
-    
+
     let iceServers
     if (window.location.host === 'feira-de-jogos.sj.ifsc.edu.br') {
       iceServers = [
@@ -39,11 +39,6 @@ class Game extends Phaser.Game {
     this.socket = io()
     this.socket.on('connect', () => {
       console.log('Conectado ao Servidor')
-      this.socket.emit('entrar-na-sala', 1)
-
-      this.socket.on('jogadores', (jogadores) => {
-        console.log(jogadores)
-      })
     })
 
     this.estadoPersonagem = {}
