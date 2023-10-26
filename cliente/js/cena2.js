@@ -12,7 +12,7 @@ export default class cena2 extends Phaser.Scene {
     /* musica de fundo */
     this.load.audio('musicadefundo', '../assets/audio/musicadefundo.mp3')
 
-    //score
+    // score
     this.load.image('scoremoeda', '../assets/fases/scoremoeda.png')
     this.load.image('scoreestrela', '../assets/fases/scoreestrela.png')
 
@@ -662,7 +662,6 @@ export default class cena2 extends Phaser.Scene {
     // Animações automáticas //
     this.ini1walk.anims.play('ini1walk', true)
 
-
     /* botoes */
     this.direita = this.add.sprite(125, 430, 'direita', 0)
       .setInteractive()
@@ -827,10 +826,10 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(agua.objeto, this.layerTrave1)
       this.physics.add.collider(agua.objeto, this.layerTrave2)
       this.physics.add.collider(agua.objeto, this.layerTrave3)
-      this.physics.add.collider(this.personagem, agua.objeto, this.gameover, null, this)
-      //this.physics.add.overlap(this.personagem, agua.objeto, () => {
+      this.physics.add.overlap(this.personagem, agua.objeto, this.gameOver, null, this)
+      // this.physics.add.overlap(this.personagem, agua.objeto, () => {
       // this.game.scene.stop('cena2')
-      //this.game.scene.start('gameover')
+      // this.game.scene.start('gameover')
       /* if (!this.gameover) {
         this.gameover = true
         this.agua.forEach((agua) => {
@@ -884,7 +883,7 @@ export default class cena2 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
-    this.game.socket.on('estado-notificar', ({ cena, x, y, frame }) => {
+    this.game.socket.on('estado-notificar', ({ x, y, frame }) => {
       this.personagemRemoto.x = x
       this.personagemRemoto.y = y
       this.personagemRemoto.setFrame(frame)
@@ -918,36 +917,42 @@ export default class cena2 extends Phaser.Scene {
         })
       }
     })
+
+    this.game.socket.on('cena-notificar', cena => {
+      this.game.scene.stop('cena2')
+      this.game.socket.emit('gameover', this.game.sala, 'gameover')
+      this.game.scene.start('gameover')
+    })
   }
 
   update () {
     try {
       this.game.socket.emit('estado-publicar', this.game.sala, {
-        cena: 'cena2',
         x: this.personagem.x,
         y: this.personagem.y,
         frame: this.personagem.frame.name
       })
+
+      if (
+        Phaser.Geom.Intersects.RectangleToRectangle(
+          this.personagem.getBounds(),
+          this.escada.getBounds()
+        )
+      ) {
+        this.naEscada = true
+        this.personagem.body.setAllowGravity(false)
+        this.personagem.setSize(32, 64)
+      } else {
+        this.naEscada = false
+        this.personagem.body.setAllowGravity(true)
+        this.personagem.setSize(64, 64)
+      }
+
+      if (this.baixo.frame.name === 1 && this.naEscada === false) {
+        this.personagem.setSize(64, 32).setOffset(0, 32)
+      }
     } catch (error) {
       console.error(error)
-    }
-
-    if (
-      Phaser.Geom.Intersects.RectangleToRectangle(
-        this.personagem.getBounds(),
-        this.escada.getBounds()
-      )
-    ) {
-      this.naEscada = true
-      this.personagem.body.setAllowGravity(false)
-      this.personagem.setSize(32, 64)
-    } else {
-      this.naEscada = false
-      this.personagem.body.setAllowGravity(true)
-      this.personagem.setSize(64, 64)
-    }
-    if (this.baixo.frame.name === 1 && this.naEscada === false) {
-      this.personagem.setSize(64, 32).setOffset(0, 32)
     }
   }
 
@@ -1001,8 +1006,10 @@ export default class cena2 extends Phaser.Scene {
     bola.destroy()
     ini1walk.destroy()
   }
-  gameover () {
+
+  gameOver () {
     this.game.scene.stop('cena2')
+    this.game.socket.emit('cena-publicar', this.game.sala, 'gameover')
     this.game.scene.start('gameover')
   }
 }
