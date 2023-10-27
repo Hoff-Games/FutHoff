@@ -44,6 +44,12 @@ export default class cena2 extends Phaser.Scene {
     })
     this.load.audio('somestrela', '../assets/audio/somestrela.mp3')
 
+    /*vida*/
+    this.load.spritesheet('coracoes', '../assets/fases/vida.png', {
+      frameWidth: 115,
+      frameHeight: 40
+    })
+
     /* PERSONAGENS */
     // skiler
     this.load.spritesheet('skiler', '../assets/personagens/skiler.png', {
@@ -126,6 +132,12 @@ export default class cena2 extends Phaser.Scene {
     this.tilesetTilearv = this.tilemapFases.addTilesetImage('tilearv')
     this.tilesetTilebloc = this.tilemapFases.addTilesetImage('tilebloc')
     this.tilesetTiletrave = this.tilemapFases.addTilesetImage('tiletrave')
+
+    /*Coracoes*/
+    this.coracoes = this.add.sprite(-40, 100, 'coracoes')
+      .setScale(1.5)
+      .setScrollFactor(0, 0)
+
 
     /* animações da agua e lava */
     this.anims.create({
@@ -390,7 +402,9 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.layerTrave3)
 
     /* Inimigos */
-    this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')/*
+    this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
+      .setImmovable()
+      /*
     this.timedEvent = this.time.addEvent({
       delay: 500,
       callback: () => {
@@ -412,6 +426,7 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.ini1walk, this.layerTrave1)
     this.physics.add.collider(this.ini1walk, this.layerTrave2)
     this.physics.add.collider(this.ini1walk, this.layerTrave3)
+    this.physics.add.collider(this.personagem, this.ini1walk, this.danoInimigos, null, this)
 
     /* colisao agua e lava */
 
@@ -825,40 +840,8 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(agua.objeto, this.layerTrave2)
       this.physics.add.collider(agua.objeto, this.layerTrave3)
       this.physics.add.overlap(this.personagem, agua.objeto, this.gameOver, null, this)
-      // this.physics.add.overlap(this.personagem, agua.objeto, () => {
-      // this.game.scene.stop('cena2')
-      // this.game.scene.start('gameover')
-      /* if (!this.gameover) {
-        this.gameover = true
-        this.agua.forEach((agua) => {
-
-        })
-        this.timer = 1
-        this.timedEvent = this.time.addEvent({
-          delay: 500,
-          callback: () => {
-            this.timer -= 1
-            if (this.timer <= 0) {
-              this.esquerda.destroy()
-              this.direita.destroy()
-              this.cima.destroy()
-              this.baixo.destroy()
-              this.add.image(this.personagem.x, this.personagem.y - 100, 'fundopreto')
-              this.add.image(this.personagem.x, this.personagem.y - 100, 'cenaperdeu')
-                .setInteractive()
-                .on('pointerdown', () => {
-                  this.game.scene.stop('cena2')
-                  this.game.scene.start('cena1')
-                })
-            }
-          },
-          callbackScope: this,
-          loop: true
-        })
-      }
-    }) */
-      // })
     })
+
     /* camera */
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
@@ -1003,6 +986,29 @@ export default class cena2 extends Phaser.Scene {
   bolalAtingeInimigo (bola, ini1walk) {
     bola.destroy()
     ini1walk.destroy()
+  }
+
+  colisaoInimigos () {
+    this.ini1walk
+      .setSize(64, 64)
+      .setOffset(0, 0)
+  }
+
+  danoInimigos (coracoes) {
+    this.ini1walk
+      .setSize(1, 1)
+      .setOffset(1000000, 10000000000000)
+    this.time.addEvent({
+      callback: () => { this.colisaoInimigos() },
+      delay: 1000,
+      callbackScope: this,
+      loop: false
+    })
+    this.game.vida.frameCoracoes += 2
+    this.coracoes.setFrame(`${this.game.vida.frameCoracoes}`)
+    if (this.coracoes.frame.name === 6) {
+      this.gameOver()
+    }
   }
 
   gameOver () {

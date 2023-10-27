@@ -5,13 +5,14 @@ export default class cena4 extends Phaser.Scene {
 
   preload () {
     this.load.image('fundopreto', '../assets/cenas/fundopreto.png')
+    this.load.image('cenaperdeu', '../assets/cenas/cenaperdeu.png')
     this.load.spritesheet('repetir', '../assets/botoes/repetir.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 84,
+      frameHeight: 80
     })
     this.load.spritesheet('menu', '../assets/botoes/menu.png', {
-      frameWidth: 128,
-      frameHeight: 64
+      frameWidth: 120,
+      frameHeight: 60
     })
   }
 
@@ -21,6 +22,8 @@ export default class cena4 extends Phaser.Scene {
 
     this.imagem = this.add
     this.add.image(400, 225, 'fundopreto')
+    this.imagem = this.add
+    this.add.image(400, 225, 'cenaperdeu')
 
     this.repetir = this.add.sprite(centrox - 70, centroy + 100, 'repetir', 0)
       .setInteractive()

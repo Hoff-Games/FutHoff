@@ -45,6 +45,9 @@ class Game extends Phaser.Game {
     this.scoreMoeda = {
       score: 0
     }
+    this.vida = {
+      frameCoracoes: 0
+    }
     this.scoreEstrela = {
       score: 0
     }
