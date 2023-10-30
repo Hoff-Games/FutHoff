@@ -46,8 +46,8 @@ export default class cena2 extends Phaser.Scene {
 
     /*vida*/
     this.load.spritesheet('coracoes', '../assets/fases/vida.png', {
-      frameWidth: 115,
-      frameHeight: 40
+      frameWidth: 46,
+      frameHeight: 14
     })
 
     /* PERSONAGENS */
@@ -132,12 +132,6 @@ export default class cena2 extends Phaser.Scene {
     this.tilesetTilearv = this.tilemapFases.addTilesetImage('tilearv')
     this.tilesetTilebloc = this.tilemapFases.addTilesetImage('tilebloc')
     this.tilesetTiletrave = this.tilemapFases.addTilesetImage('tiletrave')
-
-    /*Coracoes*/
-    this.coracoes = this.add.sprite(-40, 100, 'coracoes')
-      .setScale(1.5)
-      .setScrollFactor(0, 0)
-
 
     /* animações da agua e lava */
     this.anims.create({
@@ -401,25 +395,30 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.layerTrave2)
     this.physics.add.collider(this.personagem, this.layerTrave3)
 
+    /* Coracoes */
+    this.coracoes = this.add.sprite(-40, 100, 'coracoes')
+      .setScale(1.5)
+      .setScrollFactor(0, 0)
+
     /* Inimigos */
     this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
       .setImmovable()
-      /*
+    /*
     this.timedEvent = this.time.addEvent({
-      delay: 500,
-      callback: () => {
-        const bola = this.physics.add.sprite(this.ini1walk.x, this.ini1walk.y, 'bola'); // Substitua 'projectile' pelo nome do seu sprite de projétil
-        this.bola.setVelocityX(-300); // Define a velocidade horizontal do projétil (pode ajustar conforme necessário)
-        // Adicione outras configurações ao objeto, como colisões e animações
-
-        // Configure uma função de remoção quando o projétil sair da tela ou atingir algo
-        this.physics.world.setBoundsCollision(true, true, true, true);
-        this.bola.setCollideWorldBounds(true);
-        this.bola.setBounce(1); // Borda de rebote total
-        this.bola.setGravityY(300); // Adicione gravidade para que o projétil caia após atingir algo ou sair da tela
-      },
-      callbackScope: this,
-      loop: true
+    delay: 500,
+    callback: () => {
+      const bola = this.physics.add.sprite(this.ini1walk.x, this.ini1walk.y, 'bola'); // Substitua 'projectile' pelo nome do seu sprite de projétil
+      this.bola.setVelocityX(-300); // Define a velocidade horizontal do projétil (pode ajustar conforme necessário)
+      // Adicione outras configurações ao objeto, como colisões e animações
+    
+      // Configure uma função de remoção quando o projétil sair da tela ou atingir algo
+      this.physics.world.setBoundsCollision(true, true, true, true);
+      this.bola.setCollideWorldBounds(true);
+      this.bola.setBounce(1); // Borda de rebote total
+      this.bola.setGravityY(300); // Adicione gravidade para que o projétil caia após atingir algo ou sair da tela
+    },
+    callbackScope: this,
+    loop: true
     }) */
 
     this.physics.add.collider(this.ini1walk, this.layerBlocos)
@@ -1004,9 +1003,9 @@ export default class cena2 extends Phaser.Scene {
       callbackScope: this,
       loop: false
     })
-    this.game.vida.frameCoracoes += 2
+    this.game.vida.frameCoracoes += 1
     this.coracoes.setFrame(`${this.game.vida.frameCoracoes}`)
-    if (this.coracoes.frame.name === 6) {
+    if (this.coracoes.frame.name === 3) {
       this.gameOver()
     }
   }
