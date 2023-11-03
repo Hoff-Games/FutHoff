@@ -16,10 +16,6 @@ export default class cena2 extends Phaser.Scene {
     this.load.image('scoremoeda', '../assets/fases/scoremoeda.png')
     this.load.image('scoreestrela', '../assets/fases/scoreestrela.png')
 
-    /* cenas */
-    this.load.image('fundopreto', '../assets/cenas/fundopreto.png')
-    this.load.image('cenaperdeu', '../assets/cenas/cenaperdeu.png')
-
     /* tilesets */
     this.load.image('c1', '../assets/fases/c1.png')
     this.load.image('c2', '../assets/fases/c2.png')
