@@ -6,8 +6,8 @@ export default class cena4 extends Phaser.Scene {
   preload () {
     this.load.image('fundopreto', '../assets/cenas/fundopreto.png')
     this.load.spritesheet('cenaperdeu', '../assets/cenas/cenaperdeu.png', {
-      frameWidth: 800,
-      frameHeight: 450
+      frameWidth: 368,
+      frameHeight: 318
     })
     this.load.spritesheet('repetir', '../assets/botoes/repetir.png', {
       frameWidth: 84,
