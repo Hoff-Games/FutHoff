@@ -30,7 +30,7 @@ export default class cena4 extends Phaser.Scene {
     this.anims.create({
       key: 'cena-trocando',
       frames: this.anims.generateFrameNumbers('cenaperdeu', {
-        start: 10,
+        start: 0,
         end: 36
       }),
       frameRate: 4,
