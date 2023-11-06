@@ -1,13 +1,12 @@
 export default class cena4 extends Phaser.Scene {
   constructor () {
-    super('gameover')
+    super('tentarnovamente')
   }
 
   preload () {
-    this.load.image('fundopreto', '../assets/cenas/fundopreto.png')
-    this.load.spritesheet('cenaperdeu', '../assets/cenas/cenaperdeu.png', {
-      frameWidth: 368,
-      frameHeight: 318
+    this.load.spritesheet('cenatentarnovamente', '../assets/cenas/cenatentarnovamente.png', {
+      frameWidth: 484,
+      frameHeight: 360
     })
     this.load.spritesheet('repetir', '../assets/botoes/repetir.png', {
       frameWidth: 84,
@@ -23,24 +22,15 @@ export default class cena4 extends Phaser.Scene {
     const centrox = this.cameras.main.worldView.x + this.cameras.main.width / 2
     const centroy = this.cameras.main.worldView.y + this.cameras.main.height / 2
 
-   // this.imagem = this.add
-    //this.add.image(400, 225, 'fundopreto')
-    this.imagem = this.add.sprite(400, 225, 'cenaperdeu')
-    this.timer = 4
-    this.timedEvent = this.time.addEvent({
-      delay: 1000,
-      callback: this.countdown,
-      callbackScope: this,
-      loop: true
-    })
+    this.imagem = this.add.sprite(400, 225, 'cenatentarnovamente')
 
     this.anims.create({
       key: 'cena-trocando',
-      frames: this.anims.generateFrameNumbers('cenaperdeu', {
+      frames: this.anims.generateFrameNumbers('cenatentarnovamente', {
         start: 0,
-        end: 36
+        end: 17
       }),
-      frameRate: 8,
+      frameRate: 4,
       repeat: -1
     })
 
@@ -55,7 +45,7 @@ export default class cena4 extends Phaser.Scene {
         this.repetir.setFrame(0)
       })
       .on('pointerdown', () => {
-        this.game.scene.stop('gameover')
+        this.game.scene.stop('tentarnovamente')
         this.game.scene.start('cena2')
       })
     this.menu = this.add.sprite(centrox + 70, centroy + 100, 'menu', 0)
@@ -67,20 +57,12 @@ export default class cena4 extends Phaser.Scene {
         this.menu.setFrame(0)
       })
       .on('pointerdown', () => {
-        this.game.scene.stop('gameover')
+        this.game.scene.stop('tentarnovamente')
         this.game.scene.start('cena0')
       })
   }
 
   update () {
-  }
 
-  countdown () {
-    this.timer -= 1
-    if (this.timer <= 0) {
-      this.imagem.destroy()
-      this.timedEvent.destroy()
-      this.game.scene.start('tentarnovamente')
-    }
   }
 }

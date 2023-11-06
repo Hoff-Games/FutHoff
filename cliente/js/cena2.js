@@ -397,31 +397,42 @@ export default class cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
 
     /* Inimigos */
-    this.ini1walk = this.physics.add.sprite(-1, -290, 'ini1walk')
-      .setImmovable()
-    /*
-    this.timedEvent = this.time.addEvent({
-    delay: 500,
-    callback: () => {
-      const bola = this.physics.add.sprite(this.ini1walk.x, this.ini1walk.y, 'bola'); // Substitua 'projectile' pelo nome do seu sprite de projétil
-      this.bola.setVelocityX(-300); // Define a velocidade horizontal do projétil (pode ajustar conforme necessário)
-      // Adicione outras configurações ao objeto, como colisões e animações
-    
-      // Configure uma função de remoção quando o projétil sair da tela ou atingir algo
-      this.physics.world.setBoundsCollision(true, true, true, true);
-      this.bola.setCollideWorldBounds(true);
-      this.bola.setBounce(1); // Borda de rebote total
-      this.bola.setGravityY(300); // Adicione gravidade para que o projétil caia após atingir algo ou sair da tela
-    },
-    callbackScope: this,
-    loop: true
-    }) */
+    this.ini1walk = [
+      {
+        x: 1675,
+        y: 1040
+      },
+      {
+        x: 1900,
+        y: 920
+      },
+      {
+        x: 1150,
+        y: 790
+      }
+    ]
 
-    this.physics.add.collider(this.ini1walk, this.layerBlocos)
-    this.physics.add.collider(this.ini1walk, this.layerTrave1)
-    this.physics.add.collider(this.ini1walk, this.layerTrave2)
-    this.physics.add.collider(this.ini1walk, this.layerTrave3)
-    this.physics.add.collider(this.personagem, this.ini1walk, this.danoInimigos, null, this)
+    this.ini1walk.forEach((ini1) => {
+      ini1.objeto = this.physics.add.sprite(ini1.x, ini1.y, 'ini1walk')
+        .setImmovable()
+      ini1.objeto.setVelocity(0, 0)
+      ini1.objeto.anims.play('ini1walk', true)
+      this.physics.add.collider(ini1.objeto, this.layerBlocos)
+      this.physics.add.collider(ini1.objeto, this.layerTrave1)
+      this.physics.add.collider(ini1.objeto, this.layerTrave2)
+      this.physics.add.collider(ini1.objeto, this.layerTrave3)
+      this.physics.add.collider(this.personagem, ini1.objeto, this.danoInimigos, null, this)
+      this.time.addEvent({
+        delay: 1000,
+        callback: () => {
+          ini1.bolaInimigo = this.physics.add.sprite(ini1.x, ini1.y, 'bola')
+          ini1.bolaInimigo.setVelocityX(-500)
+          ini1.bolaInimigo.setVelocityY(0)
+        },
+        callbackScope: this,
+        loop: true
+      })
+    })
 
     /* colisao agua e lava */
 
@@ -665,10 +676,6 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 8,
       repeat: -1
     })
-    this.ini1walk.setVelocity(-100, 0)
-
-    // Animações automáticas //
-    this.ini1walk.anims.play('ini1walk', true)
 
     /* botoes */
     this.direita = this.add.sprite(125, 430, 'direita', 0)
@@ -841,7 +848,7 @@ export default class cena2 extends Phaser.Scene {
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
-    this.cameras.main.startFollow(this.personagem).setZoom(0.8)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.2)
     this.cameras.main.followOffset.set(0, 100)
 
     /* tela cheia */
@@ -874,6 +881,7 @@ export default class cena2 extends Phaser.Scene {
         }
       }
       if (artefatos.estrelas) {
+        2
         for (let i = 0; i < artefatos.estrelas.length; i++) {
           if (!artefatos.estrelas[i]) {
             this.estrelas[i].objeto.disableBody(true, true)

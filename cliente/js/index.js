@@ -7,6 +7,7 @@ import cenapersonagem from './cenapersonagem.js'
 import cenaprologo from './cenaprologo.js'
 import cena2 from './cena2.js'
 import gameover from './gameover.js'
+import tentarnovamente from './tentarnovamente.js'
 import encerramento from './encerramento.js'
 
 /* Definição do objeto Game */
@@ -58,6 +59,7 @@ class Game extends Phaser.Game {
     this.scene.add('cenaprologo', cenaprologo)
     this.scene.add('cena2', cena2)
     this.scene.add('gameover', gameover)
+    this.scene.add('tentar-novamente', tentarnovamente)
     this.scene.add('encerramento', encerramento)
 
     this.scene.start('cena0')
