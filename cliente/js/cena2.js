@@ -409,14 +409,28 @@ export default class cena2 extends Phaser.Scene {
       {
         x: 1150,
         y: 790
+      },
+      {
+        x: 1865,
+        y: -600
       }
     ]
+    /* animações dos inimigos */
+    this.anims.create({
+      key: 'ini1walk-esquerda',
+      frames: this.anims.generateFrameNumbers('ini1walk', {
+        start: 0,
+        end: 1
+      }),
+      frameRate: 1,
+      repeat: -1
+    })
 
     this.ini1walk.forEach((ini1) => {
       ini1.objeto = this.physics.add.sprite(ini1.x, ini1.y, 'ini1walk')
         .setImmovable()
       ini1.objeto.setVelocity(0, 0)
-      ini1.objeto.anims.play('ini1walk', true)
+      ini1.objeto.anims.play('ini1walk-esquerda', true)
       this.physics.add.collider(ini1.objeto, this.layerBlocos)
       this.physics.add.collider(ini1.objeto, this.layerTrave1)
       this.physics.add.collider(ini1.objeto, this.layerTrave2)
@@ -429,7 +443,7 @@ export default class cena2 extends Phaser.Scene {
           ini1.bolaInimigo.setVelocityX(-500)
           ini1.bolaInimigo.setVelocityY(0)
           this.physics.add.collider(ini1.bolaInimigo, this.layerBlocos, null, null, this)
-          this.time.delayedCall(1950, () => {
+          this.time.delayedCall(700, () => {
             ini1.bolaInimigo.destroy()
           })
         },
@@ -527,8 +541,8 @@ export default class cena2 extends Phaser.Scene {
     this.moedinhas.setScrollFactor(0)
 
     this.textoMoeda = this.add.text(-40, 0, `x ${this.game.scoreMoeda.score}`, {
-      fontFamily: 'Silkscreen',
-      fontSize: '25px',
+      fontFamily: 'Press Start 2P',
+      fontSize: '500px',
       stroke: '#000000',
       strokeThickness: 4,
       fill: '#ffffff'
@@ -577,8 +591,8 @@ export default class cena2 extends Phaser.Scene {
     this.estrelinhas.setScrollFactor(0)
 
     this.textoEstrela = this.add.text(-40, 37, `x ${this.game.scoreEstrela.score}`, {
-      fontFamily: 'Silkscreen',
-      fontSize: '25px',
+      fontFamily: 'Press Start 2P',
+      fontSize: '500px',
       stroke: '#000000',
       strokeThickness: 4,
       fill: '#ffffff'
@@ -667,17 +681,6 @@ export default class cena2 extends Phaser.Scene {
         end: 11
       }),
       frameRate: 4,
-      repeat: -1
-    })
-
-    /* animações dos inimigos */
-    this.anims.create({
-      key: 'ini1walk',
-      frames: this.anims.generateFrameNumbers('ini1walk', {
-        start: 0,
-        end: 3
-      }),
-      frameRate: 8,
       repeat: -1
     })
 
@@ -852,7 +855,7 @@ export default class cena2 extends Phaser.Scene {
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
-    this.cameras.main.startFollow(this.personagem).setZoom(0.2)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.8)
     this.cameras.main.followOffset.set(0, 100)
 
     /* tela cheia */
