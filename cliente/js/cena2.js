@@ -42,8 +42,8 @@ export default class cena2 extends Phaser.Scene {
 
     /*vida*/
     this.load.spritesheet('coracoes', '../assets/fases/vida.png', {
-      frameWidth: 46,
-      frameHeight: 14
+      frameWidth: 92,
+      frameHeight: 28
     })
 
     /* PERSONAGENS */
@@ -392,7 +392,7 @@ export default class cena2 extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.layerTrave3)
 
     /* Coracoes */
-    this.coracoes = this.add.sprite(-40, 100, 'coracoes')
+    this.coracoes = this.add.sprite(-20, -20, 'coracoes')
       .setScale(1.5)
       .setScrollFactor(0, 0)
 
@@ -537,12 +537,12 @@ export default class cena2 extends Phaser.Scene {
     this.sommoeda = this.sound.add('sommoeda')
 
     // Score Moedas//
-    this.moedinhas = this.add.image(-65, 15, 'scoremoeda')
+    this.moedinhas = this.add.image(-65, 25, 'scoremoeda')
     this.moedinhas.setScrollFactor(0)
 
-    this.textoMoeda = this.add.text(-40, 0, `x ${this.game.scoreMoeda.score}`, {
-      fontFamily: 'Press Start 2P',
-      fontSize: '500px',
+    this.textoMoeda = this.add.text(-40, 10, `x ${this.game.scoreMoeda.score}`, {
+      fontFamily: 'Silkscreen',
+      fontSize: '30px',
       stroke: '#000000',
       strokeThickness: 4,
       fill: '#ffffff'
@@ -587,12 +587,12 @@ export default class cena2 extends Phaser.Scene {
     this.somestrela = this.sound.add('somestrela')
 
     // Score Estrela//
-    this.estrelinhas = this.add.image(-65, 50, 'scoreestrela')
+    this.estrelinhas = this.add.image(-65, 60, 'scoreestrela')
     this.estrelinhas.setScrollFactor(0)
 
-    this.textoEstrela = this.add.text(-40, 37, `x ${this.game.scoreEstrela.score}`, {
-      fontFamily: 'Press Start 2P',
-      fontSize: '500px',
+    this.textoEstrela = this.add.text(-40, 47, `x ${this.game.scoreEstrela.score}`, {
+      fontFamily: 'Silkscreen',
+      fontSize: '30px',
       stroke: '#000000',
       strokeThickness: 4,
       fill: '#ffffff'
