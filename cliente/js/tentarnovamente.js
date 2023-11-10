@@ -22,7 +22,7 @@ export default class tentarnovamente extends Phaser.Scene {
     const centrox = this.cameras.main.worldView.x + this.cameras.main.width / 2
     const centroy = this.cameras.main.worldView.y + this.cameras.main.height / 2
 
-    this.imagem = this.add.sprite(400, 225, 'cenatentarnovamente')
+    this.imagemm = this.add.sprite(400, 225, 'cenatentarnovamente')
 
     this.anims.create({
       key: 'cena-trocando',
@@ -34,7 +34,7 @@ export default class tentarnovamente extends Phaser.Scene {
       repeat: -1
     })
 
-    this.imagem.anims.play('cena-trocando')
+    this.imagemm.anims.play('cena-trocando')
 
     this.repetir = this.add.sprite(centrox - 70, centroy + 100, 'repetir', 0)
       .setInteractive()

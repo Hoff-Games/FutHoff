@@ -64,7 +64,7 @@ export default class cena2 extends Phaser.Scene {
     /* Inimigos */
     this.load.spritesheet('ini1walk', '../assets/personagens/ini1walk.png', {
       frameWidth: 64,
-      frameHeight: 64
+      frameHeight: 70
     })
 
     /* agua e lava */
@@ -419,8 +419,8 @@ export default class cena2 extends Phaser.Scene {
     this.anims.create({
       key: 'ini1walk-esquerda',
       frames: this.anims.generateFrameNumbers('ini1walk', {
-        start: 0,
-        end: 1
+        start: 1,
+        end: 2
       }),
       frameRate: 1,
       repeat: -1
@@ -683,6 +683,24 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 4,
       repeat: -1
     })
+    this.anims.create({
+      key: 'personagem-chuta-esquerda',
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 1,
+        end: 2
+      }),
+      frameRate: 8,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'personagem-chuta-direita',
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 4,
+        end: 5
+      }),
+      frameRate: 8,
+      repeat: -1
+    })
 
     /* botoes */
     this.direita = this.add.sprite(125, 430, 'direita', 0)
@@ -804,12 +822,12 @@ export default class cena2 extends Phaser.Scene {
           this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y + 14, 'bola')
           this.bola.setVelocityX(-500)
           this.personagem.setVelocityY(0)
-          this.personagem.anims.play('personagem-stop-esquerda', true)
+          this.personagem.anims.play('personagem-chuta-esquerda', true)
         } else if (direita.test(anim)) {
           this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y + 14, 'bola')
           this.bola.setVelocityX(500)
           this.personagem.setVelocityY(0)
-          this.personagem.anims.play('personagem-stop-direita', true)
+          this.personagem.anims.play('personagem-chuta-direita', true)
         }
         this.game.socket.emit('artefatos-publicar', this.game.sala, {
           bola: {
@@ -855,7 +873,7 @@ export default class cena2 extends Phaser.Scene {
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
-    this.cameras.main.startFollow(this.personagem).setZoom(0.8)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.75)
     this.cameras.main.followOffset.set(0, 100)
 
     /* tela cheia */
@@ -987,11 +1005,7 @@ export default class cena2 extends Phaser.Scene {
     }
   }
 
-  /* arremessarBola() {
-    const bola = bolas.create(skiler.x, skiler.y, 'bola');
-    bola.setVelocityX(400);
-    bola.setLifetime(2000);
-  } */
+
 
   bolalAtingeInimigo (bola, ini1walk) {
     bola.destroy()
