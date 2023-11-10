@@ -40,7 +40,7 @@ export default class cena2 extends Phaser.Scene {
     })
     this.load.audio('somestrela', '../assets/audio/somestrela.mp3')
 
-    /*vida*/
+    /* vida */
     this.load.spritesheet('coracoes', '../assets/fases/vida.png', {
       frameWidth: 92,
       frameHeight: 28
@@ -114,7 +114,7 @@ export default class cena2 extends Phaser.Scene {
     /* mapas */
     this.tilemapFases = this.make.tilemap({ key: 'fases' })
 
-    this.game.scene.getScene('cena1').trilha.stop()
+    try { this.game.scene.getScene('cena1').trilha.stop() } catch (error) { console.error(error) }
     this.fundo = this.sound.add('musicadefundo')
     this.fundo.loop = true
     this.fundo.play()

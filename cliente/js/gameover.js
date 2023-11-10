@@ -20,11 +20,6 @@ export default class cena4 extends Phaser.Scene {
   }
 
   create () {
-    const centrox = this.cameras.main.worldView.x + this.cameras.main.width / 2
-    const centroy = this.cameras.main.worldView.y + this.cameras.main.height / 2
-
-   // this.imagem = this.add
-    //this.add.image(400, 225, 'fundopreto')
     this.imagem = this.add.sprite(400, 225, 'cenaperdeu')
     this.timer = 4
     this.timedEvent = this.time.addEvent({
@@ -38,38 +33,13 @@ export default class cena4 extends Phaser.Scene {
       key: 'cena-trocando',
       frames: this.anims.generateFrameNumbers('cenaperdeu', {
         start: 0,
-        end: 36
+        end: 34
       }),
       frameRate: 8,
       repeat: -1
     })
 
     this.imagem.anims.play('cena-trocando')
-
-    this.repetir = this.add.sprite(centrox - 70, centroy + 100, 'repetir', 0)
-      .setInteractive()
-      .on('pointerover', () => {
-        this.repetir.setFrame(1)
-      })
-      .on('pointerout', () => {
-        this.repetir.setFrame(0)
-      })
-      .on('pointerdown', () => {
-        this.game.scene.stop('gameover')
-        this.game.scene.start('cena2')
-      })
-    this.menu = this.add.sprite(centrox + 70, centroy + 100, 'menu', 0)
-      .setInteractive()
-      .on('pointerover', () => {
-        this.menu.setFrame(1)
-      })
-      .on('pointerout', () => {
-        this.menu.setFrame(0)
-      })
-      .on('pointerdown', () => {
-        this.game.scene.stop('gameover')
-        this.game.scene.start('cena0')
-      })
   }
 
   update () {
@@ -80,6 +50,7 @@ export default class cena4 extends Phaser.Scene {
     if (this.timer <= 0) {
       this.imagem.destroy()
       this.timedEvent.destroy()
+      this.game.scene.stop('gameover')
       this.game.scene.start('tentarnovamente')
     }
   }
