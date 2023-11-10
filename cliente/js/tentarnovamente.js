@@ -1,4 +1,4 @@
-export default class cena4 extends Phaser.Scene {
+export default class tentarnovamente extends Phaser.Scene {
   constructor () {
     super('tentarnovamente')
   }
