@@ -1005,25 +1005,23 @@ export default class cena2 extends Phaser.Scene {
     }
   }
 
-
-
   bolalAtingeInimigo (bola, ini1walk) {
     bola.destroy()
     ini1walk.destroy()
   }
 
-  colisaoInimigos () {
-    this.ini1walk
+  colisaoInimigos (personagem, inimigo) {
+    inimigo
       .setSize(64, 64)
       .setOffset(0, 0)
   }
 
-  danoInimigos (coracoes) {
-    this.ini1walk
+  danoInimigos (personagem, inimigo) {
+    inimigo
       .setSize(1, 1)
       .setOffset(1000000, 10000000000000)
     this.time.addEvent({
-      callback: () => { this.colisaoInimigos() },
+      callback: () => { this.colisaoInimigos(personagem, inimigo) },
       delay: 1000,
       callbackScope: this,
       loop: false
