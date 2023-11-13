@@ -6,7 +6,7 @@ export default class tentarnovamente extends Phaser.Scene {
   preload () {
     this.load.spritesheet('cenatentarnovamente', '../assets/cenas/cenatentarnovamente.png', {
       frameWidth: 484,
-      frameHeight: 360
+      frameHeight: 156
     })
     this.load.spritesheet('repetir', '../assets/botoes/repetir.png', {
       frameWidth: 84,
@@ -28,7 +28,7 @@ export default class tentarnovamente extends Phaser.Scene {
       key: 'cena-trocando',
       frames: this.anims.generateFrameNumbers('cenatentarnovamente', {
         start: 0,
-        end: 17
+        end: 10
       }),
       frameRate: 4,
       repeat: -1
