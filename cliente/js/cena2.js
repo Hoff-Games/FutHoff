@@ -66,6 +66,10 @@ export default class cena2 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 70
     })
+    this.load.spritesheet('ini2walk', '../assets/personagens/ini2walk.png', {
+      frameWidth: 64,
+      frameHeight: 70
+    })
 
     /* agua e lava */
     this.load.spritesheet('agua', '../assets/fases/agua.png', {
@@ -397,6 +401,61 @@ export default class cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
 
     /* Inimigos */
+    this.ini2walk = [
+      {
+        x: 1675,
+        y: 1040
+      },
+      {
+        x: 1900,
+        y: 920
+      },
+      {
+        x: 1150,
+        y: 790
+      },
+      {
+        x: 1865,
+        y: -600
+      }
+    ]
+    this.anims.create({
+      key: 'ini2walk-esquerda',
+      frames: this.anims.generateFrameNumbers('ini2walk', {
+        start: 0,
+        end: 3
+      }),
+      frameRate: 1,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'ini2walk-direita',
+      frames: this.anims.generateFrameNumbers('ini2walk', {
+        start: 4,
+        end: 7
+      }),
+      frameRate: 1,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'ini2walk-parado',
+      frames: this.anims.generateFrameNumbers('ini2walk', {
+        start: 1,
+        end: 1
+      }),
+      frameRate: 1,
+      repeat: -1
+    })
+    this.ini2walk.disableBody(true, true)
+    this.physics.add.collider(this.personagem, this.ini2walk, null, this)
+
+
+
+
+
+
+
+
     this.ini1walk = [
       {
         x: 1675,
@@ -941,6 +1000,63 @@ export default class cena2 extends Phaser.Scene {
         y: this.personagem.y,
         frame: this.personagem.frame.name
       })
+      if (this.vida > 0 && this.ini2walk.visible) {
+        /* morte segue personagem mais próximo */
+        const hipotenusaPersonagem = Phaser.Math.Distance.Between(
+          this.personagem.x,
+          this.ini2walk.x,
+          this.personagem.y,
+          this.ini2walk.y
+        )
+
+        const hipotenusaPersonagemRemoto = Phaser.Math.Distance.Between(
+          this.personagemRemoto.x,
+          this.ini2walk.x,
+          this.personagemRemoto.y,
+          this.ini2walk.y
+        )
+
+        /* Por padrão, o primeiro jogador é o alvo */
+        let alvo = this.personagem
+        if (hipotenusaPersonagem > hipotenusaPersonagemRemoto) {
+          /* Jogador 2 é perseguido pelo morte */
+          alvo = this.personagemRemoto
+        }
+
+        /* Sentido no eixo X */
+        const diffX = alvo.x - this.ini2walk.x
+        if (diffX >= 10) {
+          this.ini2walk.setVelocityX(this.velocidade * 0.5)
+        } else if (diffX <= 10) {
+          this.ini2walk.setVelocityX(-this.velocidade * 0.5)
+        }
+
+        /* Sentido no eixo Y */
+        const diffY = alvo.y - this.ini2walk.y
+        if (diffY >= 10) {
+          this.ini2walk.setVelocityY(100)
+        } else if (diffY <= 10) {
+          this.ini2walk.setVelocityY(-100)
+        }
+
+        /* Animação */
+        try {
+          if (diffX > 0) {
+            this.ini2walk.anims.play('ini2walk-direita', true)
+          } else if (diffX < 0) {
+            this.ini2walk.anims.play('ini2walk-esquerda', true)
+          } else if (diffY > 0) {
+            this.ini2walk.anims.play('ini2walk-parado', true)
+          } else {
+            this.ini2walk.anims.play('ini2walk')
+          }
+        } catch (error) {
+          console.error(error)
+        }
+      }
+    } catch (error) {
+      console.error(error)
+    }
 
       if (
         Phaser.Geom.Intersects.RectangleToRectangle(
@@ -960,6 +1076,7 @@ export default class cena2 extends Phaser.Scene {
       if (this.baixo.frame.name === 1 && this.naEscada === false) {
         this.personagem.setSize(64, 32).setOffset(0, 32)
       }
+    
     } catch (error) {
       console.error(error)
     }
