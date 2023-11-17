@@ -1000,6 +1000,27 @@ export default class cena2 extends Phaser.Scene {
         y: this.personagem.y,
         frame: this.personagem.frame.name
       })
+      if (
+        Phaser.Geom.Intersects.RectangleToRectangle(
+          this.personagem.getBounds(),
+          this.escada.getBounds()
+        )
+      ){
+        this.naEscada = true
+        this.personagem.body.setAllowGravity(false)
+        this.personagem.setSize(32, 64)
+      } else {
+        this.naEscada = false
+        this.personagem.body.setAllowGravity(true)
+        this.personagem.setSize(64, 64)
+      }
+      if (this.baixo.frame.name === 1 && this.naEscada === false) {
+        this.personagem.setSize(64, 32).setOffset(0, 32)
+      }
+
+    } catch (error) {
+      console.error(error)
+    }
       if (this.vida > 0 && this.ini2walk.visible) {
         /* morte segue personagem mais próximo */
         const hipotenusaPersonagem = Phaser.Math.Distance.Between(
@@ -1057,30 +1078,7 @@ export default class cena2 extends Phaser.Scene {
     } catch (error) {
       console.error(error)
     }
-
-      if (
-        Phaser.Geom.Intersects.RectangleToRectangle(
-          this.personagem.getBounds(),
-          this.escada.getBounds()
-        )
-      ) {
-        this.naEscada = true
-        this.personagem.body.setAllowGravity(false)
-        this.personagem.setSize(32, 64)
-      } else {
-        this.naEscada = false
-        this.personagem.body.setAllowGravity(true)
-        this.personagem.setSize(64, 64)
-      }
-
-      if (this.baixo.frame.name === 1 && this.naEscada === false) {
-        this.personagem.setSize(64, 32).setOffset(0, 32)
-      }
-    
-    } catch (error) {
-      console.error(error)
     }
-  }
 
   coletarmoeda (personagem, moeda) {
     moeda.disableBody(true, true)
@@ -1155,4 +1153,4 @@ export default class cena2 extends Phaser.Scene {
     this.game.socket.emit('cena-publicar', this.game.sala, 'gameover')
     this.game.scene.start('gameover')
   }
-}
+
