@@ -446,15 +446,11 @@ export default class cena2 extends Phaser.Scene {
       frameRate: 1,
       repeat: -1
     })
-    this.ini2walk.disableBody(true, true)
-    this.physics.add.collider(this.personagem, this.ini2walk, null, this)
-
-
-
-
-
-
-
+    this.ini2walk.forEach(ini2 => {
+      ini2.objeto = this.physics.add.sprite(ini2.x, ini2.y, 'ini2walk').setImmovable()
+      ini2.objeto.disableBody(true, true)
+      this.physics.add.collider(this.personagem, ini2.objeto, null, null, this)
+    })
 
     this.ini1walk = [
       {
@@ -1005,7 +1001,7 @@ export default class cena2 extends Phaser.Scene {
           this.personagem.getBounds(),
           this.escada.getBounds()
         )
-      ){
+      ) {
         this.naEscada = true
         this.personagem.body.setAllowGravity(false)
         this.personagem.setSize(32, 64)
@@ -1017,68 +1013,64 @@ export default class cena2 extends Phaser.Scene {
       if (this.baixo.frame.name === 1 && this.naEscada === false) {
         this.personagem.setSize(64, 32).setOffset(0, 32)
       }
-
     } catch (error) {
       console.error(error)
     }
-      if (this.vida > 0 && this.ini2walk.visible) {
-        /* morte segue personagem mais próximo */
-        const hipotenusaPersonagem = Phaser.Math.Distance.Between(
-          this.personagem.x,
-          this.ini2walk.x,
-          this.personagem.y,
-          this.ini2walk.y
-        )
+    if (this.vida > 0 && this.ini2walk.visible) {
+      /* morte segue personagem mais próximo */
+      const hipotenusaPersonagem = Phaser.Math.Distance.Between(
+        this.personagem.x,
+        this.ini2walk.x,
+        this.personagem.y,
+        this.ini2walk.y
+      )
 
-        const hipotenusaPersonagemRemoto = Phaser.Math.Distance.Between(
-          this.personagemRemoto.x,
-          this.ini2walk.x,
-          this.personagemRemoto.y,
-          this.ini2walk.y
-        )
+      const hipotenusaPersonagemRemoto = Phaser.Math.Distance.Between(
+        this.personagemRemoto.x,
+        this.ini2walk.x,
+        this.personagemRemoto.y,
+        this.ini2walk.y
+      )
 
-        /* Por padrão, o primeiro jogador é o alvo */
-        let alvo = this.personagem
-        if (hipotenusaPersonagem > hipotenusaPersonagemRemoto) {
-          /* Jogador 2 é perseguido pelo morte */
-          alvo = this.personagemRemoto
-        }
-
-        /* Sentido no eixo X */
-        const diffX = alvo.x - this.ini2walk.x
-        if (diffX >= 10) {
-          this.ini2walk.setVelocityX(this.velocidade * 0.5)
-        } else if (diffX <= 10) {
-          this.ini2walk.setVelocityX(-this.velocidade * 0.5)
-        }
-
-        /* Sentido no eixo Y */
-        const diffY = alvo.y - this.ini2walk.y
-        if (diffY >= 10) {
-          this.ini2walk.setVelocityY(100)
-        } else if (diffY <= 10) {
-          this.ini2walk.setVelocityY(-100)
-        }
-
-        /* Animação */
-        try {
-          if (diffX > 0) {
-            this.ini2walk.anims.play('ini2walk-direita', true)
-          } else if (diffX < 0) {
-            this.ini2walk.anims.play('ini2walk-esquerda', true)
-          } else if (diffY > 0) {
-            this.ini2walk.anims.play('ini2walk-parado', true)
-          } else {
-            this.ini2walk.anims.play('ini2walk')
-          }
-        } catch (error) {
-          console.error(error)
-        }
+      /* Por padrão, o primeiro jogador é o alvo */
+      let alvo = this.personagem
+      if (hipotenusaPersonagem > hipotenusaPersonagemRemoto) {
+        /* Jogador 2 é perseguido pelo morte */
+        alvo = this.personagemRemoto
       }
-    } catch (error) {
-      console.error(error)
+
+      /* Sentido no eixo X */
+      const diffX = alvo.x - this.ini2walk.x
+      if (diffX >= 10) {
+        this.ini2walk.setVelocityX(this.velocidade * 0.5)
+      } else if (diffX <= 10) {
+        this.ini2walk.setVelocityX(-this.velocidade * 0.5)
+      }
+
+      /* Sentido no eixo Y */
+      const diffY = alvo.y - this.ini2walk.y
+      if (diffY >= 10) {
+        this.ini2walk.setVelocityY(100)
+      } else if (diffY <= 10) {
+        this.ini2walk.setVelocityY(-100)
+      }
+
+      /* Animação */
+      try {
+        if (diffX > 0) {
+          this.ini2walk.anims.play('ini2walk-direita', true)
+        } else if (diffX < 0) {
+          this.ini2walk.anims.play('ini2walk-esquerda', true)
+        } else if (diffY > 0) {
+          this.ini2walk.anims.play('ini2walk-parado', true)
+        } else {
+          this.ini2walk.anims.play('ini2walk')
+        }
+      } catch (error) {
+        console.error(error)
+      }
     }
-    }
+  }
 
   coletarmoeda (personagem, moeda) {
     moeda.disableBody(true, true)
@@ -1153,4 +1145,4 @@ export default class cena2 extends Phaser.Scene {
     this.game.socket.emit('cena-publicar', this.game.sala, 'gameover')
     this.game.scene.start('gameover')
   }
-
+}
