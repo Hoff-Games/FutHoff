@@ -892,7 +892,7 @@ export default class cena2 extends Phaser.Scene {
           }
         })
         this.physics.add.collider(this.bola, this.layerBlocos, this.bolaAtingeChao, null, this)
-        this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this)
+        this.physics.add.collider(this.bola, ini1.objeto, this.bolalAtingeInimigo, null, this)
         this.time.delayedCall(500, () => {
           this.bola.destroy()
         })
@@ -928,7 +928,7 @@ export default class cena2 extends Phaser.Scene {
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
-    this.cameras.main.startFollow(this.personagem).setZoom(0.75)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.2)
     this.cameras.main.followOffset.set(0, 100)
 
     /* tela cheia */
@@ -975,7 +975,7 @@ export default class cena2 extends Phaser.Scene {
         this.bola = this.physics.add.sprite(artefatos.bola.x, artefatos.bola.y + 14, 'bola')
         this.bola.setVelocityX(artefatos.bola.velocityX)
         this.physics.add.collider(this.bola, this.layerBlocos, this.bolaAtingeChao, null, this)
-        this.physics.add.collider(this.bola, this.ini1walk, this.bolalAtingeInimigo, null, this)
+        this.physics.add.collider(this.bola, ini1.objeto, this.bolalAtingeInimigo, null, this)
         this.time.delayedCall(500, () => {
           this.bola.destroy()
         })
@@ -1112,9 +1112,9 @@ export default class cena2 extends Phaser.Scene {
     }
   }
 
-  bolalAtingeInimigo (bola, ini1walk) {
+  bolalAtingeInimigo (bola, ini1) {
     bola.destroy()
-    ini1walk.destroy()
+    ini1.objeto.destroy()
   }
 
   colisaoInimigos (personagem, inimigo) {
