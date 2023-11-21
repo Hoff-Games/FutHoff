@@ -2,6 +2,7 @@
 /* Importação de objetos */
 import config from './config.js'
 import cena0 from './cena0.js'
+import cenatutorial from './cena-tutorial.js'
 import cena1 from './cena1.js'
 import cenapersonagem from './cenapersonagem.js'
 import cenaprologo from './cenaprologo.js'
@@ -54,6 +55,7 @@ class Game extends Phaser.Game {
     }
 
     this.scene.add('cena0', cena0)
+    this.scene.add('cena-tutorial', cenatutorial)
     this.scene.add('cena1', cena1)
     this.scene.add('cenapersonagem', cenapersonagem)
     this.scene.add('cenaprologo', cenaprologo)

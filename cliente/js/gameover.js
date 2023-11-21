@@ -9,14 +9,6 @@ export default class cena4 extends Phaser.Scene {
       frameWidth: 368,
       frameHeight: 318
     })
-    this.load.spritesheet('repetir', '../assets/botoes/repetir.png', {
-      frameWidth: 84,
-      frameHeight: 80
-    })
-    this.load.spritesheet('menu', '../assets/botoes/menu.png', {
-      frameWidth: 120,
-      frameHeight: 60
-    })
   }
 
   create () {
@@ -36,7 +28,7 @@ export default class cena4 extends Phaser.Scene {
         end: 34
       }),
       frameRate: 8,
-      repeat: -1
+      repeat: 0
     })
 
     this.imagem.anims.play('cena-trocando')

@@ -5,8 +5,8 @@ export default class tentarnovamente extends Phaser.Scene {
 
   preload () {
     this.load.spritesheet('cenatentarnovamente', '../assets/cenas/cenatentarnovamente.png', {
-      frameWidth: 484,
-      frameHeight: 156
+      frameWidth: 800,
+      frameHeight: 450
     })
     this.load.spritesheet('repetir', '../assets/botoes/repetir.png', {
       frameWidth: 84,
@@ -25,16 +25,16 @@ export default class tentarnovamente extends Phaser.Scene {
     this.imagemm = this.add.sprite(400, 225, 'cenatentarnovamente')
 
     this.anims.create({
-      key: 'cena-trocando',
+      key: 'cenatrocando',
       frames: this.anims.generateFrameNumbers('cenatentarnovamente', {
         start: 0,
-        end: 10
+        end: 19
       }),
       frameRate: 4,
       repeat: -1
     })
 
-    this.imagemm.anims.play('cena-trocando')
+    this.imagemm.anims.play('cenatrocando')
 
     this.repetir = this.add.sprite(centrox - 70, centroy + 100, 'repetir', 0)
       .setInteractive()
