@@ -419,7 +419,27 @@ export default class cena2 extends Phaser.Scene {
         y: -600
       }
     ]
+    
+    //inimigos
+    this.ini2walk = this.physics.add.group(); // Cria um grupo de monstros
+
+    // Adiciona um monstro ao grupo
+    this.ini2walk1 = this.ini2walk.create(1450, 750, 'ini2walk');
+    this.physics.add.collider(this.ini2walk1, this.layerBlocos)
+    this.ini2walk1.setVelocityX(-40);// Define a velocidade inicial do monstro
     this.anims.create({
+      key: 'ini2walk-esquerda',
+      frames: this.anims.generateFrameNumbers('ini2walk', {
+        start: 0,
+        end: 7
+      }),
+      frameRate: 6,
+      repeat: -1
+    });
+
+    this.ini2walk1.anims.play('ini2walk-esquerda', true);
+
+   /* this.anims.create({
       key: 'ini2walk-esquerda',
       frames: this.anims.generateFrameNumbers('ini2walk', {
         start: 0,
@@ -450,7 +470,7 @@ export default class cena2 extends Phaser.Scene {
       ini2.objeto = this.physics.add.sprite(ini2.x, ini2.y, 'ini2walk').setImmovable()
       ini2.objeto.disableBody(true, true)
       this.physics.add.collider(this.personagem, ini2.objeto, null, null, this)
-    })
+    })*/
 
     this.ini1walk = [
       {
@@ -928,7 +948,7 @@ export default class cena2 extends Phaser.Scene {
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
-    this.cameras.main.startFollow(this.personagem).setZoom(0.75)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.2)
     this.cameras.main.followOffset.set(0, 100)
 
     /* tela cheia */
@@ -1016,9 +1036,9 @@ export default class cena2 extends Phaser.Scene {
     } catch (error) {
       console.error(error)
     }
-    if (this.vida > 0 && this.ini2walk.visible) {
+    //if (this.vida > 0 && this.ini2walk.visible) {
       /* morte segue personagem mais próximo */
-      const hipotenusaPersonagem = Phaser.Math.Distance.Between(
+      /*const hipotenusaPersonagem = Phaser.Math.Distance.Between(
         this.personagem.x,
         this.ini2walk.x,
         this.personagem.y,
@@ -1030,33 +1050,33 @@ export default class cena2 extends Phaser.Scene {
         this.ini2walk.x,
         this.personagemRemoto.y,
         this.ini2walk.y
-      )
+      )*/
 
       /* Por padrão, o primeiro jogador é o alvo */
-      let alvo = this.personagem
-      if (hipotenusaPersonagem > hipotenusaPersonagemRemoto) {
+      //let alvo = this.personagem
+      //if (hipotenusaPersonagem > hipotenusaPersonagemRemoto) {
         /* Jogador 2 é perseguido pelo morte */
-        alvo = this.personagemRemoto
+        /*alvo = this.personagemRemoto
       }
-
+*/
       /* Sentido no eixo X */
-      const diffX = alvo.x - this.ini2walk.x
+      /*const diffX = alvo.x - this.ini2walk.x
       if (diffX >= 10) {
         this.ini2walk.setVelocityX(this.velocidade * 0.5)
       } else if (diffX <= 10) {
         this.ini2walk.setVelocityX(-this.velocidade * 0.5)
-      }
+      }*/
 
       /* Sentido no eixo Y */
-      const diffY = alvo.y - this.ini2walk.y
+      /*const diffY = alvo.y - this.ini2walk.y
       if (diffY >= 10) {
         this.ini2walk.setVelocityY(100)
       } else if (diffY <= 10) {
         this.ini2walk.setVelocityY(-100)
-      }
+      }*/
 
       /* Animação */
-      try {
+     /* try {
         if (diffX > 0) {
           this.ini2walk.anims.play('ini2walk-direita', true)
         } else if (diffX < 0) {
@@ -1069,7 +1089,18 @@ export default class cena2 extends Phaser.Scene {
       } catch (error) {
         console.error(error)
       }
-    }
+    }*/
+
+    this.ini2walk.children.iterate((ini2walk) => {
+      // Verifica se o monstro atingiu os limites e inverte a direção
+      if (ini2walk.x > 1464) {
+        ini2walk.setVelocityX(-40);
+        ini2walk.flipX = false; // Inverte o sprite horizontalmente
+      } else if (ini2walk.x < 1214) {
+        ini2walk.setVelocityX(40);
+        ini2walk.flipX = true; // Reverte a orientação horizontal do sprite
+      }
+    });
   }
 
   coletarmoeda (personagem, moeda) {
