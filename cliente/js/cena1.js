@@ -52,7 +52,7 @@ export default class cena1 extends Phaser.Scene {
   create () {
     this.add.image(400, 225, 'cenasala')
 
-    this.mensagem = this.add.text(100, 50, 'Escolha uma sala para entrar:', {
+    this.mensagem = this.add.text(120, 25, 'Escolha uma sala para entrar:', {
       fontFamily: 'monospace',
       font: '32px Courier',
       fill: '#cccccc'

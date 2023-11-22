@@ -1,4 +1,4 @@
-export default class cena4 extends Phaser.Scene {
+export default class cenatutorial extends Phaser.Scene {
   constructor () {
     super('cena-tutorial')
   }

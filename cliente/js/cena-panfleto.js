@@ -1,4 +1,4 @@
-export default class cena4 extends Phaser.Scene {
+export default class cenapanfleto extends Phaser.Scene {
   constructor () {
     super('cena-panfleto')
   }
@@ -16,7 +16,7 @@ export default class cena4 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.game.scene.stop('cena-panfleto')
-        this.game.scene.start('cena1')
+        this.game.scene.start('cena-anuncio')
       })
 
     this.anims.create({
