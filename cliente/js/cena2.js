@@ -400,77 +400,40 @@ export default class cena2 extends Phaser.Scene {
       .setScale(1.5)
       .setScrollFactor(0, 0)
 
-    /* Inimigos */
-    this.ini2walk = [
-      {
-        x: 1675,
-        y: 1040
-      },
-      {
-        x: 1900,
-        y: 920
-      },
-      {
-        x: 1150,
-        y: 790
-      },
-      {
-        x: 1865,
-        y: -600
-      }
-    ]
     
     //inimigos
     this.ini2walk = this.physics.add.group(); // Cria um grupo de monstros
 
     // Adiciona um monstro ao grupo
-    this.ini2walk1 = this.ini2walk.create(1450, 750, 'ini2walk');
+    this.ini2walk1 = this.ini2walk.create(-400, -500, 'ini2walk');
     this.physics.add.collider(this.ini2walk1, this.layerBlocos)
-    this.ini2walk1.setVelocityX(-40);// Define a velocidade inicial do monstro
+    this.ini2walk1.setVelocityX(-100);// Define a velocidade inicial do monstro
     this.anims.create({
-      key: 'ini2walk-esquerda',
+      key: 'ini2walk1',
       frames: this.anims.generateFrameNumbers('ini2walk', {
         start: 0,
         end: 7
       }),
-      frameRate: 6,
+      frameRate: 2,
       repeat: -1
     });
 
-    this.ini2walk1.anims.play('ini2walk-esquerda', true);
+    this.ini2walk1.anims.play('ini2walk1', true);
 
-   /* this.anims.create({
-      key: 'ini2walk-esquerda',
+    this.ini2walk2 = this.ini2walk.create(2000, -500, 'ini2walk');
+    this.physics.add.collider(this.ini2walk2, this.layerBlocos)
+    this.ini2walk2.setVelocityX(-100);// Define a velocidade inicial do monstro
+    this.anims.create({
+      key: 'ini2walk2',
       frames: this.anims.generateFrameNumbers('ini2walk', {
         start: 0,
-        end: 3
-      }),
-      frameRate: 1,
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'ini2walk-direita',
-      frames: this.anims.generateFrameNumbers('ini2walk', {
-        start: 4,
         end: 7
       }),
-      frameRate: 1,
+      frameRate: 2,
       repeat: -1
-    })
-    this.anims.create({
-      key: 'ini2walk-parado',
-      frames: this.anims.generateFrameNumbers('ini2walk', {
-        start: 1,
-        end: 1
-      }),
-      frameRate: 1,
-      repeat: -1
-    })
-    this.ini2walk.forEach(ini2 => {
-      ini2.objeto = this.physics.add.sprite(ini2.x, ini2.y, 'ini2walk').setImmovable()
-      ini2.objeto.disableBody(true, true)
-      this.physics.add.collider(this.personagem, ini2.objeto, null, null, this)
-    })*/
+    });
+
+    this.ini2walk2.anims.play('ini2walk2', true);
 
     this.ini1walk = [
       {
@@ -520,6 +483,61 @@ export default class cena2 extends Phaser.Scene {
           this.physics.add.collider(ini1.bolaInimigo, this.layerBlocos, null, null, this)
           this.time.delayedCall(700, () => {
             ini1.bolaInimigo.destroy()
+          })
+        },
+        callbackScope: this,
+        loop: true
+      })
+    })
+
+    this.ini1walk1 = [
+      {
+        x: 1675,
+        y: 790
+      },
+      {
+        x: 1000,
+        y: 920
+      },
+      {
+        x: 920,
+        y: 790
+      },
+      {
+        x: 1100,
+        y: -600
+      }
+    ]
+    /* animações dos inimigos */
+    this.anims.create({
+      key: 'ini1walk1-direita',
+      frames: this.anims.generateFrameNumbers('ini1walk', {
+        start: 5,
+        end: 6
+      }),
+      frameRate: 1,
+      repeat: -1
+    })
+
+    this.ini1walk1.forEach((ini11) => {
+      ini11.objeto = this.physics.add.sprite(ini11.x, ini11.y, 'ini1walk')
+        .setImmovable()
+      ini11.objeto.setVelocity(0, 0)
+      ini11.objeto.anims.play('ini1walk1-direita', true)
+      this.physics.add.collider(ini11.objeto, this.layerBlocos)
+      this.physics.add.collider(ini11.objeto, this.layerTrave1)
+      this.physics.add.collider(ini11.objeto, this.layerTrave2)
+      this.physics.add.collider(ini11.objeto, this.layerTrave3)
+      this.physics.add.collider(this.personagem, ini11.objeto, this.danoInimigos, null, this)
+      this.time.addEvent({
+        delay: 2000,
+        callback: () => {
+          ini11.bolaInimigo = this.physics.add.sprite(ini11.x, ini11.y, 'bola')
+          ini11.bolaInimigo.setVelocityX(500)
+          ini11.bolaInimigo.setVelocityY(0)
+          this.physics.add.collider(ini11.bolaInimigo, this.layerBlocos, null, null, this)
+          this.time.delayedCall(700, () => {
+            ini11.bolaInimigo.destroy()
           })
         },
         callbackScope: this,
@@ -1036,70 +1054,24 @@ export default class cena2 extends Phaser.Scene {
     } catch (error) {
       console.error(error)
     }
-    //if (this.vida > 0 && this.ini2walk.visible) {
-      /* morte segue personagem mais próximo */
-      /*const hipotenusaPersonagem = Phaser.Math.Distance.Between(
-        this.personagem.x,
-        this.ini2walk.x,
-        this.personagem.y,
-        this.ini2walk.y
-      )
 
-      const hipotenusaPersonagemRemoto = Phaser.Math.Distance.Between(
-        this.personagemRemoto.x,
-        this.ini2walk.x,
-        this.personagemRemoto.y,
-        this.ini2walk.y
-      )*/
-
-      /* Por padrão, o primeiro jogador é o alvo */
-      //let alvo = this.personagem
-      //if (hipotenusaPersonagem > hipotenusaPersonagemRemoto) {
-        /* Jogador 2 é perseguido pelo morte */
-        /*alvo = this.personagemRemoto
-      }
-*/
-      /* Sentido no eixo X */
-      /*const diffX = alvo.x - this.ini2walk.x
-      if (diffX >= 10) {
-        this.ini2walk.setVelocityX(this.velocidade * 0.5)
-      } else if (diffX <= 10) {
-        this.ini2walk.setVelocityX(-this.velocidade * 0.5)
-      }*/
-
-      /* Sentido no eixo Y */
-      /*const diffY = alvo.y - this.ini2walk.y
-      if (diffY >= 10) {
-        this.ini2walk.setVelocityY(100)
-      } else if (diffY <= 10) {
-        this.ini2walk.setVelocityY(-100)
-      }*/
-
-      /* Animação */
-     /* try {
-        if (diffX > 0) {
-          this.ini2walk.anims.play('ini2walk-direita', true)
-        } else if (diffX < 0) {
-          this.ini2walk.anims.play('ini2walk-esquerda', true)
-        } else if (diffY > 0) {
-          this.ini2walk.anims.play('ini2walk-parado', true)
-        } else {
-          this.ini2walk.anims.play('ini2walk')
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    }*/
-
-    this.ini2walk.children.iterate((ini2walk) => {
+    this.ini2walk.children.iterate((ini2walk1) => {
       // Verifica se o monstro atingiu os limites e inverte a direção
-      if (ini2walk.x > 1464) {
-        ini2walk.setVelocityX(-40);
-        ini2walk.flipX = false; // Inverte o sprite horizontalmente
-      } else if (ini2walk.x < 1214) {
-        ini2walk.setVelocityX(40);
-        ini2walk.flipX = true; // Reverte a orientação horizontal do sprite
+      if (ini2walk1.x > 200) {
+        ini2walk1.setVelocityX(-100);
+        ini2walk1.flipX = false; // Inverte o sprite horizontalmente
+      } else if (ini2walk1.x < 0) {
+        ini2walk1.setVelocityX(100);
+        ini2walk1.flipX = true; // Reverte a orientação horizontal do sprite
       }
+      // Verifica se o monstro atingiu os limites e inverte a direção
+//      if (ini2walk2.x > 200) {
+  //      ini2walk2.setVelocityX(-100);
+    //    ini2walk2.flipX = false; // Inverte o sprite horizontalmente
+ //     } else if (ini2walk2.x < 0) {
+   //     ini2walk2.setVelocityX(100);
+ //       ini2walk2.flipX = true; // Reverte a orientação horizontal do sprite
+   //   }
     });
   }
 
