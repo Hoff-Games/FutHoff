@@ -12,6 +12,9 @@ export default class cena2 extends Phaser.Scene {
     /* musica de fundo */
     this.load.audio('musicadefundo', '../assets/audio/musicadefundo.mp3')
 
+    //trave
+    this.load.image('trave', '../assets/fases/trave.png')
+
     // score
     this.load.image('scoremoeda', '../assets/fases/scoremoeda.png')
     this.load.image('scoreestrela', '../assets/fases/scoreestrela.png')
@@ -399,35 +402,39 @@ export default class cena2 extends Phaser.Scene {
     this.coracoes = this.add.sprite(-20, -20, 'coracoes')
       .setScale(1.5)
       .setScrollFactor(0, 0)
-
+    
+    //trave
+    this.trave = this.add.sprite(2075, 1280, 'trave')
     
     //inimigos
     this.ini2walk = this.physics.add.group(); // Cria um grupo de monstros
 
     // Adiciona um monstro ao grupo
-    this.ini2walk1 = this.ini2walk.create(-400, -500, 'ini2walk');
+    this.ini2walk1 = this.ini2walk.create(304, -288, 'ini2walk');
     this.physics.add.collider(this.ini2walk1, this.layerBlocos)
     this.ini2walk1.setVelocityX(-100);// Define a velocidade inicial do monstro
     this.anims.create({
       key: 'ini2walk1',
       frames: this.anims.generateFrameNumbers('ini2walk', {
         start: 0,
-        end: 7
+        end: 3
       }),
-      frameRate: 2,
+      frameRate: 3,
       repeat: -1
     });
 
     this.ini2walk1.anims.play('ini2walk1', true);
 
-    this.ini2walk2 = this.ini2walk.create(2000, -500, 'ini2walk');
+    this.ini2walk11 = this.physics.add.group(); // Cria um grupo de monstros
+
+    this.ini2walk2 = this.ini2walk11.create(1200, -288, 'ini2walk');
     this.physics.add.collider(this.ini2walk2, this.layerBlocos)
     this.ini2walk2.setVelocityX(-100);// Define a velocidade inicial do monstro
     this.anims.create({
       key: 'ini2walk2',
       frames: this.anims.generateFrameNumbers('ini2walk', {
         start: 0,
-        end: 7
+        end: 3
       }),
       frameRate: 2,
       repeat: -1
@@ -496,24 +503,32 @@ export default class cena2 extends Phaser.Scene {
         y: 790
       },
       {
-        x: 1000,
+        x: 930,
         y: 920
       },
       {
-        x: 920,
-        y: 790
+        x: 1150,
+        y: 1040
       },
       {
-        x: 1100,
-        y: -600
+        x: 856,
+        y: 160
+      },
+      {
+        x: 130,
+        y: 96
+      },
+      {
+        x: -296,
+        y: -608
       }
     ]
     /* animações dos inimigos */
     this.anims.create({
       key: 'ini1walk1-direita',
       frames: this.anims.generateFrameNumbers('ini1walk', {
-        start: 5,
-        end: 6
+        start: 6,
+        end: 7
       }),
       frameRate: 1,
       repeat: -1
@@ -614,6 +629,10 @@ export default class cena2 extends Phaser.Scene {
       {
         x: 1660,
         y: 1050
+      },
+      {
+        x: 1400,
+        y: 1100
       }
     ]
 
@@ -1057,21 +1076,24 @@ export default class cena2 extends Phaser.Scene {
 
     this.ini2walk.children.iterate((ini2walk1) => {
       // Verifica se o monstro atingiu os limites e inverte a direção
-      if (ini2walk1.x > 200) {
+      if (ini2walk1.x > 300) {
         ini2walk1.setVelocityX(-100);
         ini2walk1.flipX = false; // Inverte o sprite horizontalmente
-      } else if (ini2walk1.x < 0) {
+      } else if (ini2walk1.x < -100) {
         ini2walk1.setVelocityX(100);
         ini2walk1.flipX = true; // Reverte a orientação horizontal do sprite
       }
+    });
+
+    this.ini2walk11.children.iterate((ini2walk2) => {
       // Verifica se o monstro atingiu os limites e inverte a direção
-//      if (ini2walk2.x > 200) {
-  //      ini2walk2.setVelocityX(-100);
-    //    ini2walk2.flipX = false; // Inverte o sprite horizontalmente
- //     } else if (ini2walk2.x < 0) {
-   //     ini2walk2.setVelocityX(100);
- //       ini2walk2.flipX = true; // Reverte a orientação horizontal do sprite
-   //   }
+      if (ini2walk2.x > 100) {
+        ini2walk2.setVelocityX(-100);
+        ini2walk2.flipX = false; // Inverte o sprite horizontalmente
+      } else if (ini2walk1.x < 20) {
+        ini2walk2.setVelocityX(100);
+        ini2walk2.flipX = true; // Reverte a orientação horizontal do sprite
+      }
     });
   }
 
