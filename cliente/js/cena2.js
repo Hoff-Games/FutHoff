@@ -410,8 +410,9 @@ export default class cena2 extends Phaser.Scene {
     this.ini2walk = this.physics.add.group(); // Cria um grupo de monstros
 
     // Adiciona um monstro ao grupo
-    this.ini2walk1 = this.ini2walk.create(304, -288, 'ini2walk');
+    this.ini2walk1 = this.ini2walk.create(1180, 1300, 'ini2walk');
     this.physics.add.collider(this.ini2walk1, this.layerBlocos)
+    this.physics.add.collider(this.personagem, this.ini2walk1, this.danoInimigos, null, this)
     this.ini2walk1.setVelocityX(-100);// Define a velocidade inicial do monstro
     this.anims.create({
       key: 'ini2walk1',
@@ -425,10 +426,12 @@ export default class cena2 extends Phaser.Scene {
 
     this.ini2walk1.anims.play('ini2walk1', true);
 
-    this.ini2walk11 = this.physics.add.group(); // Cria um grupo de monstros
+    this.ini22walk = this.physics.add.group(); // Cria um grupo de monstros
 
-    this.ini2walk2 = this.ini2walk11.create(1200, -288, 'ini2walk');
+    // Adiciona um monstro ao grupo
+    this.ini2walk2 = this.ini22walk.create(2175, 288, 'ini2walk');
     this.physics.add.collider(this.ini2walk2, this.layerBlocos)
+    this.physics.add.collider(this.personagem, this.ini2walk2, this.danoInimigos, null, this)
     this.ini2walk2.setVelocityX(-100);// Define a velocidade inicial do monstro
     this.anims.create({
       key: 'ini2walk2',
@@ -436,11 +439,30 @@ export default class cena2 extends Phaser.Scene {
         start: 0,
         end: 3
       }),
-      frameRate: 2,
+      frameRate: 3,
       repeat: -1
     });
 
     this.ini2walk2.anims.play('ini2walk2', true);
+
+     this.ini23walk = this.physics.add.group(); // Cria um grupo de monstros
+
+    // Adiciona um monstro ao grupo
+    this.ini2walk3 = this.ini23walk.create(304, -288, 'ini2walk');
+    this.physics.add.collider(this.ini2walk3, this.layerBlocos)
+    this.physics.add.collider(this.personagem, this.ini2walk3, this.danoInimigos, null, this)
+    this.ini2walk3.setVelocityX(-100);// Define a velocidade inicial do monstro
+    this.anims.create({
+      key: 'ini2walk3',
+      frames: this.anims.generateFrameNumbers('ini2walk', {
+        start: 0,
+        end: 3
+      }),
+      frameRate: 3,
+      repeat: -1
+    });
+
+    this.ini2walk3.anims.play('ini2walk3', true);
 
     this.ini1walk = [
       {
@@ -567,6 +589,7 @@ export default class cena2 extends Phaser.Scene {
       this.physics.add.collider(lava.objeto, this.layerTrave1)
       this.physics.add.collider(lava.objeto, this.layerTrave2)
       this.physics.add.collider(lava.objeto, this.layerTrave3)
+      this.physics.add.overlap(this.personagem, lava.objeto, this.gameOver, null, this)
     })
 
     /* animação moeda */
@@ -985,7 +1008,7 @@ export default class cena2 extends Phaser.Scene {
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
-    this.cameras.main.startFollow(this.personagem).setZoom(0.2)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.75)
     this.cameras.main.followOffset.set(0, 100)
 
     /* tela cheia */
@@ -1076,23 +1099,32 @@ export default class cena2 extends Phaser.Scene {
 
     this.ini2walk.children.iterate((ini2walk1) => {
       // Verifica se o monstro atingiu os limites e inverte a direção
-      if (ini2walk1.x > 300) {
+      if (ini2walk1.x > 1180) {
         ini2walk1.setVelocityX(-100);
         ini2walk1.flipX = false; // Inverte o sprite horizontalmente
-      } else if (ini2walk1.x < -100) {
+      } else if (ini2walk1.x < 600) {
         ini2walk1.setVelocityX(100);
         ini2walk1.flipX = true; // Reverte a orientação horizontal do sprite
       }
     });
-
-    this.ini2walk11.children.iterate((ini2walk2) => {
+    this.ini22walk.children.iterate((ini2walk2) => {
       // Verifica se o monstro atingiu os limites e inverte a direção
-      if (ini2walk2.x > 100) {
+      if (ini2walk2.x > 2175) {
         ini2walk2.setVelocityX(-100);
         ini2walk2.flipX = false; // Inverte o sprite horizontalmente
-      } else if (ini2walk1.x < 20) {
+      } else if (ini2walk2.x < 1900) {
         ini2walk2.setVelocityX(100);
         ini2walk2.flipX = true; // Reverte a orientação horizontal do sprite
+      }
+    });
+    this.ini23walk.children.iterate((ini2walk3) => {
+      // Verifica se o monstro atingiu os limites e inverte a direção
+      if (ini2walk3.x > 300) {
+        ini2walk3.setVelocityX(-100);
+        ini2walk3.flipX = false; // Inverte o sprite horizontalmente
+      } else if (ini2walk3.x < -100) {
+        ini2walk3.setVelocityX(100);
+        ini2walk3.flipX = true; // Reverte a orientação horizontal do sprite
       }
     });
   }
@@ -1140,12 +1172,6 @@ export default class cena2 extends Phaser.Scene {
   bolalAtingeInimigo (bola, ini1) {
     bola.destroy()
     ini1.objeto.destroy()
-  }
-
-  colisaoInimigos (personagem, inimigo) {
-    inimigo
-      .setSize(64, 64)
-      .setOffset(0, 0)
   }
 
   danoInimigos (personagem, inimigo) {
