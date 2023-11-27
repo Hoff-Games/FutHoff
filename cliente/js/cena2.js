@@ -12,7 +12,7 @@ export default class cena2 extends Phaser.Scene {
     /* musica de fundo */
     this.load.audio('musicadefundo', '../assets/audio/musicadefundo.mp3')
 
-    //trave
+    // trave
     this.load.image('trave', '../assets/fases/trave.png')
 
     // score
@@ -402,18 +402,18 @@ export default class cena2 extends Phaser.Scene {
     this.coracoes = this.add.sprite(-20, -20, 'coracoes')
       .setScale(1.5)
       .setScrollFactor(0, 0)
-    
-    //trave
+
+    // trave
     this.trave = this.add.sprite(2075, 1280, 'trave')
-    
-    //inimigos
-    this.ini2walk = this.physics.add.group(); // Cria um grupo de monstros
+
+    // inimigos
+    this.ini2walk = this.physics.add.group() // Cria um grupo de monstros
 
     // Adiciona um monstro ao grupo
-    this.ini2walk1 = this.ini2walk.create(1180, 1300, 'ini2walk');
+    this.ini2walk1 = this.ini2walk.create(1180, 1300, 'ini2walk')
     this.physics.add.collider(this.ini2walk1, this.layerBlocos)
     this.physics.add.collider(this.personagem, this.ini2walk1, this.danoInimigos, null, this)
-    this.ini2walk1.setVelocityX(-100);// Define a velocidade inicial do monstro
+    this.ini2walk1.setVelocityX(-100)// Define a velocidade inicial do monstro
     this.anims.create({
       key: 'ini2walk1',
       frames: this.anims.generateFrameNumbers('ini2walk', {
@@ -422,17 +422,17 @@ export default class cena2 extends Phaser.Scene {
       }),
       frameRate: 3,
       repeat: -1
-    });
+    })
 
-    this.ini2walk1.anims.play('ini2walk1', true);
+    this.ini2walk1.anims.play('ini2walk1', true)
 
-    this.ini22walk = this.physics.add.group(); // Cria um grupo de monstros
+    this.ini22walk = this.physics.add.group() // Cria um grupo de monstros
 
     // Adiciona um monstro ao grupo
-    this.ini2walk2 = this.ini22walk.create(2175, 288, 'ini2walk');
+    this.ini2walk2 = this.ini22walk.create(2175, 288, 'ini2walk')
     this.physics.add.collider(this.ini2walk2, this.layerBlocos)
     this.physics.add.collider(this.personagem, this.ini2walk2, this.danoInimigos, null, this)
-    this.ini2walk2.setVelocityX(-100);// Define a velocidade inicial do monstro
+    this.ini2walk2.setVelocityX(-100)// Define a velocidade inicial do monstro
     this.anims.create({
       key: 'ini2walk2',
       frames: this.anims.generateFrameNumbers('ini2walk', {
@@ -441,17 +441,17 @@ export default class cena2 extends Phaser.Scene {
       }),
       frameRate: 3,
       repeat: -1
-    });
+    })
 
-    this.ini2walk2.anims.play('ini2walk2', true);
+    this.ini2walk2.anims.play('ini2walk2', true)
 
-     this.ini23walk = this.physics.add.group(); // Cria um grupo de monstros
+    this.ini23walk = this.physics.add.group() // Cria um grupo de monstros
 
     // Adiciona um monstro ao grupo
-    this.ini2walk3 = this.ini23walk.create(304, -288, 'ini2walk');
+    this.ini2walk3 = this.ini23walk.create(304, -288, 'ini2walk')
     this.physics.add.collider(this.ini2walk3, this.layerBlocos)
     this.physics.add.collider(this.personagem, this.ini2walk3, this.danoInimigos, null, this)
-    this.ini2walk3.setVelocityX(-100);// Define a velocidade inicial do monstro
+    this.ini2walk3.setVelocityX(-100)// Define a velocidade inicial do monstro
     this.anims.create({
       key: 'ini2walk3',
       frames: this.anims.generateFrameNumbers('ini2walk', {
@@ -460,9 +460,9 @@ export default class cena2 extends Phaser.Scene {
       }),
       frameRate: 3,
       repeat: -1
-    });
+    })
 
-    this.ini2walk3.anims.play('ini2walk3', true);
+    this.ini2walk3.anims.play('ini2walk3', true)
 
     this.ini1walk = [
       {
@@ -1095,40 +1095,40 @@ export default class cena2 extends Phaser.Scene {
       if (this.baixo.frame.name === 1 && this.naEscada === false) {
         this.personagem.setSize(64, 32).setOffset(0, 32)
       }
+
+      this.ini2walk.children.iterate((ini2walk1) => {
+        // Verifica se o monstro atingiu os limites e inverte a direção
+        if (ini2walk1.x > 1180) {
+          ini2walk1.setVelocityX(-100)
+          ini2walk1.flipX = false // Inverte o sprite horizontalmente
+        } else if (ini2walk1.x < 600) {
+          ini2walk1.setVelocityX(100)
+          ini2walk1.flipX = true // Reverte a orientação horizontal do sprite
+        }
+      })
+      this.ini22walk.children.iterate((ini2walk2) => {
+        // Verifica se o monstro atingiu os limites e inverte a direção
+        if (ini2walk2.x > 2175) {
+          ini2walk2.setVelocityX(-100)
+          ini2walk2.flipX = false // Inverte o sprite horizontalmente
+        } else if (ini2walk2.x < 1900) {
+          ini2walk2.setVelocityX(100)
+          ini2walk2.flipX = true // Reverte a orientação horizontal do sprite
+        }
+      })
+      this.ini23walk.children.iterate((ini2walk3) => {
+        // Verifica se o monstro atingiu os limites e inverte a direção
+        if (ini2walk3.x > 300) {
+          ini2walk3.setVelocityX(-100)
+          ini2walk3.flipX = false // Inverte o sprite horizontalmente
+        } else if (ini2walk3.x < -100) {
+          ini2walk3.setVelocityX(100)
+          ini2walk3.flipX = true // Reverte a orientação horizontal do sprite
+        }
+      })
     } catch (error) {
       console.error(error)
     }
-
-    this.ini2walk.children.iterate((ini2walk1) => {
-      // Verifica se o monstro atingiu os limites e inverte a direção
-      if (ini2walk1.x > 1180) {
-        ini2walk1.setVelocityX(-100);
-        ini2walk1.flipX = false; // Inverte o sprite horizontalmente
-      } else if (ini2walk1.x < 600) {
-        ini2walk1.setVelocityX(100);
-        ini2walk1.flipX = true; // Reverte a orientação horizontal do sprite
-      }
-    });
-    this.ini22walk.children.iterate((ini2walk2) => {
-      // Verifica se o monstro atingiu os limites e inverte a direção
-      if (ini2walk2.x > 2175) {
-        ini2walk2.setVelocityX(-100);
-        ini2walk2.flipX = false; // Inverte o sprite horizontalmente
-      } else if (ini2walk2.x < 1900) {
-        ini2walk2.setVelocityX(100);
-        ini2walk2.flipX = true; // Reverte a orientação horizontal do sprite
-      }
-    });
-    this.ini23walk.children.iterate((ini2walk3) => {
-      // Verifica se o monstro atingiu os limites e inverte a direção
-      if (ini2walk3.x > 300) {
-        ini2walk3.setVelocityX(-100);
-        ini2walk3.flipX = false; // Inverte o sprite horizontalmente
-      } else if (ini2walk3.x < -100) {
-        ini2walk3.setVelocityX(100);
-        ini2walk3.flipX = true; // Reverte a orientação horizontal do sprite
-      }
-    });
   }
 
   coletarmoeda (personagem, moeda) {
@@ -1180,12 +1180,6 @@ export default class cena2 extends Phaser.Scene {
     inimigo
       .setSize(1, 1)
       .setOffset(1000000, 10000000000000)
-    this.time.addEvent({
-      callback: () => { this.colisaoInimigos(personagem, inimigo) },
-      delay: 1000,
-      callbackScope: this,
-      loop: false
-    })
     this.game.vida.frameCoracoes += 1
     this.coracoes.setFrame(`${this.game.vida.frameCoracoes}`)
     if (this.coracoes.frame.name === 3) {
