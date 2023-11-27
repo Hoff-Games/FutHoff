@@ -510,6 +510,7 @@ export default class cena2 extends Phaser.Scene {
           ini1.bolaInimigo.setVelocityX(-500)
           ini1.bolaInimigo.setVelocityY(0)
           this.physics.add.collider(ini1.bolaInimigo, this.layerBlocos, null, null, this)
+          this.physics.add.collider(this.personagem, ini1.bolaInimigo, this.danoInimigos, null, this)
           this.time.delayedCall(700, () => {
             ini1.bolaInimigo.destroy()
           })
@@ -573,6 +574,7 @@ export default class cena2 extends Phaser.Scene {
           ini11.bolaInimigo.setVelocityX(500)
           ini11.bolaInimigo.setVelocityY(0)
           this.physics.add.collider(ini11.bolaInimigo, this.layerBlocos, null, null, this)
+          this.physics.add.collider(this.personagem, ini11.bolaInimigo, this.danoInimigos, null, this)
           this.time.delayedCall(700, () => {
             ini11.bolaInimigo.destroy()
           })
