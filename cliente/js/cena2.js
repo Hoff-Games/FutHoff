@@ -1229,7 +1229,7 @@ export default class cena2 extends Phaser.Scene {
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
-    this.cameras.main.startFollow(this.personagem).setZoom(0.2)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.75)
     this.cameras.main.followOffset.set(0, 100)
 
     /* tela cheia */
