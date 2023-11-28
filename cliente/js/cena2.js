@@ -973,8 +973,8 @@ export default class cena2 extends Phaser.Scene {
             velocityX: this.bola.body.velocity.x
           }
         })
-        this.physics.add.collider(this.bola, this.layerBlocos, this.bolaAtingeChao, null, this)
-        this.physics.add.collider(this.bola, ini1.objeto, this.bolalAtingeInimigo, null, this)
+        this.physics.add.collider(this.bola, this.layerBlocos, null, null, this)
+        this.physics.add.collider(this.bola, this.ini2walk3, this.bolaAtingeInimigo, null, this)
         this.time.delayedCall(500, () => {
           this.bola.destroy()
         })
@@ -1055,8 +1055,8 @@ export default class cena2 extends Phaser.Scene {
         }
         this.bola = this.physics.add.sprite(artefatos.bola.x, artefatos.bola.y + 14, 'bola')
         this.bola.setVelocityX(artefatos.bola.velocityX)
-        this.physics.add.collider(this.bola, this.layerBlocos, this.bolaAtingeChao, null, this)
-        this.physics.add.collider(this.bola, ini1.objeto, this.bolalAtingeInimigo, null, this)
+        this.physics.add.collider(this.bola, this.layerBlocos, null, null, this)
+        this.physics.add.collider(this.bola, this.ini2walk3, this.bolaAtingeInimigo, null, this)
         this.time.delayedCall(500, () => {
           this.bola.destroy()
         })
@@ -1170,9 +1170,9 @@ export default class cena2 extends Phaser.Scene {
     }
   }
 
-  bolalAtingeInimigo (bola, ini1) {
+  bolaAtingeInimigo (bola, ini2walk3) {
     bola.destroy()
-    ini1.objeto.destroy()
+    ini2walk3.destroy()
   }
 
   danoInimigos (personagem, inimigo) {
@@ -1181,6 +1181,7 @@ export default class cena2 extends Phaser.Scene {
     } else {
       this.game.vida.frameCoracoes += 1
       this.coracoes.setFrame(`${this.game.vida.frameCoracoes}`)
+      inimigo.disableBody(true, true)
       if (this.coracoes.frame.name === 3) {
         this.gameOver()
       }
