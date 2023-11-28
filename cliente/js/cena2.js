@@ -1043,7 +1043,6 @@ export default class cena2 extends Phaser.Scene {
         }
       }
       if (artefatos.estrelas) {
-        2
         for (let i = 0; i < artefatos.estrelas.length; i++) {
           if (!artefatos.estrelas[i]) {
             this.estrelas[i].objeto.disableBody(true, true)
@@ -1177,13 +1176,14 @@ export default class cena2 extends Phaser.Scene {
   }
 
   danoInimigos (personagem, inimigo) {
-    inimigo
-      .setSize(1, 1)
-      .setOffset(1000000, 10000000000000)
-    this.game.vida.frameCoracoes += 1
-    this.coracoes.setFrame(`${this.game.vida.frameCoracoes}`)
-    if (this.coracoes.frame.name === 3) {
-      this.gameOver()
+    if (this.personagem.anims.currentAnim.key.match(/.*carro.*/)) {
+      inimigo.disableBody(true, true)
+    } else {
+      this.game.vida.frameCoracoes += 1
+      this.coracoes.setFrame(`${this.game.vida.frameCoracoes}`)
+      if (this.coracoes.frame.name === 3) {
+        this.gameOver()
+      }
     }
   }
 
