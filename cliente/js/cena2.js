@@ -1396,11 +1396,11 @@ export default class cena2 extends Phaser.Scene {
 
   danoInimigos (personagem, inimigo) {
     if (this.personagem.anims.currentAnim.key.match(/.*carro.*/)) {
-      inimigo.disableBody(true, true)
+      inimigo.destroy(true, true)
     } else {
       this.game.vida.frameCoracoes += 1
       this.coracoes.setFrame(`${this.game.vida.frameCoracoes}`)
-      inimigo.disableBody(true, true)
+      inimigo.destroy(true, true)
       if (this.coracoes.frame.name === 3) {
         this.gameOver()
       }
