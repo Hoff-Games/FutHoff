@@ -64,6 +64,12 @@ export default class cena2 extends Phaser.Scene {
     /* atacar */
     this.load.image('bola', '../assets/personagens/bola.png')
 
+    /*espinhos*/
+    this.load.image('esp1', '../assets/fases/esp1.png')
+    this.load.image('esp2', '../assets/fases/esp2.png')
+    this.load.image('esp3', '../assets/fases/esp3.png')
+    this.load.image('esp4', '../assets/fases/esp4.png')
+
     /* Inimigos */
     this.load.spritesheet('ini1walk', '../assets/personagens/ini1walk.png', {
       frameWidth: 64,
@@ -584,7 +590,7 @@ export default class cena2 extends Phaser.Scene {
       })
     })
 
-    /* colisao agua e lava */
+    /* colisao lava */
 
     this.lava.forEach((lava) => {
       this.physics.add.collider(lava.objeto, this.layerBlocos)
@@ -997,6 +1003,216 @@ export default class cena2 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
+
+    /*espinhos*/
+    this.esp1s = [
+      {
+        x: -32,
+        y: 352
+      },
+      {
+        x: 32,
+        y: 352
+      },
+      {
+        x: 96,
+        y: 352
+      },
+      {
+        x: 160,
+        y: 352
+      },
+      {
+        x: 224,
+        y: 352
+      },
+      {
+        x: 288,
+        y: 352
+      },
+      {
+        x: 352,
+        y: 352
+      },
+      {
+        x: 416,
+        y: 352
+      },
+      {
+        x: 480,
+        y: 352
+      },
+      {
+        x: 544,
+        y: 352
+      },
+      {
+        x: 608,
+        y: 352
+      },
+      {
+        x: 672,
+        y: 352
+      },
+      {
+        x: 736,
+        y: 352
+      },
+      {
+        x: 800,
+        y: 352
+      },
+      {
+        x: 864,
+        y: 352
+      },
+      {
+        x: 928,
+        y: 352
+      },
+      {
+        x: 992,
+        y: 352
+      },
+      {
+        x: -280,
+        y: 352
+      },
+      {
+        x: -554,
+        y: 608
+      },
+      {
+        x: -280,
+        y: 800
+      },
+      {
+        x: -554,
+        y: 1056
+      }
+    ]
+
+    this.esp1s.forEach((esp1) => {
+      esp1.objeto = this.physics.add.image(esp1.x, esp1.y, 'esp1')
+      esp1.objeto.body.setAllowGravity(false)
+      this.physics.add.overlap(this.personagem, esp1.objeto, this.gameOver, null, this)
+    })
+
+    this.esp2s = [
+      {
+        x: -210,
+        y: -40
+      },
+      {
+        x: -146,
+        y: -40
+      },
+      {
+        x: 1054,
+        y: -40
+      },
+      {
+        x: 1118,
+        y: -40
+      },
+      {
+        x: 1182,
+        y: -40
+      },
+      {
+        x: 1890,
+        y: -40
+      },
+      {
+        x: 1954,
+        y: -40
+      },
+      {
+        x: 2018,
+        y: -40
+      },
+      {
+        x: 1440,
+        y: 20
+      },
+      {
+        x: 1504,
+        y: 20
+      },
+      {
+        x: 1568,
+        y: 20
+      },
+      {
+        x: 1632,
+        y: 20
+      }
+    ]
+
+    this.esp2s.forEach((esp2) => {
+      esp2.objeto = this.physics.add.image(esp2.x, esp2.y, 'esp2')
+      esp2.objeto.body.setAllowGravity(false)
+      this.physics.add.overlap(this.personagem, esp2.objeto, this.gameOver, null, this)
+    })
+
+    this.esp3s = [
+      {
+        x: 800,
+        y: 672
+      },
+      {
+        x: 800,
+        y: 736
+      },
+      {
+        x: 800,
+        y: 800
+      },
+      {
+        x: 800,
+        y: 864
+      },
+      {
+        x: 800,
+        y: 928
+      }
+    ]
+
+    this.esp3s.forEach((esp3) => {
+      esp3.objeto = this.physics.add.image(esp3.x, esp3.y, 'esp3')
+      esp3.objeto.body.setAllowGravity(false)
+      this.physics.add.overlap(this.personagem, esp3.objeto, this.gameOver, null, this)
+    })
+
+    this.esp4s = [
+      {
+        x: 2018,
+        y: 672
+      },
+      {
+        x: 2018,
+        y: 736
+      },
+      {
+        x: 2018,
+        y: 800
+      },
+      {
+        x: 2018,
+        y: 864
+      },
+      {
+        x: 2018,
+        y: 928
+      }
+    ]
+
+    this.esp4s.forEach((esp4) => {
+      esp4.objeto = this.physics.add.image(esp4.x, esp4.y, 'esp4')
+      esp4.objeto.body.setAllowGravity(false)
+      this.physics.add.overlap(this.personagem, esp4.objeto, this.gameOver, null, this)
+    })
+
     /* colisao agua */
     this.agua.forEach((agua) => {
       this.physics.add.collider(agua.objeto, this.layerBlocos)
@@ -1010,7 +1226,7 @@ export default class cena2 extends Phaser.Scene {
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
-    this.cameras.main.startFollow(this.personagem).setZoom(0.75)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.2)
     this.cameras.main.followOffset.set(0, 100)
 
     /* tela cheia */
