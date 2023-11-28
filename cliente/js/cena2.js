@@ -984,7 +984,10 @@ export default class cena2 extends Phaser.Scene {
           }
         })
         this.physics.add.collider(this.bola, this.layerBlocos, null, null, this)
-        this.physics.add.collider(this.bola, this.ini2walk3, this.bolaAtingeInimigo, null, this)
+        this.physics.add.collider(this.bola, this.ini2walk1, this.bolaAtingeInimigo1, null, this)
+        this.physics.add.collider(this.bola, this.ini2walk2, this.bolaAtingeInimigo2, null, this)
+        this.physics.add.collider(this.bola, this.ini2walk3, this.bolaAtingeInimigo3, null, this)
+        this.physics.add.collider(this.bola, this.ini1walk, this.bolaAtingeInimigo4, null, this)
         this.time.delayedCall(500, () => {
           this.bola.destroy()
         })
@@ -1275,7 +1278,10 @@ export default class cena2 extends Phaser.Scene {
         this.bola = this.physics.add.sprite(artefatos.bola.x, artefatos.bola.y + 14, 'bola')
         this.bola.setVelocityX(artefatos.bola.velocityX)
         this.physics.add.collider(this.bola, this.layerBlocos, null, null, this)
-        this.physics.add.collider(this.bola, this.ini2walk3, this.bolaAtingeInimigo, null, this)
+        this.physics.add.collider(this.bola, this.ini2walk1, this.bolaAtingeInimigo1, null, this)
+        this.physics.add.collider(this.bola, this.ini2walk2, this.bolaAtingeInimigo2, null, this)
+        this.physics.add.collider(this.bola, this.ini2walk3, this.bolaAtingeInimigo3, null, this)
+        this.physics.add.collider(this.bola, this.ini1walk, this.bolaAtingeInimigo4, null, this)
         this.time.delayedCall(500, () => {
           this.bola.destroy()
         })
@@ -1389,9 +1395,24 @@ export default class cena2 extends Phaser.Scene {
     }
   }
 
-  bolaAtingeInimigo (bola, ini2walk3) {
+  bolaAtingeInimigo1 (bola, ini2walk1) {
+    bola.destroy()
+    ini2walk1.destroy()
+  }
+
+  bolaAtingeInimigo2 (bola, ini2walk2) {
+    bola.destroy()
+    ini2walk2.destroy()
+  }
+
+  bolaAtingeInimigo3 (bola, ini2walk3) {
     bola.destroy()
     ini2walk3.destroy()
+  }
+
+  bolaAtingeInimigo4 (bola, ini1walk) {
+    bola.destroy()
+    ini1walk.destroy()
   }
 
   danoInimigos (personagem, inimigo) {
