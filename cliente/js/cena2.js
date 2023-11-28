@@ -64,7 +64,7 @@ export default class cena2 extends Phaser.Scene {
     /* atacar */
     this.load.image('bola', '../assets/personagens/bola.png')
 
-    /*espinhos*/
+    /* espinhos */
     this.load.image('esp1', '../assets/fases/esp1.png')
     this.load.image('esp2', '../assets/fases/esp2.png')
     this.load.image('esp3', '../assets/fases/esp3.png')
@@ -512,14 +512,16 @@ export default class cena2 extends Phaser.Scene {
       this.time.addEvent({
         delay: 2000,
         callback: () => {
-          ini1.bolaInimigo = this.physics.add.sprite(ini1.x, ini1.y, 'bola')
-          ini1.bolaInimigo.setVelocityX(-500)
-          ini1.bolaInimigo.setVelocityY(0)
-          this.physics.add.collider(ini1.bolaInimigo, this.layerBlocos, null, null, this)
-          this.physics.add.collider(this.personagem, ini1.bolaInimigo, this.danoInimigos, null, this)
-          this.time.delayedCall(700, () => {
-            ini1.bolaInimigo.destroy()
-          })
+          if (ini1.objeto.visible) {
+            ini1.bolaInimigo = this.physics.add.sprite(ini1.x, ini1.y, 'bola')
+            ini1.bolaInimigo.setVelocityX(-500)
+            ini1.bolaInimigo.setVelocityY(0)
+            this.physics.add.collider(ini1.bolaInimigo, this.layerBlocos, null, null, this)
+            this.physics.add.collider(this.personagem, ini1.bolaInimigo, this.danoInimigos, null, this)
+            this.time.delayedCall(700, () => {
+              ini1.bolaInimigo.destroy()
+            })
+          }
         },
         callbackScope: this,
         loop: true
@@ -576,14 +578,16 @@ export default class cena2 extends Phaser.Scene {
       this.time.addEvent({
         delay: 2000,
         callback: () => {
-          ini11.bolaInimigo = this.physics.add.sprite(ini11.x, ini11.y, 'bola')
-          ini11.bolaInimigo.setVelocityX(500)
-          ini11.bolaInimigo.setVelocityY(0)
-          this.physics.add.collider(ini11.bolaInimigo, this.layerBlocos, null, null, this)
-          this.physics.add.collider(this.personagem, ini11.bolaInimigo, this.danoInimigos, null, this)
-          this.time.delayedCall(700, () => {
-            ini11.bolaInimigo.destroy()
-          })
+          if (ini11.objeto.visible) {
+            ini11.bolaInimigo = this.physics.add.sprite(ini11.x, ini11.y, 'bola')
+            ini11.bolaInimigo.setVelocityX(500)
+            ini11.bolaInimigo.setVelocityY(0)
+            this.physics.add.collider(ini11.bolaInimigo, this.layerBlocos, null, null, this)
+            this.physics.add.collider(this.personagem, ini11.bolaInimigo, this.danoInimigos, null, this)
+            this.time.delayedCall(700, () => {
+              ini11.bolaInimigo.destroy()
+            })
+          }
         },
         callbackScope: this,
         loop: true
@@ -1003,8 +1007,7 @@ export default class cena2 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
-
-    /*espinhos*/
+    /* espinhos */
     this.esp1s = [
       {
         x: -32,
