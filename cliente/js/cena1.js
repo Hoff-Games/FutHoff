@@ -8,6 +8,9 @@ export default class cena1 extends Phaser.Scene {
     /* fundo */
     this.load.image('cenasala', '../assets/cenas/cenasala.png')
 
+    /* musica de fundo */
+    this.load.audio('musicadefundo', '../assets/audio/musicadefundo.mp3')
+
     /* botoes de salas */
     this.load.spritesheet('sala1', '../assets/botoes/sala1.png', {
       frameWidth: 120,
@@ -45,8 +48,6 @@ export default class cena1 extends Phaser.Scene {
       frameWidth: 120,
       frameHeight: 60
     })
-
-    this.load.audio('trilha', '../assets/audio/musicasalas.mp3')
   }
 
   create () {
@@ -57,10 +58,10 @@ export default class cena1 extends Phaser.Scene {
       font: '32px Courier',
       fill: '#cccccc'
     })
-
-    this.trilha = this.sound.add('trilha')
-    this.trilha.loop = true
-    this.trilha.play()
+    this.game.scene.getScene('cena-tutorial').trilha.stop()
+    this.fundo = this.sound.add('musicadefundo')
+    this.fundo.loop = true
+    this.fundo.play()
 
     this.salas = [
       {
@@ -139,7 +140,6 @@ export default class cena1 extends Phaser.Scene {
         }
       })
     })
-    this.game.scene.getScene('cena2').fundo.stop()
   }
 
   update () { }

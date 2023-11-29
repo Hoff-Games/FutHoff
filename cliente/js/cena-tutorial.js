@@ -5,9 +5,15 @@ export default class cenatutorial extends Phaser.Scene {
 
   preload () {
     this.load.image('tutorial', '../assets/cenas/tutorial.png')
+
+    this.load.audio('trilha', '../assets/audio/musicasalas.mp3')
   }
 
   create () {
+    this.trilha = this.sound.add('trilha')
+    this.trilha.loop = true
+    this.trilha.play()
+
     this.imagem = this.add
       .image(400, 225, 'tutorial')
       .setInteractive()

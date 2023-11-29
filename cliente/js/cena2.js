@@ -9,9 +9,6 @@ export default class cena2 extends Phaser.Scene {
     /* mapas */
     this.load.tilemapTiledJSON('fases', '../assets/fases/fases.json')
 
-    /* musica de fundo */
-    this.load.audio('musicadefundo', '../assets/audio/musicadefundo.mp3')
-
     // trave
     this.load.image('trave', '../assets/fases/trave.png')
 
@@ -126,11 +123,6 @@ export default class cena2 extends Phaser.Scene {
   create () {
     /* mapas */
     this.tilemapFases = this.make.tilemap({ key: 'fases' })
-
-    try { this.game.scene.getScene('cena1').trilha.stop() } catch (error) { console.error(error) }
-    this.fundo = this.sound.add('musicadefundo')
-    this.fundo.loop = true
-    this.fundo.play()
 
     /* tilesets */
     this.tilesetDec1 = this.tilemapFases.addTilesetImage('dec1')
@@ -406,7 +398,9 @@ export default class cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
 
     // trave
-    this.trave = this.add.sprite(2075, 1280, 'trave')
+    this.trave = this.physics.add.sprite(2075, 1280, 'trave')
+      .setImmovable(true)
+    this.trave.body.setAllowGravity(false)
 
     // inimigos
     this.ini2walk = this.physics.add.group() // Cria um grupo de monstros
@@ -987,6 +981,7 @@ export default class cena2 extends Phaser.Scene {
         this.physics.add.collider(this.bola, this.ini2walk3, this.bolaAtingeInimigo3, null, this)
         this.physics.add.collider(this.bola, this.ini1walk, this.bolaAtingeInimigo4, null, this)
         this.physics.add.collider(this.bola, this.ini1walk1, this.bolaAtingeInimigo5, null, this)
+        this.physics.add.collider(this.bola, this.trave, this.creditos, null, this)
         this.time.delayedCall(500, () => {
           this.bola.destroy()
         })
@@ -1282,6 +1277,7 @@ export default class cena2 extends Phaser.Scene {
         this.physics.add.collider(this.bola, this.ini2walk3, this.bolaAtingeInimigo3, null, this)
         this.physics.add.collider(this.bola, this.ini1walk, this.bolaAtingeInimigo4, null, this)
         this.physics.add.collider(this.bola, this.ini1walk1, this.bolaAtingeInimigo5, null, this)
+        this.physics.add.collider(this.bola, this.trave, this.creditos, null, this)
         this.time.delayedCall(500, () => {
           this.bola.destroy()
         })
@@ -1437,7 +1433,15 @@ export default class cena2 extends Phaser.Scene {
     }
   }
 
+  creditos () {
+    this.game.scene.stop('cena2')
+    this.game.scene.start('final-feliz')
+  }
+
   gameOver () {
+    this.game.scoreMoeda.score = 0
+    this.game.scoreEstrela.score = 0
+    this.game.scene.restart('cena2')
     this.game.scene.stop('cena2')
     this.game.socket.emit('cena-publicar', this.game.sala, 'gameover')
     this.game.scene.start('gameover')
