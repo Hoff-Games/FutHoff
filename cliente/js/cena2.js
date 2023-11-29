@@ -964,11 +964,13 @@ export default class cena2 extends Phaser.Scene {
         if (esquerda.test(anim)) {
           this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y + 14, 'bola')
           this.bola.setVelocityX(-500)
+          this.bola.setVelocityY(-200)
           this.personagem.setVelocityY(0)
           this.personagem.anims.play('personagem-chuta-esquerda', true)
         } else if (direita.test(anim)) {
           this.bola = this.physics.add.sprite(this.personagem.x, this.personagem.y + 14, 'bola')
           this.bola.setVelocityX(500)
+          this.bola.setVelocityY(-200)
           this.personagem.setVelocityY(0)
           this.personagem.anims.play('personagem-chuta-direita', true)
         }
@@ -984,6 +986,7 @@ export default class cena2 extends Phaser.Scene {
         this.physics.add.collider(this.bola, this.ini2walk2, this.bolaAtingeInimigo2, null, this)
         this.physics.add.collider(this.bola, this.ini2walk3, this.bolaAtingeInimigo3, null, this)
         this.physics.add.collider(this.bola, this.ini1walk, this.bolaAtingeInimigo4, null, this)
+        this.physics.add.collider(this.bola, this.ini1walk1, this.bolaAtingeInimigo5, null, this)
         this.time.delayedCall(500, () => {
           this.bola.destroy()
         })
@@ -1103,11 +1106,11 @@ export default class cena2 extends Phaser.Scene {
     this.esp2s = [
       {
         x: -210,
-        y: -40
+        y: -60
       },
       {
         x: -146,
-        y: -40
+        y: -60
       },
       {
         x: 1054,
@@ -1228,7 +1231,7 @@ export default class cena2 extends Phaser.Scene {
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
-    this.cameras.main.startFollow(this.personagem).setZoom(0.3)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.75)
     this.cameras.main.followOffset.set(0, 100)
 
     /* tela cheia */
@@ -1278,6 +1281,7 @@ export default class cena2 extends Phaser.Scene {
         this.physics.add.collider(this.bola, this.ini2walk2, this.bolaAtingeInimigo2, null, this)
         this.physics.add.collider(this.bola, this.ini2walk3, this.bolaAtingeInimigo3, null, this)
         this.physics.add.collider(this.bola, this.ini1walk, this.bolaAtingeInimigo4, null, this)
+        this.physics.add.collider(this.bola, this.ini1walk1, this.bolaAtingeInimigo5, null, this)
         this.time.delayedCall(500, () => {
           this.bola.destroy()
         })
@@ -1406,9 +1410,18 @@ export default class cena2 extends Phaser.Scene {
     ini2walk3.destroy()
   }
 
-  bolaAtingeInimigo4 (bola, ini1walk) {
+  bolaAtingeInimigo4 (ini1walk) {
+    for (let i = 0; i < this.ini1walk.length; i++) {
+      if (!ini1walk[i]) {
+        this.utlimoIni1 = this.ini1walk[i].objeto
+        this.utlimoIni1.destroy()
+      }
+    }
+  }
+
+  bolaAtingeInimigo5 (bola, ini1walk1) {
     bola.destroy()
-    ini1walk.destroy()
+    ini1walk1.destroy()
   }
 
   danoInimigos (personagem, inimigo) {
