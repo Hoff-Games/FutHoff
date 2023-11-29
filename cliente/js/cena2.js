@@ -201,7 +201,7 @@ export default class cena2 extends Phaser.Scene {
 
     this.lava = [
       {
-        x: 1250,
+        x: 1268,
         y: 350
       },
       {
@@ -238,10 +238,6 @@ export default class cena2 extends Phaser.Scene {
       },
       {
         x: 1826,
-        y: 350
-      },
-      {
-        x: 1875,
         y: 350
       },
       {
@@ -1232,7 +1228,7 @@ export default class cena2 extends Phaser.Scene {
     this.personagem.setCollideWorldBounds(true)
     this.physics.world.setBounds(-700, -832, 3133, 2390, true, true, true, false)
     this.cameras.main.setBounds(-700, -832, 3133, 2390)
-    this.cameras.main.startFollow(this.personagem).setZoom(0.75)
+    this.cameras.main.startFollow(this.personagem).setZoom(0.3)
     this.cameras.main.followOffset.set(0, 100)
 
     /* tela cheia */

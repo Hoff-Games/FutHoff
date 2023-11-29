@@ -6,8 +6,8 @@ export default class cena4 extends Phaser.Scene {
   preload () {
     this.load.image('fundopreto', '../assets/cenas/fundopreto.png')
     this.load.spritesheet('cenaperdeu', '../assets/cenas/cenaperdeu.png', {
-      frameWidth: 368,
-      frameHeight: 318
+      frameWidth: 800,
+      frameHeight: 450
     })
   }
 
@@ -25,7 +25,7 @@ export default class cena4 extends Phaser.Scene {
       key: 'cena-trocando',
       frames: this.anims.generateFrameNumbers('cenaperdeu', {
         start: 0,
-        end: 34
+        end: 18
       }),
       frameRate: 8,
       repeat: 0

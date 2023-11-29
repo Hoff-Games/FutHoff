@@ -30,8 +30,8 @@ export default class tentarnovamente extends Phaser.Scene {
         start: 0,
         end: 19
       }),
-      frameRate: 4,
-      repeat: -1
+      frameRate: 8,
+      repeat: 0
     })
 
     this.imagemm.anims.play('cenatrocando')
