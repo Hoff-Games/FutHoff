@@ -8,6 +8,11 @@ export default class cenapanfleto extends Phaser.Scene {
       frameWidth: 800,
       frameHeight: 450
     })
+    /* tela cheia */
+    this.load.spritesheet('tela-cheia', './assets/botoes/tela-cheia.png', {
+      frameWidth: 84,
+      frameHeight: 84
+    })
   }
 
   create () {
@@ -29,6 +34,21 @@ export default class cenapanfleto extends Phaser.Scene {
       repeat: 0
     })
     this.image.anims.play('cena-trocando2')
+
+    /* tela cheia */
+    this.tela_cheia = this.add
+      .sprite(70, 50, 'tela-cheia', 0)
+      .setInteractive()
+      .on('pointerdown', () => {
+        if (this.scale.isFullscreen) {
+          this.tela_cheia.setFrame(0)
+          this.scale.stopFullscreen()
+        } else {
+          this.tela_cheia.setFrame(1)
+          this.scale.startFullscreen()
+        }
+      })
+      .setScrollFactor(0, 0)
   }
 
   update () {

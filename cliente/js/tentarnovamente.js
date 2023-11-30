@@ -12,10 +12,6 @@ export default class tentarnovamente extends Phaser.Scene {
       frameWidth: 84,
       frameHeight: 80
     })
-    this.load.spritesheet('menu', '../assets/botoes/menu.png', {
-      frameWidth: 120,
-      frameHeight: 60
-    })
   }
 
   create () {
@@ -36,7 +32,7 @@ export default class tentarnovamente extends Phaser.Scene {
 
     this.imagemm.anims.play('cenatrocando')
 
-    this.repetir = this.add.sprite(centrox - 70, centroy + 100, 'repetir', 0)
+    this.repetir = this.add.sprite(centrox - 0, centroy + 100, 'repetir', 0)
       .setInteractive()
       .on('pointerover', () => {
         this.repetir.setFrame(1)
@@ -47,18 +43,6 @@ export default class tentarnovamente extends Phaser.Scene {
       .on('pointerdown', () => {
         this.game.scene.stop('tentarnovamente')
         this.game.scene.start('cena2')
-      })
-    this.menu = this.add.sprite(centrox + 70, centroy + 100, 'menu', 0)
-      .setInteractive()
-      .on('pointerover', () => {
-        this.menu.setFrame(1)
-      })
-      .on('pointerout', () => {
-        this.menu.setFrame(0)
-      })
-      .on('pointerdown', () => {
-        this.game.scene.stop('tentarnovamente')
-        this.game.scene.start('cena0')
       })
   }
 

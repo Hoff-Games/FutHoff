@@ -8,6 +8,12 @@ export default class cenadialogo extends Phaser.Scene {
       frameWidth: 800,
       frameHeight: 450
     })
+
+    /* tela cheia */
+    this.load.spritesheet('tela-cheia', './assets/botoes/tela-cheia.png', {
+      frameWidth: 84,
+      frameHeight: 84
+    })
   }
 
   create () {
@@ -21,6 +27,21 @@ export default class cenadialogo extends Phaser.Scene {
           this.game.scene.start('cena1')
         }
       })
+
+    /* tela cheia */
+    this.tela_cheia = this.add
+      .sprite(70, 50, 'tela-cheia', 0)
+      .setInteractive()
+      .on('pointerdown', () => {
+        if (this.scale.isFullscreen) {
+          this.tela_cheia.setFrame(0)
+          this.scale.stopFullscreen()
+        } else {
+          this.tela_cheia.setFrame(1)
+          this.scale.startFullscreen()
+        }
+      })
+      .setScrollFactor(0, 0)
   }
 
   update () {
