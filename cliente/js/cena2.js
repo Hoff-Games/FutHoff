@@ -1441,7 +1441,7 @@ export default class cena2 extends Phaser.Scene {
   gameOver () {
     this.game.scoreMoeda.score = 0
     this.game.scoreEstrela.score = 0
-    this.game.scene.restart('cena2')
+    this.scene.restart()
     this.game.scene.stop('cena2')
     this.game.socket.emit('cena-publicar', this.game.sala, 'gameover')
     this.game.scene.start('gameover')
